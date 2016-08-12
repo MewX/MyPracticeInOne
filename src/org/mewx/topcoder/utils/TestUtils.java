@@ -5,7 +5,6 @@ import sun.misc.IOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -51,7 +50,7 @@ public class TestUtils {
         Matcher matcher = pattern.matcher(data);
 
         while (matcher.find()) {
-            ParsedResultMeta temp = new ParsedResultMeta(matcher.group(1), matcher.group(2));
+            ParsedResultMeta temp = new ParsedResultMeta(matcher.group(1).trim(), matcher.group(2).trim());
             listParsedResultMeta.add(temp);
             //System.out.println(temp.getTestArgs() + temp.getExpectedResult());
         }

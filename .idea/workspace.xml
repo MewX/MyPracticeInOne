@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04c1bf09-1dae-4a43-b472-c2cfdfdfaca1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/ParsedResultMeta.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/TestUtils.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/CultureShock.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/GravityBomb.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/TheLotteryBothDivs.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/CultureShockTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/GravityBombTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/TheLotteryBothDivsTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TopCoderTraning.iml" afterPath="$PROJECT_DIR$/TopCoderTraning.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java" />
     </list>
     <ignored path="TopCoderTraning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,6 +26,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -34,20 +39,8 @@
       <file leaf-file-name="HelloTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="18" selection-end-column="74" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WolfDelaymaster.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -56,8 +49,62 @@
       <file leaf-file-name="WolfDelaymasterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CultureShock.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/CultureShock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="10" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CultureShockTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/CultureShockTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GravityBomb.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/GravityBomb.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="47" column="1" selection-start-line="4" selection-start-column="0" selection-end-line="47" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GravityBombTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/GravityBombTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TheLotteryBothDivsTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/TheLotteryBothDivsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,9 +115,15 @@
       <file leaf-file-name="BuiltinParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="261">
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#431#432#0" expanded="true" />
+                <element signature="e#474#475#0" expanded="true" />
+                <element signature="e#528#529#0" expanded="true" />
+                <element signature="e#570#571#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,25 +155,30 @@
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/TestUtils.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/ParsedResultMeta.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/NetworkUtil.java" />
-        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java" />
-        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/CultureShockTest.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/CultureShock.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/GravityBomb.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/TheLotteryBothDivs.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/GravityBombTest.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/TheLotteryBothDivsTest.java" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="28" />
-    <option name="width" value="1602" />
-    <option name="height" value="839" />
+    <option name="x" value="54" />
+    <option name="y" value="-8" />
+    <option name="width" value="1874" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -147,7 +205,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -252,8 +309,9 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -267,6 +325,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -276,7 +335,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.WolfDelaymasterTest">
+  <component name="RunManager" selected="JUnit.TheLotteryBothDivsTest">
     <configuration default="false" name="HelloTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -329,6 +388,84 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="false" name="CultureShockTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.mewx.topcoder.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TopCoderTraning" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
+      <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.CultureShockTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="GravityBombTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.mewx.topcoder.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TopCoderTraning" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
+      <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.GravityBombTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="TheLotteryBothDivsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.mewx.topcoder.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TopCoderTraning" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
+      <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.TheLotteryBothDivsTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -348,19 +485,11 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
@@ -376,17 +505,9 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
       <option name="FORCE_STOP_RUNNING_APP" value="true" />
-      <option name="DEBUGGER_TYPE" value="Java" />
       <option name="USE_LAST_SELECTED_DEVICE" value="false" />
       <option name="PREFERRED_AVD" value="" />
-      <Java />
-      <Profilers>
-        <option name="GAPID_DISABLE_PCS" value="false" />
-      </Profilers>
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
@@ -749,14 +870,20 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="2">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.HelloTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.WolfDelaymasterTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CultureShockTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.GravityBombTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.TheLotteryBothDivsTest" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.WolfDelaymasterTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.HelloTest" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.TheLotteryBothDivsTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.GravityBombTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CultureShockTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.WolfDelaymasterTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.HelloTest" />
       </list>
     </recent_temporary>
   </component>
@@ -775,67 +902,68 @@
       <updated>1470977797145</updated>
       <workItem from="1470977798615" duration="1914000" />
       <workItem from="1470980677396" duration="5264000" />
+      <workItem from="1470997140532" duration="11545000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="HelloTest - 2016.08.12 at 14h 52m 56s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 23m 12s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 15h 58m 08s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 23m 39s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 15h 58m 34s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 26m 17s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 15h 59m 50s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 26m 56s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 16h 13m 59s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 34m 37s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 16h 15m 00s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 35m 02s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 16h 15m 38s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 35m 13s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 16h 16m 04s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 38m 21s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="HelloTest - 2016.08.12 at 16h 18m 00s.xml">
-      <configuration name="HelloTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 39m 56s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="WolfDelaymasterTest - 2016.08.12 at 16h 27m 05s.xml">
-      <configuration name="WolfDelaymasterTest" configurationId="JUnit" />
+    <history-entry file="TheLotteryBothDivsTest - 2016.08.12 at 22h 40m 37s.xml">
+      <configuration name="TheLotteryBothDivsTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7178000" />
+    <option name="totallyTimeSpent" value="18723000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="28" width="1602" height="839" extended-state="6" />
-    <editor active="false" />
+    <frame x="54" y="-8" width="1874" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32905984" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3696581" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2045204" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957264" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -856,7 +984,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -864,14 +994,50 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="18" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#431#432#0" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/Hello.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#137#138#0" expanded="true" />
-            <element signature="e#223#224#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -879,9 +1045,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -890,11 +1054,11 @@
         <state relative-caret-position="135">
           <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#739#740#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#873#874#0" expanded="true" />
-            <element signature="e#922#923#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#701#702#0" expanded="false" />
+            <element signature="e#770#771#0" expanded="false" />
+            <element signature="e#835#836#0" expanded="false" />
+            <element signature="e#884#885#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -903,76 +1067,122 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding>
-            <element signature="e#137#138#0" expanded="true" />
-            <element signature="e#223#224#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/NetworkUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/NetworkUtil.java" />
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/ParsedResultMeta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="439">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding>
+            <element signature="e#636#637#0" expanded="false" />
+            <element signature="e#688#689#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/TestUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="55" column="14" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+        <state relative-caret-position="419">
+          <caret line="52" column="105" selection-start-line="52" selection-start-column="105" selection-end-line="52" selection-end-column="105" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#739#740#0" expanded="true" />
-            <element signature="e#808#809#0" expanded="true" />
-            <element signature="e#873#874#0" expanded="true" />
-            <element signature="e#922#923#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/ParsedResultMeta.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="261">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="18" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#431#432#0" expanded="true" />
+            <element signature="e#474#475#0" expanded="true" />
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#570#571#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/WolfDelaymaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        <state relative-caret-position="501">
+          <caret line="58" column="1" selection-start-line="2" selection-start-column="0" selection-end-line="58" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WolfDelaymasterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/CultureShock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/CultureShockTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/GravityBombTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="23" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/GravityBomb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="47" column="1" selection-start-line="4" selection-start-column="0" selection-end-line="47" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/TheLotteryBothDivs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="47" column="1" selection-start-line="10" selection-start-column="0" selection-end-line="47" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/TheLotteryBothDivsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1034,6 +1244,18 @@
               <list>
                 <option value="0.2" />
                 <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
