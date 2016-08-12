@@ -1,7 +1,7 @@
 package org.mewx.topcoder.test;
 
 import org.junit.Test;
-import org.mewx.topcoder.TestUtils;
+import org.mewx.topcoder.utils.TestUtils;
 import org.mewx.topcoder.problems.Hello;
 
 import static org.junit.Assert.assertEquals;
