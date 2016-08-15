@@ -1,2 +1,3 @@
-# TopCoderTraning
-This is for topcoder training cases.
+# TopCoderTraining
+
+A test suite for TopCoder problems.
