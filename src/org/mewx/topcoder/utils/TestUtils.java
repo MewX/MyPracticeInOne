@@ -22,6 +22,11 @@ public class TestUtils {
     }
 
     @NotNull
+    public static String getPassedMessage(int passIdx, int size, @NotNull String test) {
+        return "Passed " + passIdx + " of " + size + ": \"" + test + "\"";
+    }
+
+    @NotNull
     public static String getSuccessMessage(int size) {
         return "Succeeded and passed all " + size + " cases.";
     }
@@ -52,7 +57,7 @@ public class TestUtils {
         while (matcher.find()) {
             ParsedResultMeta temp = new ParsedResultMeta(matcher.group(1).trim(), matcher.group(2).trim());
             listParsedResultMeta.add(temp);
-            //System.out.println(temp.getTestArgs() + temp.getExpectedResult());
+//            System.out.println(temp.getTestArgs() + temp.getExpectedResult());
         }
         return listParsedResultMeta;
     }
