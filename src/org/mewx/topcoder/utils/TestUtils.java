@@ -18,12 +18,12 @@ public class TestUtils {
 
     @NotNull
     public static String getFailureMessage(int failedIdx, int size, @NotNull String test) {
-        return "Failed, passed " + failedIdx + " of " + size + ":\n" + test;
+        return "Failed, passed " + (failedIdx + 1) + " of " + size + ":\n" + test;
     }
 
     @NotNull
     public static String getPassedMessage(int passIdx, int size, @NotNull String test) {
-        return "Passed " + passIdx + " of " + size + ": \"" + test + "\"";
+        return "Passed " + (passIdx + 1) + " of " + size + ": \"" + test + "\"";
     }
 
     @NotNull
