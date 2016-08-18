@@ -18,7 +18,7 @@ public class TestUtils {
 
     @NotNull
     public static String getFailureMessage(int failedIdx, int size, @NotNull String test) {
-        return "Failed, passed " + failedIdx + " of " + size + ": \"" + test + "\"";
+        return "Failed, passed " + failedIdx + " of " + size + ":\n" + test;
     }
 
     @NotNull

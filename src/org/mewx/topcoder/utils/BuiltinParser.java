@@ -12,7 +12,8 @@ import java.util.regex.Pattern;
 public class BuiltinParser {
 
     public static String parseToString(String str) {
-        return str.length() <= 2 ? str : str.substring(1, str.length() - 1);
+        str = str.trim();
+        return str.length() < 2 ? str : str.substring(1, str.length() - 1);
     }
 
     public static int parseToInt(String str) {
