@@ -1,7 +1,6 @@
 package org.mewx.topcoder.utils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +17,10 @@ public class BuiltinParser {
 
     public static int parseToInt(String str) {
         return Integer.valueOf(str.trim());
+    }
+
+    public static long parseToLong(String str) {
+        return Long.valueOf(str.trim());
     }
 
     public static double parseToDouble(String str) {

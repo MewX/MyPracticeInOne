@@ -1,8 +1,6 @@
 package org.mewx.topcoder.problems;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by MewX on 8/18/2016.
@@ -14,17 +12,9 @@ public class ParallelProgramming {
         public int timeRemaining = 0; // need to be assigned, if == 0, think it finished
         public boolean isRunning = false;
         public HashSet<Integer> needs = new HashSet<>();
-//        public List<Integer> needs = new ArrayList<>();
     }
 
     public int minTime(int[] time, String[] prec) {
-//		 {"NNNNNN",
-//		 "NNYYYY",
-//		 "YNNNNN",
-//		 "NNYNYN",
-//		 "NNNNNN",
-//		 "NNNNNN"}
-
         // make dependence table
         // A needs B, C, D, ...
         needsTable = new NeedsTable[time.length];
