@@ -1,0 +1,1772 @@
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+    <title>TopCoder High School Competitions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    
+
+
+
+
+
+<script type="text/javascript" src="/js/reskin/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/js/reskin/jquery-migrate-1.2.1.js"></script>
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js/reskin/html5shiv.js"></script>
+<![endif]-->
+<script type="text/javascript" src="/js/reskin/jquery.jfeed.pack.js"></script>
+<script type="text/javascript" src="/js/reskin/newTCScript.js"></script>
+
+
+<script type="text/javascript">var _kmq = _kmq || [];
+  var _kmk = _kmk || 'aa23cd43c455ef33b6a0df3de81a79af9ea30f75';
+  function _kms(u){
+    setTimeout(function(){
+      var d = document, f = d.getElementsByTagName('script')[0],
+      s = d.createElement('script');
+      s.type = 'text/javascript'; s.async = true; s.src = u;
+      f.parentNode.insertBefore(s, f);
+    }, 1);
+  }
+  _kms('//i.kissmetrics.com/i.js');
+  _kms('//scripts.kissmetrics.com/' + _kmk + '.2.js');
+</script>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300' rel='stylesheet' type='text/css'/>
+    
+    <link type="text/css" rel="stylesheet" href="/css/coders.css" />
+    <link type="text/css" rel="stylesheet" href="/css/login.css" />
+    <link type="text/css" rel="stylesheet" href="/css/reskin/myHome.css" />
+    <!--[if IE]>
+    <link type="text/css" rel="stylesheet" href="/css/ie.css" />
+    <![endif]-->
+    
+<link type="text/css" rel="stylesheet" href="/css/reskin/newStyles.css"/>
+<!--[if IE 8]>
+<link type="text/css" rel="stylesheet" href="/css/reskin/newStyles_ie8.css"/>
+<![endif]-->
+
+
+</head>
+<bean:define id="nameColor" name="CODER_COLORS" scope="application" toScope="page"/>
+
+
+
+
+<body>
+
+
+
+
+
+
+
+
+
+
+<script>
+    $(document).ready(function(){
+        $("a.new-btn-login").attr('href', $("a.new-btn-login").attr('href') + "?next=" + window.location.href);
+    })
+</script>
+
+
+    
+
+        <!-- new theme -->
+
+        <div class="header-wrapper">
+            <!-- Main header element-->
+            <header class="top-header new-topcoder-header">
+                <!-- Header content visible on small screens-->
+                <div class="show-small mobile-heading"><span class="tc-text-logo">[ topcoder ]</span>
+                    <button type="button" class="btn-open-menu">Menu</button>
+                    <button type="button" class="btn-close-menu"></button>
+
+                    
+
+                     <!-- for logged in user-->
+
+                        <a href="javascript:;" class="user-link">
+                            <img src="https://topcoder-prod-media.s3.amazonaws.com/member/profile/MewX-1458544302874.png" alt="User Avatar" class="user-avatar">
+                        </a>
+                    
+
+
+
+                </div>
+                <!-- main menu -->
+                <ul class="main-menu">
+                    <!-- search container-->
+                    <li class="menu-item search-wrapper">
+                        <div class="menu-item-header search-header show-large">
+                            <button type="button" class="btn-expand-search search-icon"></button>
+                        </div>
+                        <div class="submenu">
+                            <form action="https://www.topcoder.com/search/members/" method="get">
+                                <input type="text" id="searchBox" style="font-size: 12px"  placeholder="FIND MEMBERS BY USERNAME OR SKILL" name="q">
+                                <input type="submit"
+                                       style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+                                       tabindex="-1" />
+                             </form>
+                            <!-- Suggestion list container-->
+                            <ul class="suggestion-list"></ul>
+                        </div>
+                    </li>
+
+
+
+                    
+
+                        <!-- for logged in user-->
+
+                        <li class="menu-item link-group user-menu">
+                            <div class="authenticated-options">
+                                <div class="menu-item-header">
+                                    <img class="user-avatar" alt="User Avatar" src="https://topcoder-prod-media.s3.amazonaws.com/member/profile/MewX-1458544302874.png">
+                                    <span class="username">MewX</span>
+                                </div>
+                                <a class="btn-link btn-edit-profile show-small" href="https://www.topcoder.com/settings/profile/">EDIT</a>
+                                <ul class="submenu">
+                                    <li class="submenu-item"><a class="menu-link menu-link-dashboard" href="https://www.topcoder.com//my-dashboard/">DASHBOARD</a></li>
+                                    <li class="submenu-item"><a class="menu-link menu-link-profile" href="https://www.topcoder.com/members/MewX/">MY PROFILE</a></li>
+                                    <li class="submenu-item"><a class="menu-link menu-link-payments" target="_blank" href="https://community.topcoder.com/PactsMemberServlet?module=PaymentHistory&full_list=false">PAYMENTS</a></li>
+                                    <li class="submenu-item"><a class="menu-link menu-link-settings" href="https://www.topcoder.com/settings/profile/" target="_blank">SETTINGS</a></li>
+                                    <li class="submenu-item"><a class="menu-link menu-link-logout" href="javascript:doLogOutTC();">LOG OUT</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    
+
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">COMPETE</div>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/design/active" class="menu-link menu-link-design">DESIGN CHALLENGES</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/develop/active" class="menu-link menu-link-dev">DEVELOPMENT CHALLENGES</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/challenges/data/active" class="menu-link menu-link-data">DATA SCIENCE CHALLENGES</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://arena.topcoder.com" class="menu-link menu-link-arena">COMPETITIVE PROGRAMMING</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- 'LEARN' link group-->
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">LEARN</div>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="https://www.topcoder.com/member-onboarding/" class="menu-link menu-link-learn-started">GET STARTED</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/design/" class="menu-link menu-link-learn-design">DESIGN</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/development/" class="menu-link menu-link-learn-dev">DEVELOPMENT</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/data-science/" class="menu-link menu-link-learn-data">DATA SCIENCE</a>
+                            </li>
+                            <li class="submenu-item"><a href="http://www.topcoder.com/community/competitive%20programming/" class="menu-link menu-link-learn-competition">COMPETITIVE PROGRAMMING</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <!-- 'COMMUNITY' link group-->
+                    <li class="menu-item link-group">
+                        <div class="menu-item-header">COMMUNITY</div>
+                        <ul class="submenu">
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/members/" class="menu-link menu-link-community-members">OVERVIEW</a>
+                            </li>
+                            <li class="submenu-item"><a href="http://tco16.topcoder.com" class="menu-link menu-link-community-tco16">TCO16</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/member-programs/" class="menu-link menu-link-community-programs">PROGRAMS</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://apps.topcoder.com/forums/" class="menu-link menu-link-community-forums" target="_blank">FORUMS</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/statistics/" class="menu-link menu-link-community-stats">STATISTICS</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/community/events/" class="menu-link menu-link-community-events">EVENTS</a>
+                            </li>
+                            <li class="submenu-item"><a href="https://www.topcoder.com/blog/" class="menu-link menu-link-community-blog">BLOG</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </header>
+        </div>
+    
+    
+
+
+
+
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr valign="top">
+<!-- Left Column Begins-->
+<td width="180">
+    
+
+
+
+
+
+
+
+    
+        
+            
+            
+        
+
+
+
+
+
+
+<div style="width: 185px;" class="leftNavWrapper">
+    
+<input type="hidden" id="nodeName" value="m_hs_stats"/>
+<script language="JavaScript" type="text/javascript" src="/js/arena.js"></script>
+
+    <section class="get-time" style="margin-bottom:15px">
+        
+        <span class="date"></span>
+        <a href="javascript:tcTime();">Get Time</a>
+    </section>
+    <!-- End .get-time -->
+
+    <section class="navigation">
+    <ul>
+        <li><a id="copilot_posting_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Copilot%20Posting">Copilot Posting</a></li>
+        <li><a href="http://www.topcoder.com/active-challenges/design/">Design</a></li>
+        <li>
+            <a href="javascript:;">Develop<i></i></a>
+            <ul class="hide">
+                <li><a id="conceptualization_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Conceptualization">Conceptualization</a></li>
+                <li><a id="specification_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Specification">Specification</a></li>
+                <li><a id="architecture_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Architecture">Architecture</a></li>
+                <li><a id="ui_prototype_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=UI%20Prototype%20Competition">UI Prototype</a></li>
+                <li><a id="assembly_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Assembly%20Competition">Assembly</a></li>
+                <li><a id="first2finish_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=First2Finish">First2Finish</a></li>
+                <li><a id="code_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Code">Code</a></li>
+                <li><a id="des_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Design">Component Design</a></li>
+                <li><a id="dev_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Development">Component Development</a></li>
+                <li><a id="test_suites_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Test%20Suites">Test Suites</a></li>
+                <li><a id="content_creation_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Content%20Creation">Content Creation</a></li>
+                <li><a id="test_scenarios_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Test%20Scenarios">Test Scenarios</a></li>
+                <li><a id="bug_hunt_compete" href="http://www.topcoder.com/challenges/develop/active/?challengeTypes=Bug%20Hunt">Bug Hunt</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;">Review Opportunities<i></i></a>
+            <ul class="hide">
+                <li>
+                    <dl>
+                        <dt>Conceptualization</dt>
+                        <dd><a id="conceptualization_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=23">Review Opportunities</a></dd>
+                        <dd><a id="conceptualization_review_border" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=23">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Specification</dt>
+                        <dd><a id="specification_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=6">Review Opportunities</a></dd>
+                        <dd><a id="specification_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=6">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Architecture</dt>
+                        <dd><a id="architecture_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=7">Review Opportunities</a></dd>
+                        <dd><a id="architecture_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=7">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Component Design</dt>
+                        <dd><a id="des_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=1">Review Opportunities</a></dd>
+                        <dd><a id="des_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=1 ">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Component Development</dt>
+                        <dd><a id="dev_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=2">Review Opportunities</a></dd>
+                        <dd><a id="dev_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=2">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Assembly</dt>
+                        <dd><a id="assembly_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=14">Review Opportunities</a></dd>
+                        <dd><a id="assembly_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=14">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>First2Finish</dt>
+                        <dd><a id="first2finish_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=38">Review Opportunities</a></dd>
+                        <dd><a id="first2finish_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=38">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Code</dt>
+                        <dd><a id="code_review"href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=39">Review Opportunities</a></dd>
+                        <dd><a id="code_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=39">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Test Suites</dt>
+                        <dd><a id="test_suites_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=13">Review Opportunities</a></dd>
+                        <dd><a id="test_suites_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=13">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Report</dt>
+                        <dd><a id="reporting_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=36">Review Opportunities</a></dd>
+                        <dd><a id="reporting_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=36">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>UI prototype</dt>
+                        <dd><a id="ui_prototype_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=19">Review Opportunities</a></dd>
+                        <dd><a id="ui_prototype_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=19">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>RIA Build</dt>
+                        <dd><a id="ria_build_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=24">Review Opportunities</a></dd>
+                        <dd><a id="ria_build_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=24">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Content Creation</dt>
+                        <dd><a id="content_creation_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=35">Review Opportunities</a></dd>
+                        <dd><a id="content_creation_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=35">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Test Scenarios</dt>
+                        <dd><a id="test_scenarios_review"  href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=26">Review Opportunities</a></dd>
+                        <dd><a id="test_scenarios_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=26">Meet the review board</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl class="last-item">
+                        <dt>Bug Hunt</dt>
+                        <dd><a id="bug_hunt_review" href="http://www.topcoder.com/tc?module=ViewReviewAuctions&pt=9">Review Opportunities</a></dd>
+                        <dd><a id="bug_hunt_review_board" href="http://www.topcoder.com/tc?module=ReviewBoard&pt=9">Meet the review board</a></dd>
+                    </dl>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;">Algorithm (SRM)<i></i></a>
+            <ul class="hide">
+                <li><a href="http://www.topcoder.com/active-challenges/data/">Single Round Matches (SRM)</a></li>
+                <li><a id="algo_match_archive" href="http://www.topcoder.com/tc?module=MatchList">Match Archive</a></li>
+                <li><a id="algo_match_overviews" href="http://www.topcoder.com/stat?c=round_overview">Match Overviews</a></li>
+                <li><a id="algo_match_winners" href="http://www.topcoder.com/tc?module=SrmDivisionWins">Match Winners</a></li>
+                <li><a id="algo_match_results" href="http://www.topcoder.com/stat?c=last_match">Match Results</a></li>
+                <li><a href="http://apps.topcoder.com/wiki/display/tc/Algorithm+Problem+Set+Analysis">Match Editorials</a></li>
+                <li><a id="algo_problem_archive" href="http://www.topcoder.com/tc?module=ProblemArchive">Problem Archive</a></li>
+                <li><a id="algo_color_changes" href="http://www.topcoder.com/tc?module=ColorChange&ratid=1">Recent Color Changes</a></li>
+                <li><a href="http://apps.topcoder.com/wiki/display/tc/Algorithm+Data+Feeds">Data Feeds</a></li>
+                <li><a href="javascript:arena();">Launch Arena</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;">Marathon Match<i></i></a>
+            <ul class="hide">
+                <li><a id="long_compete" href="http://www.topcoder.com/challenges/data/active/">Challenges</a></li>
+                <li><a id="long_match_archive" href="http://www.topcoder.com/challenges/data/past/">Match Archive</a></li>
+                <li><a id="long_match_overview" href="http://www.topcoder.com/longcontest/stats/?module=ViewOverview">Match Overview</a></li>
+                <li><a id="long_match_winners" href="http://www.topcoder.com/longcontest/stats/?module=MatchWinners">Match Winners</a></li>
+                <li><a id="long_editorials" href="http://www.topcoder.com/longcontest/?module=Static&d1=match_editorials&d2=archive">Match Editorials</a></li>
+                <li><a id="long_data_feeds" href="http://www.topcoder.com/longcontest/?module=Static&d1=support&d2=dataFeed">Data Feeds</a></li>
+                <li><a id="long_practice" href="http://www.topcoder.com/longcontest/?module=ViewPractice">Practice</a></li>
+                <li><a id="long_queue" href="http://www.topcoder.com/longcontest/?module=ViewQueue">Queue Status</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="http://software.topcoder.com/review">Submit &amp; Review</a></li>
+        <li>
+            <a href="javascript:;">topcoder Networks<i></i></a>
+            <ul class="hide">
+                <li><a href="http://community.topcoder.com/ntl/">NASA Tournament Lab</a></li>
+            </ul>
+        </li>
+        <li><a href="http://www.topcoder.com/community/events/">Events</a></li>
+        <li>
+            <a href="javascript:;">Statistics<i></i></a>
+            <ul class="hide">
+                <li>
+                    <dl>
+                        <dt>Top Ranked</dt>
+                        <dd><a id="top_rated_algo" href="http://www.topcoder.com/tc?module=AlgoRank">Algorithm</a></dd>
+                        <dd><a id="top_rated_hs" href="http://www.topcoder.com/tc?module=HSRank">High School</a></dd>
+                        <dd><a id="top_rated_long" href="http://www.topcoder.com/longcontest/stats/?module=CoderRank">Marathon Match</a></dd>
+                        <dd><a id="top_rated_conceptors" href="http://www.topcoder.com/stat?c=top_conceptors">Conceptualization</a></dd>
+                        <dd><a id="top_rated_specificators" href="http://www.topcoder.com/stat?c=top_specificators">Specification</a></dd>
+                        <dd><a id="top_rated_architects" href="http://www.topcoder.com/stat?c=top_architects">Architecture</a></dd>
+                        <dd><a id="top_rated_des" href="http://www.topcoder.com/stat?c=top_designers">Design</a></dd>
+                        <dd><a id="top_rated_dev" href="http://www.topcoder.com/stat?c=top_developers">Development</a></dd>
+                        <dd><a id="top_rated_assemblers" href="http://www.topcoder.com/stat?c=top_assemblers">Assembly</a></dd>
+                        <dd><a id="top_rated_testers" href="http://www.topcoder.com/stat?c=top_testers">Test Suites</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Record Book</dt>
+                        <dd><a  id="algo_recordbook" href="http://www.topcoder.com/tc?module=Static&d1=statistics&d2=recordbook_home">Algorithm</a></dd>
+                        <dd><a  id="comp_recordbook" href="http://www.topcoder.com/tc?module=Static&d1=compstats&d2=comp_recordbook_home">Component</a></dd>
+                        <dd><a  id="long_recordbook" href="http://www.topcoder.com/longcontest/?module=Static&d1=stats&d2=recordbook_home">Marathon Match</a></dd>
+                    </dl>
+                </li>
+                <li>
+                    <dl class="last-item">
+                        <dt>Coder of the Month</dt>
+                        <dd><a  id="algo_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=5">Algorithm</a></dd>
+                        <dd><a  id="des_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=6">Design</a></dd>
+                        <dd><a  id="dev_com" href="http://www.topcoder.com/tc?module=COMHistory&achtid=7">Development</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;">Tutorials<i></i></a>
+            <ul class="hide">
+                <li><a  id="algo_tutorials" href="http://help.topcoder.com/data-science/competing-in-algorithm-challenges/algorithm-tutorials/">Algorithm Tutorials</a></li>
+                <li><a id="comp_tutorials" href="http://help.topcoder.com/development/competing-in-development-challenges/development-tutorials/ ">Software Tutorials</a></li>
+                <li><a id="mm_tutorials" href="http://help.topcoder.com/data-science/competing-in-algorithm-challenges/marathon-match-tutorials/">Marathon Tutorials</a></li>
+            </ul>
+        </li>
+        <li><a href="https://apps.topcoder.com/forums/" id="forums">Forums</a></li>
+        <li><a href="https://www.topcoder.com/tc?module=MyHome" id="my_topcoder">My topcoder</a></li>
+    </ul>
+</section>
+<!-- End .navigation -->
+<section class="member-search">
+    <h3>Member Search</h3>
+    <div class="form">
+        <form action="http://community.topcoder.com/tc" method="get" name="simpleSearchForm" class="noSpace" id="simpleSearchForm">
+            <input class="noSpace" type="hidden" name="module" value="SimpleSearch" />
+            <input class="noSpace" type="text" name="ha" value="Handle:" size="12" maxlength="15" onfocus="javascript: if (document.simpleSearchForm.ha.value=='Handle:') document.simpleSearchForm.ha.value = '';" onblur="javascript:if (document.simpleSearchForm.ha.value == '')document.simpleSearchForm.ha.value = 'Handle:';" />
+            <a href="javascript:javascript:void document.simpleSearchForm.submit();" class="btn btn-search-member"><i>SEARCH</i></a>
+        </form>
+    </div>
+</section>
+
+<!-- End .member-search -->
+
+</div>
+
+    
+    
+
+
+
+</td>
+<!-- Left Column Ends -->
+
+<!-- Center Column Begins -->
+<td width="100%" align="left" class="bodyColumn">
+
+
+
+
+
+
+
+<table cellspacing="0" cellpadding="0" class="pageTitleTable">
+    <tr>
+        <td width="100%" class="pageTitle">
+
+
+            
+                
+                    
+                    <img border="0" src="/i/header_high_school.gif" alt="high_school"/>
+                
+                
+            
+
+
+        </td>
+        <td align="right" class="pageSubtitle">&#160;Problem Solution</td>
+    </tr>
+</table>
+
+
+
+<span class="subtitle">Season 1 > <A href="/tc?module=HSRoundOverview&rd=10656" class="bcLink">TCHS Single Round Match 32&nbsp;&gt;&nbsp;Round 1</A> > <A href="/tc?module=HSRoomStats&rd=10656&rm=263665" class="bcLink">Room 6</A> > 
+ </span>
+<br>
+<br><br>
+
+
+<table cellpadding="0" cellspacing="0" border="0" class="stat" width="100%">
+    <tr>
+        <td class="title" colspan="6">
+            Problem Solutions
+        </td>
+    </tr>
+    <tr>
+        <td class="header">&#160;
+        </td>
+        <td class="header">
+            Class Name
+        </td>
+        <td class="header">
+            Method Name
+        </td>
+        <td class="header">
+            Difficulty
+        </td>
+        <td class="header">
+            Status
+        </td>
+        <td class="headerR">
+            Points
+        </td>
+    </tr>
+
+    
+        
+        <tr class='light'>
+            <td class="value" style="vertical-align: middle;">
+                <A href='/tc?module=HSProblemSolution&amp;rd=10656&amp;pm=7237&amp;cr=20812309'>
+                    <img src='/i/interface/exp_w.gif' alt=""/>
+                </A>
+            </td>
+            <td class="value">
+                BoulderRace
+            </td>
+            <td class="value">
+                winner
+            </td>
+            <td class="value">
+                Level One
+            </td>
+            <td class="value">
+                Passed System Test
+            </td>
+            <td class="valueR">
+                242.69
+            </td>
+        </tr>
+    
+        
+        <tr class='highlight'>
+            <td class="value" style="vertical-align: middle;">
+                <A href='/tc?module=HSProblemSolution&amp;rd=10656&amp;pm=7428&amp;cr=20812309'>
+                    <img src='/i/interface/exp_ed_w.gif' alt=""/>
+                </A>
+            </td>
+            <td class="value">
+                SpecialDay
+            </td>
+            <td class="value">
+                howMany
+            </td>
+            <td class="value">
+                Level Two
+            </td>
+            <td class="value">
+                Passed System Test
+            </td>
+            <td class="valueR">
+                459.81
+            </td>
+        </tr>
+    
+        
+        <tr class='light'>
+            <td class="value" style="vertical-align: middle;">
+                <A href='/tc?module=HSProblemSolution&amp;rd=10656&amp;pm=6868&amp;cr=20812309'>
+                    <img src='/i/interface/exp_w.gif' alt=""/>
+                </A>
+            </td>
+            <td class="value">
+                SuperPasture
+            </td>
+            <td class="value">
+                whichOne
+            </td>
+            <td class="value">
+                Level Three
+            </td>
+            <td class="value">
+                Passed System Test
+            </td>
+            <td class="valueR">
+                699.97
+            </td>
+        </tr>
+    
+</table>
+
+<br><br>
+
+<div style="float:right;"><A href="/tc?module=HSProblemStatement&pm=7428&rd=10656">view problem
+    statement</A></div>
+<span class="title"><a href="/tc?module=MemberProfile&amp;cr=20812309&amp;tab=hs" class="coderTextRed">ahyangyi</a>'s solution to SpecialDay</span>
+<br><br>
+
+<pre>
+    #include &lt;string&gt;
+
+using namespace std;
+
+class SpecialDay {
+  public:
+  
+  int howMany(string weekday, int which, string month, int day) {
+    int we,mo;
+    int yy,mm,dd,md,wd,re;
+    
+    re = 0;
+    if (weekday == "SUNDAY")
+      we = 0;
+    if (weekday == "MONDAY")
+      we = 1;
+    if (weekday == "TUESDAY")
+      we = 2;
+    if (weekday == "WEDNESDAY")
+      we = 3;
+    if (weekday == "THURSDAY")
+      we = 4;
+    if (weekday == "FRIDAY")
+      we = 5;
+    if (weekday == "SATURDAY")
+      we = 6;
+    if (month == "JANUARY")
+      mo = 1;
+    if (month == "FEBRUARY")
+      mo = 2;
+    if (month == "MARCH")
+      mo = 3;
+    if (month == "APRIL")
+      mo = 4;
+    if (month == "MAY")
+      mo = 5;
+    if (month == "JUNE")
+      mo = 6;
+    if (month == "JULY")
+      mo = 7;
+    if (month == "AUGUST")
+      mo = 8;
+    if (month == "SEPTEMBER")
+      mo = 9;
+    if (month == "OCTOBER")
+      mo = 10;
+    if (month == "NOVEMBER")
+      mo = 11;
+    if (month == "DECEMBER")
+      mo = 12;
+    wd = 5;
+    for (yy = 2000; yy &lt;= 2100; yy ++) {
+      int count = 0;
+      for (mm = 1; mm &lt;= 12; mm ++) {
+        switch (mm) {
+          case 1:case 3:case 5:case 7:case 8:case 10:case 12:
+            md = 31;
+            break;
+          case 4:case 6:case 9:case 11:
+            md = 30;
+            break;
+          case 2:
+            md = 28 + (yy % 4 == 0 &amp;&amp; (yy % 100 != 0 || yy % 400 == 0));
+          };
+        for (dd = 1; dd &lt;= md; dd ++) {
+          wd = (wd + 1) % 7;
+          if (mm == mo &amp;&amp; wd == we) {
+            count ++;
+            if (count == which &amp;&amp; dd == day)
+              re ++;
+            }
+          }
+        }
+      }
+    return re;
+    }
+  };
+</pre>
+
+<a name="Defenses"></a>
+
+
+
+<br>
+
+
+<table cellpadding="0" cellspacing="0" border="0" class="stat" width="100%">
+    <tr>
+        <td class="title" colspan="3">
+            System Test Results
+        </td>
+    </tr>
+    <tr>
+        <td class="header">
+            Test Arguments
+        </td>
+        <td class="headerR">
+            Expected Result
+        </td>
+        <td class="headerR">
+            Success
+        </td>
+    </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "THURSDAY",
+4,
+"NOVEMBER",
+23
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+1,
+"SEPTEMBER",
+2
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SUNDAY",
+2,
+"MAY",
+13
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SUNDAY",
+3,
+"JUNE",
+18
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "MONDAY",
+3,
+"JANUARY",
+16
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+3,
+"APRIL",
+15
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "TUESDAY",
+5,
+"FEBRUARY",
+29
+            </td>
+            <td class="valueR">
+                4
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+2,
+"OCTOBER",
+6
+            </td>
+            <td class="valueR">
+                0
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "THURSDAY",
+3,
+"OCTOBER",
+20
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+5,
+"FEBRUARY",
+29
+            </td>
+            <td class="valueR">
+                3
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SUNDAY",
+1,
+"JANUARY",
+1
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+1,
+"FEBRUARY",
+2
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "TUESDAY",
+1,
+"MARCH",
+3
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "WEDNESDAY",
+1,
+"APRIL",
+4
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "THURSDAY",
+1,
+"MAY",
+5
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "FRIDAY",
+1,
+"JUNE",
+6
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SATURDAY",
+1,
+"JULY",
+7
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SUNDAY",
+2,
+"AUGUST",
+8
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "MONDAY",
+2,
+"SEPTEMBER",
+9
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "TUESDAY",
+2,
+"OCTOBER",
+10
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "WEDNESDAY",
+2,
+"NOVEMBER",
+11
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "THURSDAY",
+2,
+"DECEMBER",
+12
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "FRIDAY",
+2,
+"JANUARY",
+13
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SATURDAY",
+2,
+"FEBRUARY",
+14
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SUNDAY",
+3,
+"MARCH",
+15
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+3,
+"APRIL",
+16
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "TUESDAY",
+3,
+"MAY",
+17
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "WEDNESDAY",
+3,
+"JUNE",
+18
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "THURSDAY",
+3,
+"JULY",
+19
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "FRIDAY",
+3,
+"AUGUST",
+20
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SATURDAY",
+3,
+"SEPTEMBER",
+21
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SUNDAY",
+4,
+"OCTOBER",
+22
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "MONDAY",
+4,
+"NOVEMBER",
+23
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "TUESDAY",
+4,
+"DECEMBER",
+24
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "WEDNESDAY",
+4,
+"JANUARY",
+25
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "THURSDAY",
+4,
+"FEBRUARY",
+26
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "FRIDAY",
+4,
+"MARCH",
+27
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SATURDAY",
+4,
+"APRIL",
+28
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SUNDAY",
+5,
+"MAY",
+29
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+5,
+"JUNE",
+30
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "TUESDAY",
+5,
+"JULY",
+31
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+4,
+"FEBRUARY",
+2
+            </td>
+            <td class="valueR">
+                0
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SATURDAY",
+1,
+"SEPTEMBER",
+18
+            </td>
+            <td class="valueR">
+                0
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "TUESDAY",
+3,
+"OCTOBER",
+27
+            </td>
+            <td class="valueR">
+                0
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "THURSDAY",
+4,
+"DECEMBER",
+28
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SATURDAY",
+5,
+"JANUARY",
+29
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "MONDAY",
+4,
+"FEBRUARY",
+28
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "FRIDAY",
+1,
+"JANUARY",
+1
+            </td>
+            <td class="valueR">
+                14
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "FRIDAY",
+5,
+"FEBRUARY",
+29
+            </td>
+            <td class="valueR">
+                4
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "MONDAY",
+4,
+"FEBRUARY",
+29
+            </td>
+            <td class="valueR">
+                0
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "MONDAY",
+1,
+"MARCH",
+1
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="dark">
+            <td class="value">
+                "SUNDAY",
+2,
+"MAY",
+13
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+        
+        <tr class="light">
+            <td class="value">
+                "SATURDAY",
+1,
+"SEPTEMBER",
+4
+            </td>
+            <td class="valueR">
+                15
+            </td>
+            <td class="valueR">
+                Passed
+            </td>
+        </tr>
+    
+</table>
+
+
+
+</td>
+<!-- Center Column Ends -->
+
+<!-- Right Column Begins -->
+<td width="170">
+    
+
+
+
+<script type="text/javascript" language="javascript">
+
+</script>
+
+
+
+
+<div class="rightColContent">
+    <br /><br />
+</div>
+
+
+
+
+</td>
+<!-- Right Column Ends -->
+<td width="10"><img src="/i/clear.gif" width="10" height="1" border="0"></td>
+
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
+    
+        
+            
+                
+                    
+                    
+
+
+                        
+                            
+                                
+                            
+                        
+
+                        
+                    
+                
+                
+                    
+                         
+                              
+                                 
+                                     
+
+                                 
+                              
+                             
+                         
+
+
+                
+                
+                    
+                    
+                        
+                    
+                    
+                
+                
+            
+            
+                
+                    
+                        
+                        
+                            
+                            
+                            
+                            
+                        
+                        
+                    
+                    
+                        
+                            
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            
+                            
+
+                        
+                    
+                
+                
+                    
+                        
+                        
+                        
+                        
+                    
+                
+                
+            
+        
+
+        <footer class="bottom-footer"><!-- Footer links-->
+            <nav class="menu-item">
+                <div class="menu-item-header show-small">OTHERS</div>
+                <ul class="submenu">
+                    <li class="submenu-item"><a class="menu-link" href="https://www.topcoder.com/sitemap">SITEMAP</a></li>
+                    <li class="submenu-item"><a class="menu-link" href="https://www.topcoder.com/about/">ABOUT US</a></li>
+                    <li class="submenu-item"><a class="menu-link" href="https://help.topcoder.com/hc/en-us/articles/219069687-Contact-Support">CONTACT US</a></li>
+                    <li class="submenu-item"><a class="menu-link" href="https://help.topcoder.com/">HELP CENTER</a></li>
+                    <li class="submenu-item"><a class="menu-link" href="https://www.topcoder.com/community/how-it-works/privacy-policy/">PRIVACY POLICY</a></li>
+                    <li class="submenu-item"><a class="menu-link" href="https://www.topcoder.com/community/how-it-works/terms/">TERMS</a></li>
+                </ul>
+            </nav>
+            <!-- Social links-->
+            <div class="social-links"><p>topcoder is also on</p><a class="fb-link" href="https://www.facebook.com/topcoder"></a><a
+                    class="twitter-link" href="http://www.twitter.com/topcoder"></a><a class="linkedin-link" href="https://www.linkedin.com/company/topcoder"></a><a
+                    class="google-link" href="https://plus.google.com/+topcoder/posts"></a></div>
+            <p class="copyright-notice">&copy; 2015 topcoder. All Rights Reserved</p></footer>
+    
+    
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-6340959-1']);
+  _gaq.push(['_setDomainName', '.topcoder.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- Start of topcoder Zendesk Widget script -->
+<script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(c){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","topcoder.zendesk.com");
+/*]]>*/</script>
+<!-- End of topcoder Zendesk Widget script -->
+
+
+
+</body>
+
+</html>

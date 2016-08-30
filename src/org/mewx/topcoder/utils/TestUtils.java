@@ -18,12 +18,12 @@ public class TestUtils {
 
     @NotNull
     public static String getFailureMessage(int failedIdx, int size, @NotNull String test) {
-        return "Failed, passed " + (failedIdx + 1) + " of " + size + ":\n" + test;
+        return "Failed, passed " + failedIdx + " / " + size + "; current case id " + (failedIdx + 1) + ":\n" + test;
     }
 
     @NotNull
     public static String getPassedMessage(int passIdx, int size, @NotNull String test) {
-        return "Passed " + (passIdx + 1) + " of " + size + ": \"" + test + "\"";
+        return "Passed " + (passIdx + 1) + " / " + size + ": \"" + test + "\"";
     }
 
     @NotNull
@@ -49,7 +49,15 @@ public class TestUtils {
 
     @NotNull
     public static List<ParsedResultMeta> parseTestData(@NotNull String data) {
-        final String regex = "CLASS=\"statText\" ALIGN=\"left\">(.*?)</TD.*?ALIGN=\"right\">(.*?)</TD";
+        if (data.contains("High School Competition")) {
+            return parseTestDataGeneral(data, "<tr class=\"light\">.*?class=\"value\">(.*?)</td>.*?class=\"valueR\">(.*?)</td>");
+        }
+
+        return parseTestDataGeneral(data, "CLASS=\"statText\" ALIGN=\"left\">(.*?)</TD.*?ALIGN=\"right\">(.*?)</TD");
+    }
+
+    @NotNull
+    private static List<ParsedResultMeta> parseTestDataGeneral(@NotNull String data, @NotNull final String regex) {
         List<ParsedResultMeta> listParsedResultMeta = new ArrayList<>();
         Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
         Matcher matcher = pattern.matcher(data);
