@@ -6,7 +6,6 @@ import java.util.*;
  * Created by MewX on 9/7/2016.
  */
 public class EllysCandyGame {
-    private HashMap<String, Tree> setSave = new HashMap<>();
     private final String[] candidates = new String[] {"Elly", "Draw", "Kris"}; // 0, 1, 2
 
     private class Tree {
@@ -19,7 +18,7 @@ public class EllysCandyGame {
         Tree root = new Tree();
         root.values = Arrays.copyOf(sweets, sweets.length);
         makeSubTree(root, 0, 0, 0);
-        printTree(root, 1);
+//        printTree(root, 1);
 
         return candidates[root.winner];
     }
@@ -37,14 +36,6 @@ public class EllysCandyGame {
         }
     }
 
-    private String buildValueString(Tree tree, int turn) {
-        StringBuilder sb = new StringBuilder();
-        for (int v : tree.values) {
-            sb.append(v + ", ");
-        }
-        return sb.toString() + turn;
-    }
-
     private int makeSubTree(Tree node, int sum0, int sum1, int turn) {
         node.trees = new ArrayList<>();
         int resultSave = turn == 0 ? 2 : 0;
@@ -52,34 +43,18 @@ public class EllysCandyGame {
             if (node.values[i] == 0) continue;
 
             Tree next = new Tree();
+            node.trees.add(next); // not necessary
             next.values = Arrays.copyOf(node.values, node.values.length);
             int save = next.values[i];
             next.values[i] = 0;
             if (i - 1 >= 0) next.values[i - 1] <<= 1;
             if (i + 1 < next.values.length) next.values[i + 1] <<= 1;
-
-            // check table
-            String saveString = buildValueString(next, turn);
-            if (setSave.containsKey(saveString)) {
-                // has already DFS
-                System.out.println("Hit: " + saveString);
-                int temp = setSave.get(saveString).winner;
-                System.out.println(temp);
-
-                if (turn == 0 && temp != 2 && resultSave > temp) resultSave = temp;
-                else if (temp != 0 && resultSave < temp) resultSave = temp;
-
-//                node.trees.add(setSave.get(saveString));
+            if (turn == 0) {
+                int temp = makeSubTree(next, sum0 + save, sum1, 1); // recursive to make tree
+                if (temp != 2 && resultSave > temp) resultSave = temp;
             } else {
-                setSave.put(saveString, next); // save
-                if (turn == 0) {
-                    int temp = makeSubTree(next, sum0 + save, sum1, 1); // recursive to make tree
-                    if (temp != 2 && resultSave > temp) resultSave = temp;
-                } else {
-                    int temp = makeSubTree(next, sum0, sum1 + save, 0); // recursive to make tree
-                    if (temp != 0 && resultSave < temp) resultSave = temp;
-                }
-                node.trees.add(next); // not necessary
+                int temp = makeSubTree(next, sum0, sum1 + save, 0); // recursive to make tree
+                if (temp != 0 && resultSave < temp) resultSave = temp;
             }
         }
 
@@ -91,7 +66,6 @@ public class EllysCandyGame {
         } else {
             node.winner = resultSave;
         }
-        System.out.println("Current winner: " + node.winner);
         return node.winner;
     }
 
