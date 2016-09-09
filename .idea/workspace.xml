@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04c1bf09-1dae-4a43-b472-c2cfdfdfaca1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/DeadCodeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java" />
     </list>
     <ignored path="TopCoderTraning.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,8 +52,8 @@
       <file leaf-file-name="DeadCode.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-974">
-              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+            <state relative-caret-position="774">
+              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -866,7 +863,7 @@
       <workItem from="1472647939025" duration="3626000" />
       <workItem from="1473225034198" duration="2424000" />
       <workItem from="1473247100361" duration="9187000" />
-      <workItem from="1473334584017" duration="16211000" />
+      <workItem from="1473334584017" duration="16294000" />
     </task>
     <servers />
   </component>
@@ -903,7 +900,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106440000" />
+    <option name="totallyTimeSpent" value="106523000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1344,8 +1341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-974">
-          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+        <state relative-caret-position="774">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding />
         </state>
       </provider>
