@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04c1bf09-1dae-4a43-b472-c2cfdfdfaca1" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/test/DeadCodeTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java" afterPath="$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java" />
     </list>
@@ -29,7 +31,7 @@
       <file leaf-file-name="HelloTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
+            <state relative-caret-position="0">
               <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="false" />
@@ -41,64 +43,21 @@
       <file leaf-file-name="WidgetRepairsTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WidgetRepairsTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
+            <state relative-caret-position="323">
               <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="24" selection-end-column="81" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopPositions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/ShopPositions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
               <folding>
-                <element signature="e#1578#1579#0" expanded="false" />
-                <element signature="e#1627#1628#0" expanded="false" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EllysCandyGame.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java">
+      <file leaf-file-name="DeadCode.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="45" column="50" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+            <state relative-caret-position="-974">
+              <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContestSchedule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/ContestSchedule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1254">
-              <caret line="68" column="28" selection-start-line="68" selection-start-column="28" selection-end-line="68" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EllysCandyGameTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/EllysCandyGameTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopPositionsTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/ShopPositionsTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="28" column="37" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -126,8 +85,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/ContestSchedule.java" />
-        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/ContestScheduleTest.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/ParallelProgramming.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/ParallelProgrammingTest.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/ShopPositionsTest.java" />
@@ -177,6 +134,8 @@
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/NumberSplit.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/EllysCandyGameTest.java" />
         <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/test/DeadCodeTest.java" />
+        <option value="$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java" />
       </list>
     </option>
   </component>
@@ -255,6 +214,10 @@
               <option name="myItemId" value="topcoder" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -330,33 +293,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EllysCandyGameTest">
-    <configuration default="false" name="ReppityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.mewx.topcoder.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="TopCoderTraning" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
-      <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.ReppityTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.DeadCodeTest">
     <configuration default="false" name="NumberSplitTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -441,6 +378,32 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
       <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.ContestScheduleTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="DeadCodeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.mewx.topcoder.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="TopCoderTraning" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.mewx.topcoder.test" />
+      <option name="MAIN_CLASS_NAME" value="org.mewx.topcoder.test.DeadCodeTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -860,19 +823,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.ReppityTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.NumberSplitTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.EllysCandyGameTest" />
-      <item index="3" class="java.lang.String" itemvalue="Application.EllysCandyGame" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ContestScheduleTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.NumberSplitTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.EllysCandyGameTest" />
+      <item index="2" class="java.lang.String" itemvalue="Application.EllysCandyGame" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ContestScheduleTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.DeadCodeTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.EllysCandyGameTest" />
-        <item index="1" class="java.lang.String" itemvalue="Application.EllysCandyGame" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ContestScheduleTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.NumberSplitTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ReppityTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.DeadCodeTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.EllysCandyGameTest" />
+        <item index="2" class="java.lang.String" itemvalue="Application.EllysCandyGame" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ContestScheduleTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.NumberSplitTest" />
       </list>
     </recent_temporary>
   </component>
@@ -903,44 +866,44 @@
       <workItem from="1472647939025" duration="3626000" />
       <workItem from="1473225034198" duration="2424000" />
       <workItem from="1473247100361" duration="9187000" />
-      <workItem from="1473334584017" duration="9216000" />
+      <workItem from="1473334584017" duration="16211000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ContestScheduleTest - 2016.09.09 at 01h 27m 07s.xml">
-      <configuration name="ContestScheduleTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 08h 35m 59s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 53m 43s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 08h 36m 08s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 56m 13s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 08h 36m 21s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 56m 38s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 08h 58m 11s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 56m 57s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 08h 58m 54s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 57m 56s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 09h 03m 48s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 22h 58m 28s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 09h 04m 53s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.08 at 23h 03m 22s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 09h 34m 03s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.09 at 01h 36m 22s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 09h 35m 23s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="EllysCandyGameTest - 2016.09.09 at 01h 39m 40s.xml">
-      <configuration name="EllysCandyGameTest" configurationId="JUnit" />
+    <history-entry file="DeadCodeTest - 2016.09.09 at 09h 36m 58s.xml">
+      <configuration name="DeadCodeTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99445000" />
+    <option name="totallyTimeSpent" value="106440000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -963,7 +926,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.47542736" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.44658118" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1004,34 +967,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/AlternateColorsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="30" column="42" selection-start-line="30" selection-start-column="42" selection-end-line="30" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/AlternateColors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/ObjectFallTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="18" column="107" selection-start-line="18" selection-start-column="107" selection-end-line="18" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/ObjectFall.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -1091,13 +1026,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/SnowyWinter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="30" column="31" selection-start-line="27" selection-start-column="41" selection-end-line="30" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/SnowyWinterTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -1123,13 +1051,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/SpecialDay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1214,6 +1136,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1235,13 +1158,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="18" column="107" selection-start-line="18" selection-start-column="107" selection-end-line="18" selection-end-column="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/VolumeGuess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1287,13 +1203,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/Reppity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/ReppityTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -1315,32 +1224,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/ShopPositions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding>
-            <element signature="e#1578#1579#0" expanded="false" />
-            <element signature="e#1627#1628#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/HelloTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
+        <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WidgetRepairsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="24" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1368,10 +1258,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/TheLotteryBothDivs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/VolumeGuess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="15" selection-end-line="11" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/EllysCandyGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="50" selection-start-line="45" selection-start-column="50" selection-end-line="45" selection-end-column="50" />
+        <state relative-caret-position="228">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/SnowyWinter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="33" column="43" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/Reppity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/SpecialDay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/ShopPositions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/WidgetRepairsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="24" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/utils/BuiltinParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-209">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/test/DeadCodeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="18" column="107" selection-start-line="18" selection-start-column="107" selection-end-line="18" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/mewx/topcoder/problems/DeadCode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-974">
+          <caret line="30" column="21" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
           <folding />
         </state>
       </provider>

@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * Created by MewX on 9/7/2016.
+ * TODO: to optimize this code
  */
 public class EllysCandyGame {
     private final String[] candidates = new String[] {"Elly", "Draw", "Kris"}; // 0, 1, 2
