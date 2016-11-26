@@ -2,7 +2,6 @@ import java.security.MessageDigest
 
 fun main(args: Array<String>) {
     val str1 = """iwrupvqb"""
-//    val str1 = """abcdef"""
     val m = MessageDigest.getInstance("MD5")
     for (i in 0..Int.MAX_VALUE) {
         val thedigest: ByteArray = m.digest((str1 + i.toString()).toByteArray())
@@ -12,6 +11,16 @@ fun main(args: Array<String>) {
         if (thedigest.toString().startsWith("00000")) {
             println("key: $i")
             // key: 346386
+            break
+        }
+    }
+
+    for (i in 346386..Int.MAX_VALUE) {
+        val thedigest: ByteArray = m.digest((str1 + i.toString()).toByteArray())
+        val str = String(encodeHex(thedigest, true))
+        if (thedigest.toString().startsWith("00000")) {
+            println("key: $i")
+            // key: 9958218
             break
         }
     }
