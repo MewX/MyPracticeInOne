@@ -9,4 +9,4 @@ import {
 } from 'react-native';
 MainActivity = require('./app/MainActivity');
 
-AppRegistry.registerComponent('AwesomeProject', () => MainActivity);
+AppRegistry.registerComponent('ReactNativeMaterialToDoList', () => MainActivity);
