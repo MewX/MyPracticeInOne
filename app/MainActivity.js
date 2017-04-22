@@ -66,7 +66,8 @@ class MainActivity extends React.Component {
                     />
 
                     <ListView
-                        style={{ flex: 1 }}
+                        enableEmptySections={true}
+                        style={{flex: 1}}
                         dataSource={this.state.ds.cloneWithRows(
                             this.state.items
                                 .map(this.itemMapping.bind(this))
@@ -81,8 +82,10 @@ class MainActivity extends React.Component {
                                 background={TouchableNativeFeedback.SelectableBackground()}>
                                 <View style={{alignSelf: "stretch", backgroundColor: textBgColor}}>
                                     <Text
-                                        style={{padding: 12, textAlign: 'left', justifyContent: 'center',
-                                            fontSize: 16, textDecorationLine: textDeco}}
+                                        style={{
+                                            padding: 12, textAlign: 'left', justifyContent: 'center',
+                                            fontSize: 16, textDecorationLine: textDeco
+                                        }}
                                         onPress={() => this.changeItemState(rowData.id)}
                                     >{rowData.text}</Text>
                                 </View>
