@@ -67,24 +67,24 @@ class MainActivity extends React.Component {
 
                     <ListView
                         style={{ flex: 1 }}
-                        dataSource={this.state.ds.cloneWithRows(this.state.items.filter((it) => {
-                            switch (this.state.active) {
-                                case MainActivity.ACTIVE_DONE:
-                                    return it.done;
-                                case MainActivity.ACTIVE_PENDING:
-                                    return !it.done;
-                                default:
-                                    return true;
-                            }
-                        }))}
+                        dataSource={this.state.ds.cloneWithRows(
+                            this.state.items
+                                .map(this.itemMapping.bind(this))
+                                .filter(this.itemFilter.bind(this)))
+                        }
                         renderRow={(rowData) => {
-                            // todo: filter items by active
-                            let color = rowData.done ? COLOR.grey300 : '#ffffff00';
-                            console.log(rowData.text);
+                            let textBgColor = rowData.done ? COLOR.grey300 : '#ffffff00';
+                            let textDeco = rowData.done ? 'line-through' : 'none';
+                            console.log(rowData);
+
                             return (<TouchableNativeFeedback
                                 background={TouchableNativeFeedback.SelectableBackground()}>
-                                <View style={{alignSelf: "stretch", backgroundColor: color}}>
-                                    <Text style={{padding: 12, textAlign: 'left', justifyContent: 'center', fontSize: 16}}>{rowData.text}</Text>
+                                <View style={{alignSelf: "stretch", backgroundColor: textBgColor}}>
+                                    <Text
+                                        style={{padding: 12, textAlign: 'left', justifyContent: 'center',
+                                            fontSize: 16, textDecorationLine: textDeco}}
+                                        onPress={() => this.changeItemState(rowData.id)}
+                                    >{rowData.text}</Text>
                                 </View>
                             </TouchableNativeFeedback>);
                         }}
@@ -112,6 +112,32 @@ class MainActivity extends React.Component {
         )
     }
 
+    /**
+     * map each item with its index
+     * @param it the item
+     * @param index its index
+     * @returns {{text, done, id: *}}
+     */
+    itemMapping(it, index) {
+        return {text: it.text, done: it.done, id: index};
+    }
+
+    /**
+     * filter items by current active label
+     * @param it the item
+     * @returns {boolean}
+     */
+    itemFilter(it) {
+        switch (this.state.active) {
+            case MainActivity.ACTIVE_DONE:
+                return it.done;
+            case MainActivity.ACTIVE_PENDING:
+                return !it.done;
+            default:
+                return true;
+        }
+    }
+
     addNewItem(str) {
         // pre process, and ignore empty string
         str = str.trim();
@@ -120,6 +146,15 @@ class MainActivity extends React.Component {
 
         let i = this.state.items;
         i.unshift({text: str, done: false});
+        this.setState({items: i});
+    }
+
+    changeItemState(id) {
+        if (id === undefined) return;
+        console.log("clicked: " + id);
+
+        let i = this.state.items;
+        i[id].done = !i[id].done;
         this.setState({items: i});
     }
 }
