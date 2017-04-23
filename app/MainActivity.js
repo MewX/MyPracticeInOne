@@ -77,8 +77,8 @@ class MainActivity extends React.Component {
                             let textBgColor = rowData.done ? COLOR.grey300 : '#ffffff00';
                             let textDeco = rowData.done ? 'line-through' : 'none';
                             console.log(rowData);
-
                             return (<TouchableNativeFeedback
+                                onPress={() => this.changeItemState(rowData.id)}
                                 background={TouchableNativeFeedback.SelectableBackground()}>
                                 <View style={{alignSelf: "stretch", backgroundColor: textBgColor}}>
                                     <Text
@@ -86,7 +86,6 @@ class MainActivity extends React.Component {
                                             padding: 12, textAlign: 'left', justifyContent: 'center',
                                             fontSize: 16, textDecorationLine: textDeco
                                         }}
-                                        onPress={() => this.changeItemState(rowData.id)}
                                     >{rowData.text}</Text>
                                 </View>
                             </TouchableNativeFeedback>);
