@@ -82,6 +82,11 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+
+def keystorePropertiesFile = rootProject.file("keystores/release.keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -104,8 +109,17 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['key.alias']
+            keyPassword keystoreProperties['key.store.password']
+            storeFile file(keystoreProperties['key.store'])
+            storePassword keystoreProperties['key.alias.password']
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.config
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
