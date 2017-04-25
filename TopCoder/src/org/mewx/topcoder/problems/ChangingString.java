@@ -9,25 +9,18 @@ import java.util.List;
  */
 public class ChangingString {
     public int distance(String A, String B, int K) {
-        Integer[] diff = new Integer[A.length()];
+        ArrayList<Integer> diffs = new ArrayList<>();
         for (int i = 0; i < A.length(); i ++) {
-            int temp = A.charAt(i) - B.charAt(i);
-            if (temp < 0) temp = -temp;
-            diff[i] = temp;
+            int tempDiff = Math.abs(A.codePointAt(i) - B.codePointAt(i));
+            if (tempDiff != 0) diffs.add(tempDiff); // add all diffs
         }
 
-        List<Integer> list = Arrays.asList(diff);
-        Collections.sort(list, (a, b) -> b - a);
-
-        for (int i = 0; i < list.size() && K > 0; i ++, K --) {
-            if (list.get(i) == 0) {
-                list.set(i, 1);
-            } else {
-                list.set(i, 0);
-            }
-        }
-
-        return list.stream().mapToInt(Integer::intValue).sum();
+        diffs.sort((a, b) -> b - a); // sort to decreasing list
+        if (K >= diffs.size()) return K - diffs.size(); // diffs array is set 0, the rest are 1
+        
+        // else set the first K elements to 0
+        for (int i = 0; i < K; i ++) diffs.set(i, 0);
+        return diffs.stream().mapToInt(Integer::intValue).sum();
     }
 }
 

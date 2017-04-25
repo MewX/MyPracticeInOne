@@ -7,29 +7,20 @@ public class InsertionSortCount {
 
     public int countMoves(int[] A) {
         int count = 0;
-
-        // insertion sort
-        /*
-        insertion-sort(A)
-           initialize a new empty sequence R
-           for each number N in A (in the original order) do:
-              determine the index i in R where N should be inserted so that R remains sorted
-              move each element in R with index greater than or equal to i to the following index
-              set R[i]=N
-           return R
-         */
-
+        // sorted part, i means the last unsorted index
         for (int i = 1; i < A.length; i ++) {
-            int j = i;
-            while (j > 0 && A[j] < A[j - 1]) {
-                count ++;
-                int temp = A[j-1];
-                A[j-1] = A[j];
-                A[j] = temp;
-                j --;
+            // j means move [j] to [j - 1] if A[j] < A[j - 1]
+            for (int j = i; j > 0; j --) {
+                if (A[j] < A[j - 1]) {
+                    // this is a swap
+                    int temp = A[j];
+                    A[j] = A[j - 1];
+                    A[j - 1] = temp;
+                    // so, count it
+                    count ++;
+                }
             }
         }
-
         return count;
     }
 }

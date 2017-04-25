@@ -5,24 +5,20 @@ package org.mewx.topcoder.problems;
  */
 public class Elections {
     public int visit(String[] likelihoods) {
-        int idxMin = 0;
-        double minPerc = Double.MAX_VALUE;
-
+        int idxLowest = 0;
+        double lowestRate = 1.0;
         for (int i = 0; i < likelihoods.length; i ++) {
-            int count = 0;
+            int count1 = 0;
             for (int j = 0; j < likelihoods[i].length(); j ++) {
-                if (likelihoods[i].charAt(j) == '1') {
-                    count ++;
-                }
+                if (likelihoods[i].charAt(j) == '1') count1 ++;
             }
 
-            double temp = count * 1.0 / likelihoods[i].length();
-            if (temp < minPerc) {
-                idxMin = i;
-                minPerc = temp;
+            double temp = count1 * 1.0 / likelihoods[i].length();
+            if (temp < lowestRate) {
+                lowestRate = temp;
+                idxLowest = i;
             }
         }
-
-        return idxMin;
+        return idxLowest;
     }
 }
