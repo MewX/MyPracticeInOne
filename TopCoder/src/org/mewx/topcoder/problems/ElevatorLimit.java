@@ -5,28 +5,18 @@ package org.mewx.topcoder.problems;
  */
 public class ElevatorLimit {
     public int[] getRange(int[] enter, int[] exit, int physicalLimit) {
-        int[] result = new int [2];
-
-        // brute force again
-        int maxPeople = 0, minPeople = 0;
-        int currentPeople = minPeople;
+        // simulate
+        int maxPeople = Integer.MIN_VALUE, minPeople = Integer.MAX_VALUE;
+        int currentPeople = 0;
         for (int i = 0; i < enter.length; i ++) {
             currentPeople -= exit[i];
             if (currentPeople < minPeople) minPeople = currentPeople;
             currentPeople += enter[i];
-        }
-
-        result[0] = minPeople < 0 ? -minPeople : 0;
-        currentPeople = result[0];
-        for (int i = 0; i < enter.length; i ++) {
-            currentPeople = currentPeople - exit[i] + enter[i];
             if (currentPeople > maxPeople) maxPeople = currentPeople;
         }
 
-        result[1] = physicalLimit - maxPeople + result[0];
-        if (result[1] > physicalLimit) result[1] = physicalLimit;
-
-        if (maxPeople > physicalLimit || maxPeople < 0 || minPeople < -physicalLimit) return new int [0];
-        return result;
+        // limitation on maxPeople and minPeople
+        if (maxPeople - minPeople > physicalLimit || -minPeople > physicalLimit) return new int[0];
+        else return new int[] {-minPeople, maxPeople < 0 ? physicalLimit : physicalLimit - maxPeople};
     }
 }
