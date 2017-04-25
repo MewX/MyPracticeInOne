@@ -6,79 +6,53 @@ import java.math.BigInteger;
  * Created by a1700831 on 10/08/16.
  */
 public class FriendlySequences {
-    private class Figure {
-        boolean[] count = new boolean[] {false, false, false, false, false, false, false, false, false, false};
-
-        boolean equalTo(Figure figure) {
-            for (int i = 0; i < 10; i ++) {
-                if (count[i] != figure.count[i]) return false;
-            }
-            return true;
+    private boolean compareTwoTables(boolean[] t0, boolean[] t1) {
+        // they must have the same lengths
+        for (int i = 0; i < t0.length; i ++) {
+            if (t0[i] != t1[i]) return false;
         }
+        return true;
+    }
+
+    private void resetTable(boolean[] t) {
+        for (int i = 0; i < t.length; i ++) t[i] = false;
+    }
+
+    private void fillTable(boolean[] t, int number) {
+        // assume table is already set
+        String temp = Integer.toString(number);
+        for (int i = 0; i < temp.length(); i ++) t[(int)temp.charAt(i) - (int)'0'] = true;
     }
 
     public int count(int[] array) {
-        // get length & define vals
-        Figure[] figures = new Figure[array.length];
+        if (array.length == 0) return 0;
 
-        // calc all
-        for (int i = 0; i < array.length; i ++) {
-            String temp = Integer.toString(array[i]);
-            figures[i] = new Figure();
-            for (int j = 0; j < temp.length(); j ++) {
-                figures[i].count[temp.charAt(j) - '0'] = true;
+        // tables for comparing
+        boolean[] table0 = new boolean[10], table1 = new boolean[10];
+        resetTable(table0);
+        resetTable(table1);
+
+        int count = 0, beg = 0;
+        fillTable(table0, array[0]);
+        for (int i = 1; i < array.length; i ++) {
+            fillTable(table1, array[i]);
+            if (!compareTwoTables(table0, table1)) {
+                // update count
+                // diff = i - beg
+                //  ==> diff - 1 + diff - 2 + ... + 1 == (diff - 1) * diff / 2
+                // e.g. diff = 4 ==> 3 + 2 + 1        == 3 * 4 / 2
+                //      diff = 5 ==> 4 + 3 + 2 + 1    == 4 * 5 / 2
+                count += (i - beg - 1) * (i - beg) / 2;
+
+                // swap and reset table1
+                boolean[] temp = table0;
+                table0 = table1;
+                table1 = temp;
+                beg = i;
             }
+            resetTable(table1); // reset table1 in every round
         }
 
-        // compare and divided into groups, each used figure should be set true
-        int tempSaveCount, totalCount = 0;
-        for (int startIdx = 0, judgeIdx; startIdx < figures.length;) {
-            tempSaveCount = 1;
-            for (judgeIdx = startIdx + 1; judgeIdx < figures.length; judgeIdx ++) {
-                // equals
-                if (figures[judgeIdx].equalTo(figures[startIdx])) {
-                    tempSaveCount ++;
-                } else {
-                    break;
-                }
-            }
-
-            // add to total
-            startIdx = judgeIdx;
-            if (tempSaveCount == 1) continue;
-            totalCount += calcCombinationBigInt(tempSaveCount, 2);
-        }
-        return totalCount;
-    }
-
-
-    // This causes integer exceeding
-    private int calcCombination(int n, int k) {
-        return factorial(n) / (factorial(n - k) * factorial(k));
-    }
-
-    private int factorial(int n) {
-        int result = 1;
-        while (n > 0) {
-            result *= n;
-            n --;
-        }
-        return result;
-    }
-
-    // use these new codes
-    private int calcCombinationBigInt(int n, int k) {
-        BigInteger bigN = BigInteger.valueOf(n);
-        BigInteger bigK = BigInteger.valueOf(k);
-        return factorialBigInt(BigInteger.valueOf(n)).divide( factorialBigInt(BigInteger.valueOf(n-k)).multiply(factorialBigInt(BigInteger.valueOf(k)))).intValue();
-    }
-
-    private BigInteger factorialBigInt(BigInteger n) {
-        BigInteger result = BigInteger.ONE;
-        while (n.compareTo(BigInteger.ZERO) == 1) {
-            result = result.multiply(n);
-            n = n.subtract(BigInteger.ONE);
-        }
-        return result;
+        return count + (array.length - beg - 1) * (array.length - beg) / 2;
     }
 }
