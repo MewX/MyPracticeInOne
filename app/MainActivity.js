@@ -41,7 +41,6 @@ class MainActivity extends React.Component {
     }
 
 
-
     componentWillMount() {
     }
 
@@ -50,8 +49,8 @@ class MainActivity extends React.Component {
             <ThemeProvider uiTheme={uiTheme}>
                 <View style={{flex: 1}}>
                     {/*Interesting ways to make translucent*/}
-                    <StatusBar backgroundColor="rgba(0, 0, 0, 0.2)" translucent />
-                    <View style={{ backgroundColor: COLOR.green500, height: 24 }} />
+                    <StatusBar backgroundColor="rgba(0, 0, 0, 0.2)" translucent/>
+                    <View style={{backgroundColor: COLOR.green500, height: 24}}/>
                     <Toolbar
                         leftElement="menu"
                         centerElement="RN Material Todo List"
@@ -94,20 +93,23 @@ class MainActivity extends React.Component {
 
                     <BottomNavigation active={this.state.active} hidden={false}>
                         <BottomNavigation.Action
-                            key={MainActivity.ACTIVE_ALL}
+                            key="all"
                             icon="home"
-                            label="All"
-                            onPress={() => this.setState({active: MainActivity.ACTIVE_ALL})}/>
+                            label="all"
+                            onPress={() => this.setState({active: 'all'})}
+                        style={{ container: { minWidth: null } }}/>
                         <BottomNavigation.Action
-                            key={MainActivity.ACTIVE_PENDING}
+                            key="pending"
                             icon="compare-arrows"
-                            label="Pending"
-                            onPress={() => this.setState({active: MainActivity.ACTIVE_PENDING})}/>
+                            label="pending"
+                            onPress={() => this.setState({active: 'pending'})}
+                        style={{ container: { minWidth: null } }}/>
                         <BottomNavigation.Action
-                            key={MainActivity.ACTIVE_DONE}
+                            key="done"
                             icon="archive"
-                            label="Done"
-                            onPress={() => this.setState({active: MainActivity.ACTIVE_DONE})}/>
+                            label="done"
+                            onPress={() => this.setState({active: 'done'})}
+                        style={{ container: { minWidth: null } }}/>
                     </BottomNavigation>
                 </View>
             </ThemeProvider>
