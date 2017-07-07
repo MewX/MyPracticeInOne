@@ -8,31 +8,32 @@ import java.util.*
  *
  */
 
-fun opOn(xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<BooleanArray>) {
+fun opOn(part: Int, xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<IntArray>) {
+    for (i in xLeft..xRight) {
+        (yTop..yBottom)
+                .filter { matrix[i][it] == 0 || part == 2 }
+                .forEach { matrix[i][it] += 1 }
+    }
+}
+
+fun opOff(xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<IntArray>) {
+    for (i in xLeft..xRight) {
+        (yTop..yBottom)
+                .filter { matrix[i][it] != 0 }
+                .forEach { matrix[i][it] -= 1 }
+    }
+}
+
+fun opToggle(part: Int, xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<IntArray>) {
     for (i in xLeft..xRight) {
         for (j in yTop..yBottom) {
-            matrix[i][j] = true
+            matrix[i][j] += 2
+            if (part == 1) matrix[i][j] = matrix[i][j].inc().and(1)
         }
     }
 }
 
-fun opOff(xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<BooleanArray>) {
-    for (i in xLeft..xRight) {
-        for (j in yTop..yBottom) {
-            matrix[i][j] = false
-        }
-    }
-}
-
-fun opToggle(xLeft: Int, xRight: Int, yTop: Int, yBottom: Int, matrix: Array<BooleanArray>) {
-    for (i in xLeft..xRight) {
-        for (j in yTop..yBottom) {
-            matrix[i][j] = !matrix[i][j]
-        }
-    }
-}
-
-fun opParse(str: String, matrix: Array<BooleanArray>) {
+fun opParse(part: Int, str: String, matrix: Array<IntArray>) {
     if (str.isEmpty()) return
 
     // parse integers
@@ -47,23 +48,30 @@ fun opParse(str: String, matrix: Array<BooleanArray>) {
     val yBottom = Math.max(y1, y2)
 
     if (result.groupValues[1].contains("on")) {
-        opOn(xLeft, xRight, yTop, yBottom, matrix)
+        opOn(part, xLeft, xRight, yTop, yBottom, matrix)
     } else if (result.groupValues[1].contains("off")) {
         opOff(xLeft, xRight, yTop, yBottom, matrix)
     } else {
-        opToggle(xLeft, xRight, yTop, yBottom, matrix)
+        opToggle(part, xLeft, xRight, yTop, yBottom, matrix)
     }
 }
 
 fun main(args: Array<String>) {
     // init matrix
-    val matrix = Array(1000, {BooleanArray(1000)})
-    matrix.map { it.map { false } }
+    val matrix1 = Array(1000, {IntArray(1000)})
+    val matrix2 = Array(1000, {IntArray(1000)})
+    matrix1.map { it.map { 0 } }
+    matrix2.map { it.map { 0 } }
 
     // read operations
     val s = Scanner(System.`in`)
     while (s.hasNextLine()) {
-        opParse(s.nextLine(), matrix)
+        val line = s.nextLine()
+        opParse(1, line, matrix1)
+        opParse(2, line, matrix2)
     }
-    println("Lit: " + matrix.sumBy { it.count { it == true } })
+    s.close()
+
+    println("Lit1: " + matrix1.sumBy { it.sum() })
+    println("Lit2: " + matrix2.sumBy { it.sum() })
 }
