@@ -5,25 +5,30 @@ import java.util.*
  * This is a typical TSP problem (NP hard)
  */
 
-fun dfs(table: Array<IntArray>, path: LinkedList<Int>, sum: Int): Int {
+// return value <smallest, biggest>
+fun dfs(table: Array<IntArray>, path: LinkedList<Int>, sum: Int): Pair<Int, Int> {
     if (table.size == path.size) {
         path.forEach { print(it.toString() + ", ") }
         println(sum)
-        return sum
+        return Pair(sum, sum)
     }
 
     var smallest = Int.MAX_VALUE
+    var biggest = Int.MIN_VALUE
     var i = 0
     while (i < table.size) {
         if (!path.contains(i)) {
-            val temp = sum + (if (path.isNotEmpty()) table[path.last()][i] else 0)
+            val tempSum = sum + (if (path.isNotEmpty()) table[path.last()][i] else 0)
             path.addLast(i)
-            smallest = Math.min(dfs(table, path, temp), smallest)
+
+            val temp = dfs(table, path, tempSum)
+            smallest = Math.min(temp.first, smallest)
+            biggest = Math.max(temp.second, biggest)
             path.removeLast()
         }
         i ++
     }
-    return smallest
+    return Pair(smallest, biggest)
 }
 
 fun main(args: Array<String>) {
@@ -53,5 +58,7 @@ fun main(args: Array<String>) {
     }
     s.close()
 
-    println(dfs(table, LinkedList<Int>(), 0))
+    val result = dfs(table, LinkedList<Int>(), 0)
+    println("part 1: " + result.first)
+    println("part 2: " + result.second)
 }
