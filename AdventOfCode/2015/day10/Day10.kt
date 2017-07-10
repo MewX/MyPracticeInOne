@@ -4,7 +4,8 @@ import java.util.*
  * Created by MewX on 7/8/2017.
  * http://adventofcode.com/2015/day/10
  *
- * Part 1 input: 1113222113
+ * Part 1 input: 1113222113 with 40 loop
+ * Part 2 input: 1113222113 with 50 loop
  */
 
 fun main(args: Array<String>) {
@@ -15,7 +16,7 @@ fun main(args: Array<String>) {
 //    s.close()
 
     val sb = StringBuilder()
-    for (times in 1..40) {
+    for (times in 1..50) {
         var prev = temp[0]
         var idx = 1
         var counter = 1
@@ -35,7 +36,7 @@ fun main(args: Array<String>) {
         // move to a new round
         temp = sb.toString()
         sb.setLength(0)
-        println(String.format("Round %d: %s (%d)", times, temp, temp.length))
+        println(String.format("Round %d: %s (%d)", times, "change to variable temp", temp.length))
     }
 
 }
