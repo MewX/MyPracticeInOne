@@ -3,6 +3,7 @@
  * http://adventofcode.com/2015/day/11
  *
  * part 1: vzbxkghb
+ * part 2: vzbxxyzz
  */
 
 /**
@@ -41,7 +42,7 @@ fun main(args: Array<String>) {
     shiftToValidStringIfInvalid(str)
 
     // only add 1 to the last char
-    while (!validate(str)) {
+    do {
         print("Working on \"$str\" -> ")
 
         // add 1
@@ -53,5 +54,5 @@ fun main(args: Array<String>) {
         }
         shiftToValidStringIfInvalid(str)
         println(str)
-    }
+    } while (!validate(str))
 }
