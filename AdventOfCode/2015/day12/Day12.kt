@@ -9,27 +9,17 @@ fun sumLine(str: String): Int = Regex("-?\\d+").findAll(str).sumBy { it.value.to
 fun removeRedObjects(sb: StringBuilder): StringBuilder {
     var str = sb
     do {
-        val idx = str.indexOf("\"red\"")
+        val idx = str.indexOf(":\"red\"")
         if (idx == -1) break
         println("Found red in: $idx")
 
         // find beginning index
         var remaining = 1 // the brace counter
-        var arrayCounter = 1
         var rmBeg = idx
-        while (rmBeg >= 0 && remaining != 0 && arrayCounter != 0) {
+        while (rmBeg >= 0 && remaining != 0) {
             rmBeg --
-            when (str[rmBeg]) {
-                '}' -> remaining ++
-                '{' -> remaining --
-                ']' -> arrayCounter ++
-                '[' -> arrayCounter --
-            }
-        }
-        if (arrayCounter == 0) {
-            // array, should not be removed, but for simplifying, still remove the word
-            str = StringBuilder(str.removeRange(idx..idx + 5))
-            continue
+            if (str[rmBeg] == '}') remaining ++
+            else if (str[rmBeg] == '{') remaining --
         }
 
         // find ending index
