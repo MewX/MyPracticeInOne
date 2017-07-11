@@ -29,7 +29,7 @@ fun evolve(seq: LinkedList<Int>, pool: LinkedList<Int>, table: Array<IntArray>):
 fun main(args: Array<String>) {
     // build relationship from input
     val s = Scanner(System.`in`)
-    val dim = 8 // sample: 4; input: 8
+    val dim = 9 // sample: 4; input: 8; for part 2: 9 (by default the values are 0)
     var pIdx = 0
     val pMap = mutableMapOf<String, Int>() // peopleName, peopleIdx
     val table = Array(dim, {IntArray(dim)})
