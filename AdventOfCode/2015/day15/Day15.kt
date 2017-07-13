@@ -8,13 +8,15 @@ import java.util.*
  */
 
 data class Ingredient(val capacity: Int, val durability: Int, val flavor: Int, val texture: Int, val calories: Int)
+val PART = 2
 
 fun benchmark(selected: Map<String, Int>, db: Map<String, Ingredient>): Int {
     val allCapacity = Math.max(0, selected.map { db[it.key]!!.capacity * it.value }.sum())
     val allDur= Math.max(0, selected.map { db[it.key]!!.durability * it.value }.sum())
     val allFlavor = Math.max(0, selected.map { db[it.key]!!.flavor * it.value }.sum())
     val allTexture = Math.max(0, selected.map { db[it.key]!!.texture * it.value }.sum())
-    val result = allCapacity * allDur * allFlavor * allTexture
+    val allCalories = Math.max(0, selected.map { db[it.key]!!.calories * it.value }.sum())
+    val result = if (PART == 1 || PART == 2 && allCalories == 500) allCapacity * allDur * allFlavor * allTexture else 0
 
     selected.forEach { print(it.key + " (" + it.value + "), ") }
     println("-> $result")
@@ -58,6 +60,6 @@ fun main(args: Array<String>) {
     }
     s.close()
 
-    println("Part 1: " + permuteSelected(LinkedList(), data.keys.toList(), data))
+    println("Part $PART: " + permuteSelected(LinkedList(), data.keys.toList(), data))
 
 }
