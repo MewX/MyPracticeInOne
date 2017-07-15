@@ -1,16 +1,12 @@
 import random
 import math
-import matplotlib
 from pylab import plot, legend, subplot, grid, xlabel, ylabel, show, title
 from pyneurgen.neuralnet import NeuralNet
-from pyneurgen.nodes import BiasNode, Connection
 
 #   all samples are drawn from this population
 pop_len = 200
 factor = 1.0 / float(pop_len)
-population = [[i, math.sin(float(i) * factor * 10.0) + \
-               random.gauss(float(i) * factor, .2)]
-              for i in range(pop_len)]
+population = [[i, math.sin(float(i) * factor * 10.0) + random.gauss(float(i) * factor, .2)] for i in range(pop_len)]
 
 all_inputs = []
 all_targets = []
@@ -85,4 +81,3 @@ grid(True)
 title("Mean Squared Error by Epoch")
 
 show()
-
