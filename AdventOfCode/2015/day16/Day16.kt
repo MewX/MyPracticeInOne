@@ -14,9 +14,14 @@ fun lineToMap(line: String): Pair<Int, Map<String, Int>>? {
 }
 
 fun compToRequirement(line: Map<String, Int>): Boolean {
-    val preset = mapOf("children" to 3, "cats" to 7, "pomeranians" to 3, "akitas" to 0, "vizslas" to 0,
-                                    "goldfish" to 5, "trees" to 3, "cars" to 2, "perfumes" to 1)
-    return line.count { it.value != preset.getOrDefault(it.key, 0) } == 0
+    val preset = mapOf("children" to 3, "cats" to 7, "samoyeds" to 2, "pomeranians" to 3, "akitas" to 0, "vizslas" to 0,
+                       "goldfish" to 5, "trees" to 3, "cars" to 2, "perfumes" to 1)
+    return line.count {
+        when (it.key) {
+            in setOf("cats", "trees") -> it.value > preset.getOrDefault(it.key, 0)
+            in setOf("pomeranians", "goldfish") -> it.value < preset.getOrDefault(it.key, 0)
+            else -> it.value == preset.getOrDefault(it.key, 0) // PART 1 only
+        } } == line.size
 }
 
 fun main(args: Array<String>) {
@@ -28,5 +33,4 @@ fun main(args: Array<String>) {
         }
     }
     s.close()
-
 }
