@@ -66,7 +66,7 @@ test_data = raw_data[start_test_idx:end_test_idx:pick_every]
 # define NN
 input_nodes = 1
 hidden_nodes = 10
-output_nodes = 2
+output_nodes = 1
 
 output_order = 3
 incoming_weight_from_output = .6
@@ -85,8 +85,10 @@ net.set_halt_on_extremes(True)
 net.set_random_constraint(.5)
 net.set_learnrate(.1)
 
-net.set_all_inputs(training_data[1, :])
-net.set_all_targets(training_data[2, :])
+# net.set_all_inputs(training_data[:, 1])  # this results in [a, b, ..., z] not [[a], [b], ..., [z]]
+# net.set_all_targets(training_data[:, 2])
+net.set_all_inputs([[row[1]] for row in training_data])  # wanting [[a], [b], ..., [z]]
+net.set_all_targets([[row[2]] for row in training_data])
 
 length = len(training_data)
 learn_end_point = int(length * .8)
@@ -96,7 +98,7 @@ net.set_test_range(learn_end_point + 1, length - 1)
 net.layers[1].set_activation_type('tanh')
 
 # train
-net.learn(epochs=125, show_epoch_results=True, random_testing=False)
+net.learn(epochs=500, show_epoch_results=True)
 mse = net.test()
 
 # test
