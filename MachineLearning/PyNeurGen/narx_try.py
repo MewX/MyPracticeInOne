@@ -1,13 +1,14 @@
 import math
 import numpy
+from pylab import plot, legend, subplot, grid, xlabel, ylabel, show, title
 from pyneurgen.neuralnet import NeuralNet
 from pyneurgen.recurrent import NARXRecurrent
 
 MODE = 1
-START_SECOND = 60
+START_SECOND = 20
 TRAIN_SECONDS = 50
 VALIDATE_SECONDS = 15
-TEST_SECONDS = 30
+TEST_SECONDS = 15
 SAMPLE_SECOND = 1.0  # 1.0: 1 second; 0.1: 0.1 second
 
 # detect data file name
@@ -59,6 +60,8 @@ end_validate_idx = start_validate_idx + VALIDATE_SECONDS * second_length
 start_test_idx = end_validate_idx + 1
 end_test_idx = end_validate_idx + TEST_SECONDS * second_length
 
+selected_data = raw_data[start_training_idx:end_test_idx:pick_every]
+selected_data_time = [[row[0]] for row in selected_data]
 training_data = raw_data[start_training_idx:end_training_idx:pick_every]
 validate_data = raw_data[start_validate_idx:end_validate_idx:pick_every]
 test_data = raw_data[start_test_idx:end_test_idx:pick_every]
@@ -68,9 +71,9 @@ input_nodes = 1
 hidden_nodes = 10
 output_nodes = 1
 
-output_order = 3
+output_order = 10
 incoming_weight_from_output = .6
-input_order = 2
+input_order = 10
 incoming_weight_from_input = .4
 
 net = NeuralNet()
@@ -87,18 +90,33 @@ net.set_learnrate(.1)
 
 # net.set_all_inputs(training_data[:, 1])  # this results in [a, b, ..., z] not [[a], [b], ..., [z]]
 # net.set_all_targets(training_data[:, 2])
-net.set_all_inputs([[row[1]] for row in training_data])  # wanting [[a], [b], ..., [z]]
-net.set_all_targets([[row[2]] for row in training_data])
+net.set_all_inputs([[row[1]] for row in selected_data])  # wanting [[a], [b], ..., [z]]
+net.set_all_targets([[row[2]] for row in selected_data])
 
-length = len(training_data)
-learn_end_point = int(length * .8)
+length = len(selected_data)
+learn_end_point = int((end_validate_idx - start_training_idx) / pick_every * .8)  # validation
 
-net.set_learn_range(0, learn_end_point)
-net.set_test_range(learn_end_point + 1, length - 1)
+net.set_learn_range(0, (end_validate_idx - start_training_idx) / pick_every)
+net.set_test_range((end_validate_idx - start_training_idx) / pick_every, (end_test_idx - start_training_idx) / pick_every)
 net.layers[1].set_activation_type('tanh')
 
 # train
-net.learn(epochs=500, show_epoch_results=True)
+net.learn(epochs=125, show_epoch_results=True)
 mse = net.test()
 
-# test
+# test and generate charts
+all_real = [item[0] for item in net.test_targets_activations]
+all_targets = [item[1] for item in net.test_targets_activations]
+
+plot(selected_data_time[
+     (end_validate_idx - start_training_idx) / pick_every: (end_test_idx - start_training_idx) / pick_every],
+     all_targets, 'bo', label='predict')
+plot(selected_data_time[
+     (end_validate_idx - start_training_idx) / pick_every: (end_test_idx - start_training_idx) / pick_every],
+     all_real, ':k',
+     label='real')
+grid(True)
+legend(loc='lower left', numpoints=1)
+title("Test Target Points vs Actual Points")
+
+show()
