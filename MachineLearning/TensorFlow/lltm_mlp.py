@@ -6,6 +6,7 @@ References:
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import matplotlib.pyplot as plt
 
 # definitions
 FILE_NAME = "newdata0725_variable_interval.csv"
@@ -13,7 +14,7 @@ FILE_NAME = "newdata0725_variable_interval.csv"
 TIME_INTERVAL = 10  # records per second
 
 N_INPUT_LAYER = 10 * TIME_INTERVAL  # 10 seconds historical data
-N_PREDICT_FORWARD = 5 * TIME_INTERVAL  # 5 seconds later
+N_PREDICT_FORWARD = 1 * TIME_INTERVAL  # 5 seconds later
 START_TIME_POINT = 150  # START_TIME_POINT-th second (previous data will be used later)
 N_TRAINING_DATA = 1000 * TIME_INTERVAL  # training record number
 N_TESTING_DATA = 100 * TIME_INTERVAL  # testing record number, following training data
@@ -56,6 +57,7 @@ def find_second_beg(data_set, start_second):
 # using N values as input, 1 value as output; future real values are used for prediction
 raw_data = np.loadtxt(FILE_NAME, delimiter=",")  # data from second 101
 RAW_DATA_LEN = len(raw_data)
+raw_time = np.array(raw_data[:, 0])
 raw_elevation = np.array(raw_data[:, 1])
 raw_linear_heave = np.array(raw_data[:, 2])
 raw_real_heave = np.array(raw_data[:, 3])
@@ -79,6 +81,7 @@ print(training_target.shape)
 
 testing_input = N_TESTING_DATA * [None]
 testing_target = N_TESTING_DATA * [None]
+testing_time = N_TESTING_DATA * [None]
 for i in range(N_TESTING_DATA):
     testing_input[i] = raw_elevation[i + testing_data_idx_start: i + testing_data_idx_start + N_INPUT_LAYER]
     testing_target[i] = [raw_nonlinear_heave[testing_data_idx_start + i]]
@@ -86,9 +89,6 @@ testing_input = np.array(testing_input)
 testing_target = np.array(testing_target)
 print(testing_input.shape)
 print(testing_target.shape)
-
-# config the MLP
-
 
 # NRMSE
 def nrmse(real, predict):
@@ -112,15 +112,23 @@ y = tf.placeholder(tf.float32, [None, n_classes])
 dropout_keep_prob = tf.placeholder(tf.float32)
 
 
-def mlp(_x, _weights, _biases, dropout_keep_probability):
-    layer1 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1'])), dropout_keep_probability)
-    layer2 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2'])),
-                           dropout_keep_probability)
-    layer3 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3'])),
-                           dropout_keep_probability)
-    layer4 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4'])),
-                           dropout_keep_probability)
-    out = tf.nn.relu(tf.add(tf.matmul(layer4, _weights['out']), _biases['out']))
+# def mlp(_x, _weights, _biases, dropout_keep_probability):
+#     layer1 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1'])), dropout_keep_probability)
+#     layer2 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2'])),
+#                            dropout_keep_probability)
+#     layer3 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3'])),
+#                            dropout_keep_probability)
+#     layer4 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4'])),
+#                            dropout_keep_probability)
+#     out = tf.nn.relu(tf.add(tf.matmul(layer4, _weights['out']), _biases['out']))
+#     return out
+
+def mlp(_x, _weights, _biases):
+    layer1 = tf.nn.sigmoid(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1']))
+    layer2 = tf.nn.sigmoid(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
+    layer3 = tf.nn.sigmoid(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3']))
+    layer4 = tf.nn.sigmoid(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4']))
+    out = tf.nn.sigmoid(tf.add(tf.matmul(layer4, _weights['out']), _biases['out']))
     return out
 
 
@@ -141,7 +149,12 @@ biases = {
 }
 
 # Build model
-pred = mlp(X, weights, biases, dropout_keep_prob)
+pred = mlp(X, weights, biases)
+
+# Accuracy
+# correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
+# accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+accuracy = nrmse(y, pred)
 
 # Accuracy
 # correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
@@ -149,16 +162,19 @@ pred = mlp(X, weights, biases, dropout_keep_prob)
 accuracy = nrmse(y, pred)
 
 # Loss and optimizer
-cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))  # softmax loss
+# cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))  # softmax loss
+cost = tf.reduce_mean(tf.pow(y - pred, 2))
 # optimizer = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(cost)
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=LEARNING_RATE).minimize(cost)  # learning rate
+# optimizer = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(cost)
 
 # Training
 print("Net built successfully...\n")
 print("Starting training...\n")
 
 # Initialize variables
-init_all = tf.initialize_all_variables()
+# init_all = tf.initialize_all_variables()
+init_all = tf.global_variables_initializer()
 
 # Launch session
 sess = tf.Session()
@@ -181,7 +197,8 @@ for epoch in range(TRAINING_EPOCHS):
     #
     #     # Calculate average cost
     #     avg_cost += sess.run(accuracy, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 1.}) / total_batch
-    sess.run(optimizer, feed_dict={X: training_input, y: training_target, dropout_keep_prob: 0.9})
+    _, c = sess.run([optimizer, cost], feed_dict={X: training_input, y: training_target, dropout_keep_prob: 0.9})
+    # print(c)
 
     # Display progress
     if epoch % DISPLAY_STEP == 0:
@@ -197,6 +214,7 @@ print("Testing...\n")
 # Testing
 test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
 # print("Test accuracy: %.6f" % test_acc)
+print(repr(np.column_stack((test_acc, testing_target))))
 for i in np.column_stack((test_acc, testing_target)):
     print(repr(i))
 sess.close()
@@ -211,3 +229,4 @@ plt.xlabel('time')
 plt.ylabel('non-linear heave')  # grayscale color
 # plt.title('About as silly as it gets, folks', color='#afeeee')
 plt.show()
+
