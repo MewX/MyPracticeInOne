@@ -127,8 +127,7 @@ def mlp(_x, _weights, _biases):
     layer1 = tf.nn.tanh(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1']))
     layer2 = tf.nn.tanh(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
     layer3 = tf.nn.tanh(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3']))
-    layer4 = tf.nn.tanh(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4']))
-    out = tf.add(tf.matmul(layer4, _weights['out']), _biases['out'])
+    out = tf.add(tf.matmul(layer3, _weights['out']), _biases['out'])
     return out
 
 
@@ -136,15 +135,13 @@ weights = {
     'h1': tf.Variable(tf.random_normal([n_input, n_hidden_1], stddev=STANDARD_DEVIATION)),
     'h2': tf.Variable(tf.random_normal([n_hidden_1, n_hidden_2], stddev=STANDARD_DEVIATION)),
     'h3': tf.Variable(tf.random_normal([n_hidden_2, n_hidden_3], stddev=STANDARD_DEVIATION)),
-    'h4': tf.Variable(tf.random_normal([n_hidden_3, n_hidden_4], stddev=STANDARD_DEVIATION)),
-    'out': tf.Variable(tf.random_normal([n_hidden_4, n_classes], stddev=STANDARD_DEVIATION)),
+    'out': tf.Variable(tf.random_normal([n_hidden_3, n_classes], stddev=STANDARD_DEVIATION)),
 }
 
 biases = {
     'b1': tf.Variable(tf.random_normal([n_hidden_1])),
     'b2': tf.Variable(tf.random_normal([n_hidden_2])),
     'b3': tf.Variable(tf.random_normal([n_hidden_3])),
-    'b4': tf.Variable(tf.random_normal([n_hidden_4])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -210,6 +207,13 @@ for epoch in range(TRAINING_EPOCHS):
 
 print("End of training.\n")
 print("Testing...\n")
+
+# Testing training data
+test_acc = sess.run(pred, feed_dict={X: training_input, y: training_target, dropout_keep_prob: 1.})
+# print("Test accuracy: %.6f" % test_acc)
+print(repr(np.column_stack((test_acc, training_target))))
+# for i in np.column_stack((test_acc, testing_target)):
+#     print(repr(i))
 
 # Testing
 test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
