@@ -3,11 +3,13 @@ References:
     [1] https://gist.github.com/mick001/45a45b94eab29d81a5f1e46d88632053
 """
 
+import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 
 # definitions
 FILE_NAME = "newdata0725_variable_interval.csv"
+# FILE_NAME = "test.csv"
 TIME_INTERVAL = 10  # records per second
 
 N_INPUT_LAYER = 10 * TIME_INTERVAL  # 10 seconds historical data
@@ -16,10 +18,10 @@ START_TIME_POINT = 150  # START_TIME_POINT-th second (previous data will be used
 N_TRAINING_DATA = 1000 * TIME_INTERVAL  # training record number
 N_TESTING_DATA = 100 * TIME_INTERVAL  # testing record number, following training data
 
-LEARNING_RATE = 0.003
+LEARNING_RATE = 0.03
 STANDARD_DEVIATION = 0.1
-TRAINING_EPOCHS = 100
-BATCH_SIZE = 100
+TRAINING_EPOCHS = 1000
+BATCH_SIZE = 50  # 100
 DISPLAY_STEP = 20
 RANDOM_STATE = 100
 
@@ -85,18 +87,17 @@ testing_target = np.array(testing_target)
 print(testing_input.shape)
 print(testing_target.shape)
 
-
 # config the MLP
-# model, loss function, dropout, optimizer
 
-# train
-
-# testing
 
 # NRMSE
+def nrmse(real, predict):
+    up = tf.sqrt(tf.reduce_sum(tf.square(real - predict)))
+    down = tf.sqrt(tf.reduce_sum(tf.square(real)))
+    return up / down
 
-# plotting
 
+# model, loss function, dropout, optimizer
 # Net params
 n_input = N_INPUT_LAYER  # input n labels
 n_hidden_1 = 100  # 1st layer
@@ -112,10 +113,13 @@ dropout_keep_prob = tf.placeholder(tf.float32)
 
 
 def mlp(_x, _weights, _biases, dropout_keep_probability):
-    layer1 = tf.nn.dropout(tf.nn.tanh(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1'])), dropout_keep_probability)
-    layer2 = tf.nn.dropout(tf.nn.tanh(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2'])), dropout_keep_probability)
-    layer3 = tf.nn.dropout(tf.nn.tanh(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3'])), dropout_keep_probability)
-    layer4 = tf.nn.dropout(tf.nn.tanh(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4'])), dropout_keep_probability)
+    layer1 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1'])), dropout_keep_probability)
+    layer2 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2'])),
+                           dropout_keep_probability)
+    layer3 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3'])),
+                           dropout_keep_probability)
+    layer4 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4'])),
+                           dropout_keep_probability)
     out = tf.nn.relu(tf.add(tf.matmul(layer4, _weights['out']), _biases['out']))
     return out
 
@@ -139,19 +143,19 @@ biases = {
 # Build model
 pred = mlp(X, weights, biases, dropout_keep_prob)
 
+# Accuracy
+# correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
+# accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+accuracy = nrmse(y, pred)
+
 # Loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=y))  # softmax loss
 # optimizer = tf.train.AdamOptimizer(learning_rate=LEARNING_RATE).minimize(cost)
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=LEARNING_RATE).minimize(cost)  # learning rate
 
-# Accuracy
-correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
-accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-
+# Training
 print("Net built successfully...\n")
 print("Starting training...\n")
-# ------------------------------------------------------------------------------
-# Training
 
 # Initialize variables
 init_all = tf.initialize_all_variables()
@@ -162,30 +166,48 @@ sess.run(init_all)
 
 # Training loop
 for epoch in range(TRAINING_EPOCHS):
-    avg_cost = 0.
-    total_batch = int(training_input.shape[0] / BATCH_SIZE)
-    # Loop over all batches
-    for i in range(total_batch):
-        randidx = np.random.randint(len(training_input), size=BATCH_SIZE)
-        batch_xs = training_input[randidx, :]
-        batch_ys = training_target[randidx, :]
-        # Fit using batched data
-        sess.run(optimizer, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 0.9})
-        # Calculate average cost
-        avg_cost += sess.run(cost, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 1.}) / total_batch
+    # avg_cost = 0.
+    # total_batch = int(training_input.shape[0] / BATCH_SIZE)
+    # # Loop over all batches
+    # for i in range(total_batch):
+    #     randidx = np.random.randint(len(training_input), size=BATCH_SIZE)
+    #     batch_xs = training_input[randidx, :]
+    #     # print(repr(batch_xs))
+    #     batch_ys = training_target[randidx, :]
+    #     # print(repr(batch_ys))
+    #
+    #     # Fit using batched data
+    #     sess.run(optimizer, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 0.9})
+    #
+    #     # Calculate average cost
+    #     avg_cost += sess.run(accuracy, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 1.}) / total_batch
+    sess.run(optimizer, feed_dict={X: training_input, y: training_target, dropout_keep_prob: 0.9})
+
     # Display progress
     if epoch % DISPLAY_STEP == 0:
-        print("Epoch: %03d/%03d cost: %.9f" % (epoch, TRAINING_EPOCHS, avg_cost))
-        train_acc = sess.run(accuracy, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 1.})
-        print("Training accuracy: %.3f" % train_acc)
+        # print("Epoch: %03d/%03d cost: %.9f" % (epoch, TRAINING_EPOCHS, avg_cost))
+        print("Epoch: %03d/%03d" % (epoch, TRAINING_EPOCHS))
+        # train_acc = sess.run(accuracy, feed_dict={X: batch_xs, y: batch_ys, dropout_keep_prob: 1.})
+        train_acc = sess.run(accuracy, feed_dict={X: training_input, y: training_target, dropout_keep_prob: 1.})
+        print("Training accuracy: %.6f" % train_acc)
 
 print("End of training.\n")
 print("Testing...\n")
-# ------------------------------------------------------------------------------
+
 # Testing
-
-test_acc = sess.run(accuracy, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
-print("Test accuracy: %.3f" % test_acc)
-
+test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
+# print("Test accuracy: %.6f" % test_acc)
+for i in np.column_stack((test_acc, testing_target)):
+    print(repr(i))
 sess.close()
 print("Session closed!")
+
+# Plotting
+t = np.arange(raw_data[testing_data_idx_start][0], raw_data[testing_data_idx_start + N_TESTING_DATA][0],
+              1.0 / TIME_INTERVAL)
+plt.plot(t, testing_target, "grey")
+plt.plot(t, test_acc, "red")
+plt.xlabel('time')
+plt.ylabel('non-linear heave')  # grayscale color
+# plt.title('About as silly as it gets, folks', color='#afeeee')
+plt.show()
