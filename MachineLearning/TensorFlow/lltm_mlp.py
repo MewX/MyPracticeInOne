@@ -19,7 +19,7 @@ START_TIME_POINT = 150  # START_TIME_POINT-th second (previous data will be used
 N_TRAINING_DATA = 1000 * TIME_INTERVAL  # training record number
 N_TESTING_DATA = 100 * TIME_INTERVAL  # testing record number, following training data
 
-LEARNING_RATE = 0.03
+LEARNING_RATE = 0.003
 STANDARD_DEVIATION = 0.1
 TRAINING_EPOCHS = 1000
 BATCH_SIZE = 50  # 100
@@ -124,11 +124,11 @@ dropout_keep_prob = tf.placeholder(tf.float32)
 #     return out
 
 def mlp(_x, _weights, _biases):
-    layer1 = tf.nn.sigmoid(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1']))
-    layer2 = tf.nn.sigmoid(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
-    layer3 = tf.nn.sigmoid(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3']))
-    layer4 = tf.nn.sigmoid(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4']))
-    out = tf.nn.sigmoid(tf.add(tf.matmul(layer4, _weights['out']), _biases['out']))
+    layer1 = tf.nn.tanh(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1']))
+    layer2 = tf.nn.tanh(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
+    layer3 = tf.nn.tanh(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3']))
+    layer4 = tf.nn.tanh(tf.add(tf.matmul(layer3, _weights['h4']), _biases['b4']))
+    out = tf.add(tf.matmul(layer4, _weights['out']), _biases['out'])
     return out
 
 
@@ -215,8 +215,8 @@ print("Testing...\n")
 test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
 # print("Test accuracy: %.6f" % test_acc)
 print(repr(np.column_stack((test_acc, testing_target))))
-for i in np.column_stack((test_acc, testing_target)):
-    print(repr(i))
+# for i in np.column_stack((test_acc, testing_target)):
+#     print(repr(i))
 sess.close()
 print("Session closed!")
 
