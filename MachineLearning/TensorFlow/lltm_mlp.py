@@ -9,7 +9,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 # definitions
-FILE_NAME = "newdata0725_variable_interval.csv"
+FILE_NAME = "newdata.csv"
 # FILE_NAME = "test.csv"
 TIME_INTERVAL = 10  # records per second
 
@@ -21,7 +21,7 @@ N_TESTING_DATA = 100 * TIME_INTERVAL  # testing record number, following trainin
 
 LEARNING_RATE = 0.003
 STANDARD_DEVIATION = 0.1
-TRAINING_EPOCHS = 1000
+TRAINING_EPOCHS = 10
 BATCH_SIZE = 50  # 100
 DISPLAY_STEP = 20
 RANDOM_STATE = 100
@@ -47,6 +47,12 @@ def find_second_beg(data_set, start_second):
     return start_idx
 
 
+def outputSpecialData(arr, val):
+    for i in range(len(arr)):
+        if arr[i] > val or arr[i] < -val:
+            print("" + i + arr[i])
+
+
 # fetch data from csv file
 # data format:
 # [0]: time
@@ -62,7 +68,7 @@ raw_elevation = np.array(raw_data[:, 1])
 raw_linear_heave = np.array(raw_data[:, 2])
 raw_real_heave = np.array(raw_data[:, 3])
 raw_nonlinear_heave = np.subtract(raw_real_heave, raw_linear_heave)
-print(raw_nonlinear_heave[0])
+# outputSpecialData(raw_nonlinear_heave, 1)
 
 print(raw_data[find_second_beg(raw_data, 101)])
 print(raw_data[find_second_beg(raw_data, 120)])
@@ -76,6 +82,7 @@ for i in range(N_TRAINING_DATA):
     training_target[i] = [raw_nonlinear_heave[training_data_idx_start + i]]
 training_input = np.array(training_input)
 training_target = np.array(training_target)
+# outputSpecialData(training_target, 1)
 print(training_input.shape)
 print(training_target.shape)
 
@@ -87,8 +94,10 @@ for i in range(N_TESTING_DATA):
     testing_target[i] = [raw_nonlinear_heave[testing_data_idx_start + i]]
 testing_input = np.array(testing_input)
 testing_target = np.array(testing_target)
+# outputSpecialData(testing_target, 1)
 print(testing_input.shape)
 print(testing_target.shape)
+
 
 # NRMSE
 def nrmse(real, predict):
@@ -218,6 +227,7 @@ print(repr(np.column_stack((test_acc, training_target))))
 # Testing
 test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
 # print("Test accuracy: %.6f" % test_acc)
+outputSpecialData(testing_target, 1)
 print(repr(np.column_stack((test_acc, testing_target))))
 # for i in np.column_stack((test_acc, testing_target)):
 #     print(repr(i))
