@@ -76,7 +76,10 @@ raw_nonlinear_heave = np.subtract(raw_real_heave, raw_linear_heave)
 # outputSpecialData(raw_nonlinear_heave, 1)
 
 training_data_idx_start = find_second_beg(raw_data, START_TIME_POINT)
+print("Training start: " + str(raw_data[training_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1 + N_PREDICT_FORWARD][0]))
 testing_data_idx_start = training_data_idx_start + N_TRAINING_DATA
+print("Testing start: " + str(raw_data[testing_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1 + N_PREDICT_FORWARD][0]))
+exit()
 training_input = N_TRAINING_DATA * [None]
 training_target = N_TRAINING_DATA * [None]
 for i in range(N_TRAINING_DATA):
