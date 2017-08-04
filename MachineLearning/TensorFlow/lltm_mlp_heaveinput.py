@@ -17,16 +17,16 @@ N_INPUT_ELEVATION_BACKWARDS = 5 * TIME_INTERVAL
 N_INPUT_ELEVATION = N_INPUT_ELEVATION_FORWARD + N_INPUT_ELEVATION_BACKWARDS  # (t-5s, t+5s] elevation
 N_INPUT_REAL_HEAVE = 10 * TIME_INTERVAL  # (t-10s, t] real heave
 
-N_INPUT_LAYER = N_INPUT_ELEVATION + N_INPUT_REAL_HEAVE  # 10 seconds historical data
+N_INPUT_LAYER = 2 * N_INPUT_ELEVATION + N_INPUT_REAL_HEAVE  # 10 seconds historical data
 N_PREDICT_FORWARD = 1 * TIME_INTERVAL  # 5 seconds later
 START_TIME_POINT = 150  # START_TIME_POINT-th second (previous data will be used later)
 N_TRAINING_DATA = 1000 * TIME_INTERVAL  # training record number
-N_TESTING_DATA = 100 * TIME_INTERVAL  # testing record number, following training data
+N_TESTING_DATA = 1000 * TIME_INTERVAL  # testing record number, following training data
 
 N_INPUT_MAX_TIME = max(N_INPUT_ELEVATION_BACKWARDS, N_INPUT_REAL_HEAVE)
-LEARNING_RATE = 0.003
+LEARNING_RATE = 0.01
 STANDARD_DEVIATION = 0.1
-TRAINING_EPOCHS = 100
+TRAINING_EPOCHS = 1000
 BATCH_SIZE = 100
 DISPLAY_STEP = 20
 RANDOM_STATE = 100
@@ -76,16 +76,16 @@ raw_nonlinear_heave = np.subtract(raw_real_heave, raw_linear_heave)
 # outputSpecialData(raw_nonlinear_heave, 1)
 
 training_data_idx_start = find_second_beg(raw_data, START_TIME_POINT)
-print("Training start: " + str(raw_data[training_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1 + N_PREDICT_FORWARD][0]))
 testing_data_idx_start = training_data_idx_start + N_TRAINING_DATA
-print("Testing start: " + str(raw_data[testing_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1 + N_PREDICT_FORWARD][0]))
-exit()
 training_input = N_TRAINING_DATA * [None]
 training_target = N_TRAINING_DATA * [None]
 for i in range(N_TRAINING_DATA):
     t = int(i + training_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1)
     training_input[i] = np.append(
-        raw_elevation[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+        np.append(
+            raw_elevation[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+            raw_linear_heave[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+        ),
         raw_real_heave[t - N_INPUT_REAL_HEAVE: t]
     )
     training_target[i] = [raw_nonlinear_heave[t + N_PREDICT_FORWARD]]
@@ -104,7 +104,10 @@ testing_time = N_TESTING_DATA * [None]
 for i in range(N_TESTING_DATA):
     t = int(i + testing_data_idx_start + N_INPUT_MAX_TIME * TIME_INTERVAL + 1)
     testing_input[i] = np.append(
-        raw_elevation[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+        np.append(
+            raw_elevation[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+            raw_linear_heave[t - N_INPUT_ELEVATION_BACKWARDS: t + N_INPUT_ELEVATION_FORWARD],
+        ),
         raw_real_heave[t - N_INPUT_REAL_HEAVE: t]
     )
     testing_target[i] = [raw_nonlinear_heave[t + N_PREDICT_FORWARD]]
