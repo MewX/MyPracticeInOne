@@ -26,7 +26,7 @@ N_TESTING_DATA = 1000 * TIME_INTERVAL  # testing record number, following traini
 N_INPUT_MAX_TIME = max(N_INPUT_ELEVATION_BACKWARDS, N_INPUT_REAL_HEAVE)
 LEARNING_RATE = 0.01
 STANDARD_DEVIATION = 0.1
-TRAINING_EPOCHS = 1000
+TRAINING_EPOCHS = 100
 BATCH_SIZE = 100
 DISPLAY_STEP = 20
 RANDOM_STATE = 100
@@ -138,13 +138,6 @@ y = tf.placeholder(tf.float32, [None, n_classes])
 dropout_keep_prob = tf.placeholder(tf.float32)
 
 
-# def mlp(_x, _weights, _biases):
-#     layer1 = tf.nn.tanh(tf.add(tf.matmul(_x, np.math.sin(_weights['h1'] * X[0])), _biases['b1']))
-#     layer2 = tf.nn.tanh(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
-#     layer3 = tf.nn.tanh(tf.add(tf.matmul(layer2, _weights['h3']), _biases['b3']))
-#     out = tf.add(tf.matmul(layer3, _weights['out']), _biases['out'])
-#     return out
-
 def mlp(_x, _weights, _biases):
     layer1 = tf.nn.tanh(tf.add(tf.matmul(_x, _weights['h1']), _biases['b1']))
     layer2 = tf.nn.tanh(tf.add(tf.matmul(layer1, _weights['h2']), _biases['b2']))
@@ -227,7 +220,7 @@ for epoch in range(TRAINING_EPOCHS):
 print("End of training.\n")
 
 # Testing training data
-print("Testing training...\n")
+print("#####Testing training...\n")
 test_acc = sess.run(pred, feed_dict={X: training_input, y: training_target, dropout_keep_prob: 1.})
 # print("Test accuracy: %.6f" % test_acc)
 print(repr(np.column_stack((test_acc, training_target))))
@@ -235,7 +228,7 @@ print(repr(np.column_stack((test_acc, training_target))))
 #     print(repr(i))
 
 # Testing testing data
-print("Testing predicting...\n")
+print("#####Testing predicting...\n")
 test_acc = sess.run(pred, feed_dict={X: testing_input, y: testing_target, dropout_keep_prob: 1.})
 # print("Test accuracy: %.6f" % test_acc)
 outputSpecialData(testing_target, 1)
