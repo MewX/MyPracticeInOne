@@ -16,4 +16,4 @@ hs_err_pid*
 
 # django files
 __pycache__/
-00*.py
+**/migrations/0*.py
