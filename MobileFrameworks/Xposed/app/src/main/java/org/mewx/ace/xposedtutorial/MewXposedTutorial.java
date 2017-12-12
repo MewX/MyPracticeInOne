@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -82,6 +83,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
             App Activity: com.tencent.mm.plugin.appbrand.ui.AppBrandUI
              */
             XposedHelpers.findAndHookMethod("com.tencent.mm.plugin.appbrand.ui.AppBrandUI", lpparam.classLoader, "onCreate", Bundle.class, new XC_MethodHook() {
+//            XposedHelpers.findAndHookMethod("com.tencent.mm.plugin.appbrand.ui.AppBrandUI", lpparam.classLoader, "onResume", new XC_MethodHook() {
 
                 public void recursiveLoopChildren(ViewGroup parent) {
                     for (int i = parent.getChildCount() - 1; i >= 0; i--) {
@@ -111,10 +113,28 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
             });
 
+            XposedHelpers.findAndHookMethod(ViewGroup.class, "addView", View.class, ViewGroup.LayoutParams.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    super.afterHookedMethod(param);
+                    if (param.args[0] instanceof WebView) {
+                        XposedBridge.log("Found just added Webview!!!");
+                    }
+                }
+            });
+
             XposedBridge.hookAllConstructors(WebView.class, new XC_MethodHook() {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     XposedHelpers.callStaticMethod(WebView.class, "setWebContentsDebuggingEnabled", true);
+                }
+            });
+
+            XposedHelpers.findAndHookMethod(WebView.class, "setWebViewClient", WebViewClient.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    super.beforeHookedMethod(param);
+                    XposedBridge.log("Setting web view client: " + (param.args[0].getClass().getName()));
                 }
             });
 
@@ -125,35 +145,26 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 }
             });
 
-            // postVisualStateCallback
-            // loadUrl
-            //XposedHelpers.findAndHookMethod(WebView.class, "loadUrl", String.class, new XC_MethodHook(){
-//            XposedHelpers.findAndHookMethod(WebView.class, "postVisualStateCallback", Long.class, WebView.VisualStateCallback.class, new XC_MethodHook(){
-//            XposedHelpers.findAndHookMethod(WebViewClient.class, "onPageFinished", WebView.class, String.class, new XC_MethodHook(){
-//
-//                void recursiveLoopChildren(ViewGroup parent) {
-//                    for (int i = parent.getChildCount() - 1; i >= 0; i--) {
-//                        final View child = parent.getChildAt(i);
-//                        if (child instanceof WebView) {
-//                            XposedBridge.log("From WebView Found Webview!!! " + parent.getContext().getPackageName());
-//                            recursiveLoopChildren((ViewGroup) child);
-//
-//                        } else if (child instanceof ViewGroup) {
-//                            XposedBridge.log("From WebView Found a ViewGroup - " + child.getClass().getName());
-//                            recursiveLoopChildren((ViewGroup) child);
-//                        } else if (child instanceof TextView) {
-//                            XposedBridge.log("From WebView TextView dump: " + ((TextView) child).getText());
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                    XposedBridge.log("From WebView, after loading, these codes are executed.");
-//                    super.afterHookedMethod(param);
-//                    recursiveLoopChildren((ViewGroup) param.args[0]);
-//                }
-//            });
+            XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.SystemWebViewClient", lpparam.classLoader, "onPageFinished", WebView.class, String.class, new XC_MethodHook(){
+
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    XposedBridge.log("From WebView, after loading!!!");
+                    super.afterHookedMethod(param);
+
+                    ((WebView) param.args[0]).evaluateJavascript(
+                            "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
+                            new ValueCallback<String>() {
+                                @Override
+                                public void onReceiveValue(String html) {
+//                                    XposedBridge.log(html); // bad, having a length limit
+                                    String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
+                                    XposedBridge.log("Dumped html files are stored in: " + filePath);
+                                    LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
+                                }
+                            });
+                }
+            });
 
             // not working for text view inside webview
             XposedHelpers.findAndHookMethod(TextView.class, "setText", CharSequence.class, new XC_MethodHook(){
