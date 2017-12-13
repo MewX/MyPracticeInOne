@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -35,6 +37,19 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
             XposedBridge.log(String.format("WeChat Version is not ok: %s, but expecting %s.", real, target));
             versionOK = false;
         }
+    }
+
+    class MyJavaScriptInterface {
+        MyJavaScriptInterface() {
+        }
+
+        @JavascriptInterface
+        public void sendValueFromHtml(String html) {
+            String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
+            XposedBridge.log("Dumped html files are stored in: " + filePath);
+            LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
+        }
+
     }
 
     @Override
@@ -88,6 +103,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 //                             WebView.setWebContentsDebuggingEnabled(true); // API: 19
                             XposedBridge.log("Found Webview!!! - " + child.getClass().getName());
                             recursiveLoopChildren((ViewGroup) child);
+                            XposedHelpers.callStaticMethod(((WebView) child).getClass(), "setWebContentsDebuggingEnabled", true);
 
                         } else if (child instanceof ViewGroup) {
                             XposedBridge.log("Found a ViewGroup - " + child.getClass().getName());
@@ -114,6 +130,12 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                     super.afterHookedMethod(param);
                     if (param.args[0] instanceof WebView) {
                         XposedBridge.log("Found just added Webview!!! - " + param.args[0].getClass().getName());
+                        XposedHelpers.callStaticMethod(((WebView) param.args[0]).getClass(), "setWebContentsDebuggingEnabled", true);
+                        Class C = param.args[0].getClass();
+                        while (C != null) {
+                            XposedBridge.log("   -> " + C.getName());
+                            C = C.getSuperclass();
+                        }
                     }
                 }
             });
@@ -142,14 +164,35 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
             XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.SystemWebViewClient", lpparam.classLoader, "onPageFinished", WebView.class, String.class, new XC_MethodHook(){
 
+
+                void recursiveLoopChildren(ViewGroup parent) {
+                    for (int i = parent.getChildCount() - 1; i >= 0; i--) {
+                        final View child = parent.getChildAt(i);
+                        if (child instanceof ViewGroup) {
+                            XposedBridge.log("  -> Found a ViewGroup - " + child.getClass().getName());
+                            recursiveLoopChildren((ViewGroup) child);
+                        } else if (child instanceof TextView) {
+                            XposedBridge.log("  -> TextView dump: " + ((TextView) child).getText());
+                        } else {
+                            XposedBridge.log("  -> Found a subview: " + child.getClass().getName());
+                        }
+                    }
+                }
+
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    XposedBridge.log("From WebView, after loading!!!");
                     super.afterHookedMethod(param);
+                    XposedBridge.log("From WebView, after loading!!! Trying to traverse the webview.");
+
+                    // trying to traverse the webview
+                    final WebView webview = (WebView) param.args[0];
+                    new WaitAndFetchViews().execute(webview);
 
                     // FIXME: this is confirmed to be an issue from: com.tencent.smtt.sdk.WebView$SystemWebView
-                    ((WebView) param.args[0]).evaluateJavascript(
-                            "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
+                    webview.evaluateJavascript(
+                            "var mewxsave = document.documentElement.outerHTML; function mewxgame() {window.interface.sendValueFromHtml(mewxsave);}",
+//                            ((WebView) param.args[0]).evaluateJavascript(
+//                                    "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
                             new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String html) {
@@ -158,7 +201,32 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                                     LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
                                 }
                             });
+
+                    webview.getSettings().setJavaScriptEnabled(true);
+                    webview.addJavascriptInterface(new MyJavaScriptInterface(), "interface");
+//                    webview.loadUrl("javascript:window.HtmlViewer.showHTML" +
+//                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
+                    webview.loadUrl("javascript:console.log(\"start\");mewxgame();");
+
                 }
+
+                class WaitAndFetchViews extends AsyncTask<WebView, Integer, Integer> {
+                    @Override
+                    protected Integer doInBackground(WebView... webViews) {
+                        XposedBridge.log("Sleeping");
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        recursiveLoopChildren(webViews[0]);
+
+                        return null;
+                    }
+                }
+
+
             });
 
             // not working for text view inside webview
