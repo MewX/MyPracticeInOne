@@ -27,7 +27,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
     private boolean versionOK = false;
     private Context appContext = null;
 
-    void checkWeChatVersion(String real, String target) {
+    private void checkWeChatVersion(String real, String target) {
         if (real.contains(target)) {
             XposedBridge.log(String.format("WeChat Version is ok: %s, and expecting %s.", real, target));
             versionOK = true;
@@ -78,19 +78,15 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 }
             });
 
-            /*
-            App Launcher Activity: com.tencent.mm.plugin.appbrand.ui.AppBrandLauncherUI
-            App Activity: com.tencent.mm.plugin.appbrand.ui.AppBrandUI
-             */
+            // hooking `onCreate` cannot get WebView!
             XposedHelpers.findAndHookMethod("com.tencent.mm.plugin.appbrand.ui.AppBrandUI", lpparam.classLoader, "onCreate", Bundle.class, new XC_MethodHook() {
-//            XposedHelpers.findAndHookMethod("com.tencent.mm.plugin.appbrand.ui.AppBrandUI", lpparam.classLoader, "onResume", new XC_MethodHook() {
 
-                public void recursiveLoopChildren(ViewGroup parent) {
+                void recursiveLoopChildren(ViewGroup parent) {
                     for (int i = parent.getChildCount() - 1; i >= 0; i--) {
                         final View child = parent.getChildAt(i);
                         if (child instanceof WebView) {
 //                             WebView.setWebContentsDebuggingEnabled(true); // API: 19
-                            XposedBridge.log("Found Webview!!! " + parent.getContext().getPackageName());
+                            XposedBridge.log("Found Webview!!! - " + child.getClass().getName());
                             recursiveLoopChildren((ViewGroup) child);
 
                         } else if (child instanceof ViewGroup) {
@@ -105,7 +101,6 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     super.afterHookedMethod(param);
-//                    WebView.setWebContentsDebuggingEnabled(true); // API: 19
                     Activity activity = (Activity) param.thisObject;
                     XposedBridge.log("Enabled web content debugging. Current class name: " + activity.getLocalClassName());
                     recursiveLoopChildren((ViewGroup) activity.getWindow().getDecorView());
@@ -118,7 +113,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     super.afterHookedMethod(param);
                     if (param.args[0] instanceof WebView) {
-                        XposedBridge.log("Found just added Webview!!!");
+                        XposedBridge.log("Found just added Webview!!! - " + param.args[0].getClass().getName());
                     }
                 }
             });
@@ -134,7 +129,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
-                    XposedBridge.log("Setting web view client: " + (param.args[0].getClass().getName()));
+                    XposedBridge.log("Setting web view client: " + param.args[0].getClass().getName());
                 }
             });
 
@@ -152,12 +147,12 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                     XposedBridge.log("From WebView, after loading!!!");
                     super.afterHookedMethod(param);
 
+                    // FIXME: this is confirmed to be an issue from: com.tencent.smtt.sdk.WebView$SystemWebView
                     ((WebView) param.args[0]).evaluateJavascript(
                             "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
                             new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String html) {
-//                                    XposedBridge.log(html); // bad, having a length limit
                                     String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
                                     XposedBridge.log("Dumped html files are stored in: " + filePath);
                                     LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
