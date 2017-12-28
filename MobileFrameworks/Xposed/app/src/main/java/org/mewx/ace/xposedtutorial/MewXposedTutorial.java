@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
@@ -13,6 +14,12 @@ import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import com.google.common.io.BaseEncoding;
+
+import java.io.InputStream;
+import java.security.Key;
+import java.security.KeyStore;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.XC_MethodHook;
@@ -54,7 +61,33 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        if (lpparam.packageName.equals("com.android.systemui")) {
+        final boolean HIJACK_WECHAT = false;
+        final boolean HIJACK_TRANSORKS = true;
+
+        if (HIJACK_TRANSORKS && lpparam.packageName.contains("fobwifi")) {
+            // for hijacking the bks keystore password
+            XposedBridge.log("MewX outputs, loaded app: " + lpparam.packageName);
+
+
+            XposedHelpers.findAndHookMethod("java.security.KeyStore", lpparam.classLoader, "load", InputStream.class, char[].class, new XC_MethodHook() {
+
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    if (((char[]) param.args[1]).length > 0) {
+                        XposedBridge.log("GOT IT");
+                        char[] pass = (char[]) param.args[1];
+                        XposedBridge.log("GOT IT: " + new String(pass));
+
+                        Key key = ((KeyStore) param.thisObject).getKey("new", pass);
+                        Log.e("MEWX", "-----BEGIN PRIVATE KEY-----");
+                        Log.e("MEWX", BaseEncoding.base64().encode(key.getEncoded()));
+                        Log.e("MEWX", "-----END PRIVATE KEY-----");
+                    }
+                }
+            });
+
+        }
+        else if (lpparam.packageName.equals("com.android.systemui")) {
             XposedBridge.log("MewX outputs, loaded app: " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader, "updateClock", new XC_MethodHook() {
                 @Override
@@ -66,7 +99,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 }
             });
 
-        } else if (lpparam.packageName.equals("com.tencent.mm")) {
+        } else if (HIJACK_WECHAT && lpparam.packageName.equals("com.tencent.mm")) {
             XposedBridge.log("MewX outputs, loaded app: " + lpparam.packageName);
             final String SUPPORTTED_WECHAT_VERSION = "6.5.23";
 
