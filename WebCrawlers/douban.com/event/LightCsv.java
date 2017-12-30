@@ -5,15 +5,15 @@ import java.util.List;
 public class LightCsv {
     private static final char DEFAULT_SEPARATOR = ',';
 
-    public static void writeLine(Writer w, List<String> values) throws IOException {
-        writeLine(w, values, DEFAULT_SEPARATOR, ' ');
+    public static void writeLine(Writer w, String[] values) throws IOException {
+        writeLine(w, values, DEFAULT_SEPARATOR, '\"');
     }
 
-    public static void writeLine(Writer w, List<String> values, char separators) throws IOException {
+    public static void writeLine(Writer w, String[] values, char separators) throws IOException {
         writeLine(w, values, separators, ' ');
     }
 
-    //https://tools.ietf.org/html/rfc4180
+    // https://tools.ietf.org/html/rfc4180
     private static String followCVSformat(String value) {
 
         String result = value;
@@ -24,12 +24,8 @@ public class LightCsv {
 
     }
 
-    public static void writeLine(Writer w, List<String> values, char separators, char customQuote) throws IOException {
-
+    public static void writeLine(Writer w, String[] values, char separators, char customQuote) throws IOException {
         boolean first = true;
-
-        //default customQuote is empty
-
         if (separators == ' ') {
             separators = DEFAULT_SEPARATOR;
         }
