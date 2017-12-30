@@ -7,13 +7,13 @@ import java.util.regex.Pattern;
 
 public class DownloadedParser {
     public static void main(String[] args) throws IOException {
-        final String BASE_PATH = "/home/cloud-user/dbdata";
+        final String BASE_PATH = "/home/cloud-user/dbdata/";
         final String[] CITY_LIST = {"上海", "北京", "广州", "成都", "杭州", "武汉", "深圳"};
 
         int breakCounter = 1000;
-        FileWriter writer = new FileWriter(BASE_PATH + "test.csv"); // override
-        LightCsv.writeLine(writer, new String[] {"dbid", "name", "time", "place", "type", "provider", "people_interested", "people_going", "info", "city", "price"});
         for (String city : CITY_LIST) {
+            FileWriter writer = new FileWriter(BASE_PATH + city + ".csv"); // override
+            LightCsv.writeLine(writer, new String[]{"dbid", "name", "time", "place", "type", "provider", "people_interested", "people_going", "info", "city", "price"});
             final String PATH = BASE_PATH + city + "/";
             File folder = new File(PATH);
             for (File listOfFile : folder.listFiles()) {
@@ -26,10 +26,11 @@ public class DownloadedParser {
                     if (breakCounter <= 0) break;
                 }
             }
+            writer.flush();
+            writer.close();
         }
 
-        writer.flush();
-        writer.close();
+
     }
 
     private static String[] parseFile(final String city, final String id, final byte[] raw) throws UnsupportedEncodingException {
