@@ -1,4 +1,5 @@
 # Intellij
+META-INF/
 *.iml
 out/
 .idea/
@@ -8,6 +9,7 @@ out/
 
 # My files
 dump/
+*.zip
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
