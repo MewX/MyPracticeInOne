@@ -10,7 +10,7 @@ public class DownloadedParser {
         final String BASE_PATH = "/home/cloud-user/dbdata/";
         final String[] CITY_LIST = {"上海", "北京", "广州", "成都", "杭州", "武汉", "深圳"};
 
-        int breakCounter = 1000;
+        int breakCounter = Integer.MAX_VALUE;
         for (String city : CITY_LIST) {
             FileWriter writer = new FileWriter(BASE_PATH + city + ".csv"); // override
             LightCsv.writeLine(writer, new String[]{"dbid", "name", "time", "place", "type", "provider", "people_interested", "people_going", "info", "city", "price"});
