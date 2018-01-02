@@ -51,6 +51,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
         }
 
         @JavascriptInterface
+        @SuppressWarnings("unused")
         public void sendValueFromHtml(String html) {
             String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
             XposedBridge.log("Dumped html files are stored in: " + filePath);
@@ -61,8 +62,9 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
     @Override
     public void handleLoadPackage(final XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        final boolean HIJACK_WECHAT = false;
-        final boolean HIJACK_TRANSORKS = true;
+        // switches
+        final boolean HIJACK_WECHAT = true;
+        final boolean HIJACK_TRANSORKS = false;
 
         if (HIJACK_TRANSORKS && lpparam.packageName.contains("fobwifi")) {
             // for hijacking the bks keystore password
@@ -88,6 +90,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
         }
         else if (lpparam.packageName.equals("com.android.systemui")) {
+            // system ui hook, used to detecting the module is actually running
             XposedBridge.log("MewX outputs, loaded app: " + lpparam.packageName);
             XposedHelpers.findAndHookMethod("com.android.systemui.statusbar.policy.Clock", lpparam.classLoader, "updateClock", new XC_MethodHook() {
                 @Override
@@ -113,7 +116,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                         return;
                     }
                     XposedBridge.log("LauncherUI hooked.");
-                    appContext = ((Activity)param.thisObject).getApplicationContext();
+                    appContext = ((Activity) param.thisObject).getApplicationContext();
                     PackageInfo pInfo = appContext.getPackageManager().getPackageInfo(lpparam.packageName, 0);
                     if (pInfo != null)
                         wechatVersion = pInfo.versionName;
@@ -195,7 +198,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 }
             });
 
-            XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.SystemWebViewClient", lpparam.classLoader, "onPageFinished", WebView.class, String.class, new XC_MethodHook(){
+            XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.SystemWebViewClient", lpparam.classLoader, "onPageFinished", WebView.class, String.class, new XC_MethodHook() {
 
 
                 void recursiveLoopChildren(ViewGroup parent) {
@@ -222,26 +225,67 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                     new WaitAndFetchViews().execute(webview);
 
                     // FIXME: this is confirmed to be an issue from: com.tencent.smtt.sdk.WebView$SystemWebView
-                    webview.evaluateJavascript(
-                            "var mewxsave = document.documentElement.outerHTML; function mewxgame() {window.interface.sendValueFromHtml(mewxsave);}",
-//                            ((WebView) param.args[0]).evaluateJavascript(
-//                                    "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
+//                    webview.evaluateJavascript(
+//                            "var mewxsave = document.documentElement.outerHTML; function mewxgame() {window.interface.sendValueFromHtml(mewxsave);console.log(mewxsave);};mewxgame();",
+////                            ((WebView) param.args[0]).evaluateJavascript(
+////                                    "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
+//                            new ValueCallback<String>() {
+//                                @Override
+//                                public void onReceiveValue(String html) {
+//                                    String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
+//                                    XposedBridge.log("Dumped html files are stored in: " + filePath);
+//                                    LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
+//                                }
+//                            });
+
+                    webview.getSettings().setJavaScriptEnabled(true);
+//                    webview.addJavascriptInterface(new MyJavaScriptInterface(), "interface");
+//                    webview.loadUrl("javascript:window.HtmlViewer.showHTML" +
+//                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
+
+//                    webview.loadUrl("javascript:console.log(\"start\");mewxgame();");
+
+                    // not working with different threads
+//                    new AsyncDump().execute(webview);
+
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    webview.evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done: \" + window.document.body.outerHTML);return window.document.body.outerHTML}), 10000);",
                             new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String html) {
                                     String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
-                                    XposedBridge.log("Dumped html files are stored in: " + filePath);
+                                    XposedBridge.log(html);
+                                    XposedBridge.log("MewX: Dumped html files are stored in: " + filePath);
                                     LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
                                 }
                             });
-
-                    webview.getSettings().setJavaScriptEnabled(true);
-                    webview.addJavascriptInterface(new MyJavaScriptInterface(), "interface");
-//                    webview.loadUrl("javascript:window.HtmlViewer.showHTML" +
-//                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
-                    webview.loadUrl("javascript:console.log(\"start\");mewxgame();");
-
                 }
+
+                class AsyncDump extends AsyncTask<WebView, Void, Void> {
+                    @Override
+                    protected Void doInBackground(WebView... webViews) {
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        webViews[0].evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done\");return window.document.body.outerHTML}), 10000);",
+                                new ValueCallback<String>() {
+                                    @Override
+                                    public void onReceiveValue(String html) {
+                                        String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
+                                        XposedBridge.log("MewX: Dumped html files are stored in: " + filePath);
+                                        LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
+                                    }
+                                });
+                        return null;
+                    }
+                }
+
 
                 class WaitAndFetchViews extends AsyncTask<WebView, Integer, Integer> {
                     @Override
@@ -263,7 +307,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
             });
 
             // not working for text view inside webview
-            XposedHelpers.findAndHookMethod(TextView.class, "setText", CharSequence.class, new XC_MethodHook(){
+            XposedHelpers.findAndHookMethod(TextView.class, "setText", CharSequence.class, new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
                     super.afterHookedMethod(param);
