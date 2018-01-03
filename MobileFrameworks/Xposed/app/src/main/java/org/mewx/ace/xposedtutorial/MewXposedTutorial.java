@@ -187,6 +187,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 @Override
                 protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                     super.beforeHookedMethod(param);
+                    XposedHelpers.callStaticMethod(((WebView) param.thisObject).getClass(), "setWebContentsDebuggingEnabled", true);
                     XposedBridge.log("Setting web view client: " + param.args[0].getClass().getName());
                 }
             });
@@ -224,27 +225,13 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                     final WebView webview = (WebView) param.args[0];
                     new WaitAndFetchViews().execute(webview);
 
-                    // FIXME: this is confirmed to be an issue from: com.tencent.smtt.sdk.WebView$SystemWebView
-//                    webview.evaluateJavascript(
-//                            "var mewxsave = document.documentElement.outerHTML; function mewxgame() {window.interface.sendValueFromHtml(mewxsave);console.log(mewxsave);};mewxgame();",
-////                            ((WebView) param.args[0]).evaluateJavascript(
-////                                    "(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();",
-//                            new ValueCallback<String>() {
-//                                @Override
-//                                public void onReceiveValue(String html) {
-//                                    String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
-//                                    XposedBridge.log("Dumped html files are stored in: " + filePath);
-//                                    LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
-//                                }
-//                            });
-
                     webview.getSettings().setJavaScriptEnabled(true);
 //                    webview.addJavascriptInterface(new MyJavaScriptInterface(), "interface");
 //                    webview.loadUrl("javascript:window.HtmlViewer.showHTML" +
 //                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
 
-//                    webview.loadUrl("javascript:console.log(\"start\");mewxgame();");
-
+                    // FIXME: this is confirmed to be an issue from: com.tencent.smtt.sdk.WebView$SystemWebView
+                    // http://bbs.mb.qq.com/thread-1944783-1-1.html
                     final int timeout = 0;
                     webview.evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done: \" + window.document.body.outerHTML);return window.document.body.outerHTML}), " + timeout + ");",
                             new ValueCallback<String>() {
@@ -279,15 +266,15 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
             });
 
             // not working for text view inside webview
-            XposedHelpers.findAndHookMethod(TextView.class, "setText", CharSequence.class, new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    super.afterHookedMethod(param);
-                    CharSequence temp = ((TextView) param.thisObject).getText();
-                    if (temp == null || temp.length() == 0) return;
-                    XposedBridge.log("From setText in TextView dump: " + temp);
-                }
-            });
+//            XposedHelpers.findAndHookMethod(TextView.class, "setText", CharSequence.class, new XC_MethodHook() {
+//                @Override
+//                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                    super.afterHookedMethod(param);
+//                    CharSequence temp = ((TextView) param.thisObject).getText();
+//                    if (temp == null || temp.length() == 0) return;
+//                    XposedBridge.log("From setText in TextView dump: " + temp);
+//                }
+//            });
         }
     }
 }
