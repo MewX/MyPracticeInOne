@@ -245,15 +245,8 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
 
 //                    webview.loadUrl("javascript:console.log(\"start\");mewxgame();");
 
-                    // not working with different threads
-//                    new AsyncDump().execute(webview);
-
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    webview.evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done: \" + window.document.body.outerHTML);return window.document.body.outerHTML}), 10000);",
+                    final int timeout = 0;
+                    webview.evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done: \" + window.document.body.outerHTML);return window.document.body.outerHTML}), " + timeout + ");",
                             new ValueCallback<String>() {
                                 @Override
                                 public void onReceiveValue(String html) {
@@ -263,27 +256,6 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                                     LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
                                 }
                             });
-                }
-
-                class AsyncDump extends AsyncTask<WebView, Void, Void> {
-                    @Override
-                    protected Void doInBackground(WebView... webViews) {
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        webViews[0].evaluateJavascript("console.log(\"waiting\");setTimeout((function(){console.log(\"done\");return window.document.body.outerHTML}), 10000);",
-                                new ValueCallback<String>() {
-                                    @Override
-                                    public void onReceiveValue(String html) {
-                                        String filePath = "/data/system/mewx/ace/dump/html/"; // This folder is created in advance
-                                        XposedBridge.log("MewX: Dumped html files are stored in: " + filePath);
-                                        LightCache.saveFile(filePath, "" + System.currentTimeMillis() + ".html", html.getBytes(), true);
-                                    }
-                                });
-                        return null;
-                    }
                 }
 
 
