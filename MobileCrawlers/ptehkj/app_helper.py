@@ -5,8 +5,11 @@ import random
 import re
 import xml.etree.ElementTree as et
 
-
 # constants
+import sys
+
+import time
+
 DEBUG = True
 TEMP_FOLDER = "tmp"
 RANDOM_RANGE_FOR_FILE = 100
@@ -29,17 +32,17 @@ def get_adb_bin_full_path():
     return adb_bin_full_path
 
 
-def init_adb_path(device_id=None, adb_path=None):
+def init_adb_path(adb_path, device_id=None):
     # TODO: remove default `None` for device_id
     if adb_path is None:
         adb_path = get_adb_bin_full_path()
 
-    # TODO: add multi-device support
+    # TODO: add multi-device support, need to check whether the device id is already there
     return adb_path
 
 
 def get_device_list(adb_path=None):
-    adb_path = init_adb_path()
+    adb_path = init_adb_path(adb_path)
 
     list_output = os.popen(adb_path + " devices").read()
 
@@ -51,7 +54,7 @@ def get_device_list(adb_path=None):
 
 
 def get_top_activity_name(adb_path=None):
-    adb_path = init_adb_path()
+    adb_path = init_adb_path(adb_path)
 
     # simplify results
     output = os.popen(adb_path + " shell dumpsys window windows | grep -E \"mCurrentFocus\"").read()
@@ -59,15 +62,15 @@ def get_top_activity_name(adb_path=None):
     return pattern.search(output).group(1)
 
 
-def start_activity(package_name, activity_name, adb_path=None,):
-    adb_path = init_adb_path()
+def start_activity(package_name, activity_name, adb_path=None, ):
+    adb_path = init_adb_path(adb_path)
 
     os.popen(adb_path + " shell am start -n " + package_name + "/" + activity_name).read()
-    return get_top_activity_name(adb_path) == activity_name
+    return wait_for_activity_on_top(activity_name, adb_path)
 
 
 def get_current_view_xml_tree(adb_path=None):
-    adb_path = init_adb_path()
+    adb_path = init_adb_path(adb_path)
 
     # ui dump on phone
     output = os.popen(adb_path + " shell uiautomator dump").read()
@@ -86,13 +89,49 @@ def get_current_view_xml_tree(adb_path=None):
     file_path = "./" + TEMP_FOLDER + "/" + file_name
     os.popen(adb_path + " pull " + xml_path + " " + file_path).read()
     tree = et.parse(file_path)
-    for elem in tree.iter():
-        print(elem)
     return tree
+
+
+def parse_bounds_text(bounds):
+    p = re.compile(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]")
+    m = p.search(bounds)
+    if m is None:
+        return None, None, None, None
+    return int(m.group(1)), int(m.group(2)), int(m.group(3)), int(m.group(4))
+
+
+def wait_for_activity_on_top(name, adb_path=None):
+    adb_path = init_adb_path(adb_path)
+
+    dead_counter = 20
+    while get_top_activity_name(adb_path) != name:
+        time.sleep(1)
+        dead_counter -= 1
+
+        if dead_counter == 0:
+            print("ERROR: Dead loop, couldn't get correct top activity (current: "
+                  + get_top_activity_name(adb_path) + ")")
+            return False
+    print("Not activity - \"" + name + "\"is on top")
+    return True
+
+
+def click_on_screen(min_x, min_y, max_x, max_y, adb_path=None):
+    adb_path = init_adb_path(adb_path)
+    mid_x = (min_x + max_x) // 2
+    mid_y = (min_y + max_y) // 2
+    os.popen(adb_path + " shell input tap " + str(mid_x) + " " + str(mid_y)).read()
+    return
+
+
+def scroll_on_screen(from_x, from_y, to_x, to_y, adb_path=None):
+    adb_path = init_adb_path(adb_path)
+
+    return
 
 
 # testing codes, remove them in production level
 print(repr(get_device_list()))
 print(get_top_activity_name())
-print(repr(start_activity("com.tencent.mm", "com.tencent.mm.ui.LauncherUI")))
-get_current_view_xml_tree()
+# print(repr(start_activity("com.tencent.mm", "com.tencent.mm.ui.LauncherUI")))
+
