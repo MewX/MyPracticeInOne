@@ -39,8 +39,10 @@ def get_top_activity_name(adb_path=None):
     if adb_path is None:
         adb_path = get_adb_bin_full_path()
 
-    # TODO: simplify results
-    return os.popen(adb_path + " shell dumpsys window windows | grep -E \"mCurrentFocus|mFocusedApp\"").read()
+    # simplify results
+    output = os.popen(adb_path + " shell dumpsys window windows | grep -E \"mCurrentFocus\"").read()
+    pattern = re.compile(r"mCurrentFocus.+?{.+?/(.+?)}")
+    return pattern.search(output).group(1)
 
 
 # testing codes, remove them in production level
