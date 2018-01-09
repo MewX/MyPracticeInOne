@@ -3,6 +3,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -135,5 +136,42 @@ public class TestStream {
                 })
                 .forEach(s -> System.out.format("forEach: %s [%s]\n",
                         s, Thread.currentThread().getName()));
+        System.out.println();
+
+        /*
+         * Reference: http://www.baeldung.com/java-8-streams
+         */
+        System.out.println(Stream.empty()
+                .collect(Collectors.averagingInt(i -> Integer.valueOf((String) i)))); // Not good, it shows 0.0 as well
+        // another way to generate new stream like for loop
+        // Integer type
+        Stream.iterate(40, n -> n + 2)
+                .limit(5)
+                .map(Object::toString)
+                .reduce((a, b) -> String.format("%s, %s", a, b))
+                .ifPresent(System.out::println);
+        // int type
+        IntStream.rangeClosed(1, 4)
+                .mapToObj(Integer::toString)
+                .reduce((a, b) -> String.format("%s, %s", a, b))
+                .ifPresent(System.out::println);
+
+        // regex split stream, not working for matcher,
+        // but can be achieved by https://stackoverflow.com/questions/28148483/how-do-i-create-a-stream-of-regex-matches
+        Pattern.compile(", ")
+                .splitAsStream("a, b, c")
+                .reduce((a, b) -> String.format("%s + %s", a, b))
+                .ifPresent(System.out::println);
+
+        Stream.of("abcd", "bbcd", "cbcd", "dfgh")
+                .skip(2) // skip the first some elements
+                .reduce((a, b) -> String.format("%s, %s", a, b))
+                .ifPresent(System.out::println);
+
+        // other reductions
+        Stream.iterate(40, n -> n + 2) // by default, iterate() is infinite!
+                .limit(5)
+                .max(Integer::compareTo)
+                .ifPresent(System.out::println);
     }
 }
