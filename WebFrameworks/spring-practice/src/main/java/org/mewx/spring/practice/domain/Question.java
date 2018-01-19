@@ -15,6 +15,9 @@ public class Question {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "text")
+    private String questionText;
+
     @Column(name = "pub_date")
     private Date publishDate;
 
@@ -48,5 +51,13 @@ public class Question {
 
     public void setpublishDateUsingString(String date) throws ParseException {
         this.publishDate = Constants.DATETIME_FORMAT.parse(date);
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 }
