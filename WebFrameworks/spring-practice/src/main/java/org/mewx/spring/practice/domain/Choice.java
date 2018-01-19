@@ -25,6 +25,8 @@ public class Choice {
     @Column(name = "votes")
     private int votes = 0; // TODO: make it atomic increase-able
 
+    public Choice() { }
+
     public Choice(Question q, String text) {
         question = q;
         this.text = text;

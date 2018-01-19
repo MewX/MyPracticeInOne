@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Details</title>
+</head>
+<body>
+<h1 th:text="${question_text}"></h1>
+<p th:if="${error_message != null}"><strong th:text="${error_message}"></strong></p>
+
+<!--<form action="{% url 'polls:vote' question.id %}" method="post">-->
+<form action="" method="post" th:if="${choices != null}">
+    <label th:each="choice: ${choices}">
+        <input type="radio" name="choice" th:id="${'choice' + choice.getId()}" th:value="${choice.getId()}"/>
+        <span th:text="${choice.getText()}"></span>
+        <br/>
+    </label>
+    <input type="submit" value="Vote" />
+</form>
+</body>
+</html>
