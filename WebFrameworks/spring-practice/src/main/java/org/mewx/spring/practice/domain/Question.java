@@ -5,6 +5,7 @@ import org.mewx.spring.practice.Constants;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "question")
@@ -17,7 +18,8 @@ public class Question {
     @Column(name = "pub_date")
     private Date publishDate;
 
-    // TODO: add choices
+    @OneToMany
+    private List<Choice> choices;
 
     @PrePersist
     protected void onCreate() {
