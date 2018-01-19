@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<h1 th:text="${'Results on question - ' + question.getQuestionText()}"></h1>
+<ul>
+    <li th:each="choice : ${choices}" th:text="${'(' + choice.getVotes() + ') ' + choice.getText()}"></li>
+</ul>
+<a th:href="${'/detail/' + question.getId() + '.html'}">Vote again?</a>
+<a th:href="${'/'}">Go back to list</a>
+</body>
+</html>

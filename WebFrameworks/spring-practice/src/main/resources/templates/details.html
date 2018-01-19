@@ -5,11 +5,13 @@
     <title>Details</title>
 </head>
 <body>
-<h1 th:text="${question_text}"></h1>
-<p th:if="${error_message != null}"><strong th:text="${error_message}"></strong></p>
+<h1 th:if="${question != null}" th:text="${question.getQuestionText()}"></h1>
+<p th:if="${error_message != null}">
+    <strong th:text="${error_message}"></strong>
+</p>
 
 <!--<form action="{% url 'polls:vote' question.id %}" method="post">-->
-<form action="" method="post" th:if="${choices != null}">
+<form th:action="${'/vote/' + question.getId() + '.do'}" method="post" th:if="${choices != null}">
     <label th:each="choice: ${choices}">
         <input type="radio" name="choice" th:id="${'choice' + choice.getId()}" th:value="${choice.getId()}"/>
         <span th:text="${choice.getText()}"></span>
@@ -17,5 +19,6 @@
     </label>
     <input type="submit" value="Vote" />
 </form>
+<a th:href="${'/'}">Go back to list</a>
 </body>
 </html>
