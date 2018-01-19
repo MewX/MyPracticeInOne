@@ -1,5 +1,6 @@
 package org.mewx.spring.practice.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mewx.spring.practice.Constants;
 
 import javax.persistence.*;
@@ -16,12 +17,13 @@ public class Question {
     private int id;
 
     @Column(name = "text")
+    @NotEmpty
     private String questionText;
 
     @Column(name = "pub_date")
     private Date publishDate;
 
-    @OneToMany
+    @OneToMany(targetEntity = Choice.class)
     private List<Choice> choices;
 
     @PrePersist

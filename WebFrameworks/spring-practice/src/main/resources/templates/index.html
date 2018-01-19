@@ -7,15 +7,12 @@
     <link rel="stylesheet" type="text/css" href="../static/style.css" th:href="@{/style.css}" />
 </head>
 <body>
-<!--{%  if latest_question_list %}-->
-<ul>
+<ul th:if="${!questions.isEmpty()}">
     <!--{% for question in latest_question_list %}-->
     <!--<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>-->
     <li>question.question_text</li>
     <!--{% endfor %}-->
 </ul>
-<!--{% else %}-->
-<p>No polls are available now.</p>
-<!--{% endif %}-->
+<p th:if="${questions.isEmpty()}">No polls are available now.</p>
 </body>
 </html>

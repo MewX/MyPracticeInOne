@@ -1,6 +1,9 @@
 package org.mewx.spring.practice.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "choice")
@@ -10,15 +13,22 @@ public class Choice {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "question_id")
-    @ManyToOne
+    @JoinColumn(name = "question_id")
+    @ManyToOne(targetEntity = Question.class)
+    @NotNull
     private Question question;
 
     @Column(name = "text")
+    @NotEmpty
     private String text;
 
     @Column(name = "votes")
-    private int votes; // TODO: make it atomic increase-able
+    private int votes = 0; // TODO: make it atomic increase-able
+
+    public Choice(Question q, String text) {
+        question = q;
+        this.text = text;
+    }
 
     public int getId() {
         return id;

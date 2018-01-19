@@ -19,10 +19,16 @@ public class DataLoader implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
         if (!Constants.LOAD_DATA) return;
 
-        // TODO: load initial data
-        Question firstQuestion = new Question();
+        // load initial data
+        Question firstQuestion = new Question(); // the publish date is automatically updated
         firstQuestion.setQuestionText("Sample question 1?");
-        // TODO:
+        questionRepo.save(firstQuestion);
 
+        Choice choice1 = new Choice(firstQuestion, "Choice 1");
+        choiceRepo.save(choice1);
+        Choice choice2 = new Choice(firstQuestion, "Choice 2");
+        choiceRepo.save(choice2);
+        Choice choice3 = new Choice(firstQuestion, "Choice 3");
+        choiceRepo.save(choice3);
     }
 }
