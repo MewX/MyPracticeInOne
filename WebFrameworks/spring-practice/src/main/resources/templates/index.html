@@ -10,7 +10,7 @@
 <ul th:if="${!questions.isEmpty()}">
     <!--{% for question in latest_question_list %}-->
     <li th:each="question: ${questions}">
-        <a th:href="${'/detail/' + question.getId()}" th:text="${question.getQuestionText()}"></a>
+        <a th:href="${'/detail/' + question.getId() + '.html'}" th:text="${question.getQuestionText()}"></a>
     </li>
     <!--{% endfor %}-->
 </ul>

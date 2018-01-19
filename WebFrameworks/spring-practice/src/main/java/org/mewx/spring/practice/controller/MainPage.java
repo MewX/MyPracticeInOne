@@ -29,7 +29,7 @@ public class MainPage {
         return "index";
     }
 
-    @RequestMapping(value = "/detail/{id:[\\d]+}", method = GET)
+    @RequestMapping(value = "/detail/{id:[\\d]+}.html", method = GET)
     public String detail(Model model, @PathVariable("id") int id) {
         Question question = questionRepo.findById(id);
         if (question == null) {
