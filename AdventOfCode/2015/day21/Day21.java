@@ -53,7 +53,8 @@ public class Day21 {
     }
 
     public static void main(String[] args) {
-        int minCost = Integer.MAX_VALUE;
+//        int minCost = Integer.MAX_VALUE;
+        int maxCost = Integer.MIN_VALUE;
         // choose an armor
         for (final Item curWeapon : weapons) {
             addStats(curWeapon);
@@ -71,9 +72,12 @@ public class Day21 {
                         final Item curRing2 = rings[idxRing2];
                         addStats(curRing2);
 
-                        if (canWinBoss()) {
-                            System.out.println("Can win at cost: " + totalCost);
-                            minCost = Math.min(minCost, totalCost);
+                        // test 1
+                        // if (canWinBoss()) {
+                        // test 2
+                        if (!canWinBoss()) {
+//                            minCost = Math.min(minCost, totalCost);
+                            maxCost = Math.max(maxCost, totalCost);
                         }
 
                         removeStats(curRing2);
@@ -86,7 +90,8 @@ public class Day21 {
         }
 
         // output
-        System.out.println(minCost);
+//        System.out.println(minCost);
+        System.out.println(maxCost);
     }
 
     private static void addStats(final Item item) {
@@ -119,4 +124,5 @@ public class Day21 {
         }
         return bossHitPoints <= 0;
     }
+
 }
