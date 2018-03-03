@@ -14,7 +14,7 @@ public class Day18 {
 
 
         for (int i = 0; i < ROUNDS; i ++) {
-            lights = moveToNext(lights, convert(lights));
+            lights = moveToNext(lights, convert(lights), true);
         }
         System.out.println(countOn(lights, true));
     }
@@ -41,10 +41,22 @@ public class Day18 {
         return c;
     }
 
-    private static StringBuilder[] moveToNext(StringBuilder[] end, final String[] begin) {
+    private static StringBuilder[] moveToNext(StringBuilder[] end, final String[] begin, boolean part2) {
+        // init part 2
+        if (part2) {
+            end[0].setCharAt(0, '#');
+            end[0].setCharAt(SIZE - 1, '#');
+            end[SIZE - 1].setCharAt(0, '#');
+            end[SIZE - 1].setCharAt(SIZE - 1, '#');
+        }
+
         // begin is used to calculate, end is used to store
         for (int row = 0; row < begin.length; row ++) {
             for (int col = 0; col < begin[row].length(); col ++) {
+                if (part2 && (row == 0 || row == SIZE - 1) && (col == 0 || col == SIZE - 1)) {
+                    continue;
+                }
+
                 final int noOfOnAround = countOnAround(begin, row, col);
                 if (begin[row].charAt(col) == '#' && !(noOfOnAround == 2 || noOfOnAround == 3)) {
                     end[row].setCharAt(col, '.'); // turn off
