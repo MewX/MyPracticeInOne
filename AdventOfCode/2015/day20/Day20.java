@@ -22,13 +22,18 @@ public class Day20 {
 
     private static int calc(int houseId) {
         int count = 0;
+
+        final int minDelivery = houseId / 50;
         final int max = new Double(Math.sqrt(houseId * 1.0)).intValue();
         for (int i = 1; i <= max; i++) {
             if (houseId % i == 0) {
-                count += (i + houseId / i) * 10;
+                final int temp = houseId / i;
+                if (i >= minDelivery) count += i * 11;
+                if (temp >= minDelivery) count += houseId / i * 11;
+//                count += (i + houseId / i) * 10; // this line was for test 1
             }
         }
-        if (max * max == houseId) {
+        if (max * max == houseId && max > minDelivery) {
             count -= max * 10;
         }
         return count;
