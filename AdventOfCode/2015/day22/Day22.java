@@ -1,126 +1,119 @@
-import java.util.ArrayList;
+import role.*;
+import skill.*;
+
+import java.util.*;
 
 public class Day22 {
-    private static class Player {
-        int hitPoints = PLAYER_HIT_POINTS, mana = PLAYER_MANA, armor = 0;
-    }
-    private static class Boss {
-        int hitPoints = BOSS_HIT_POINTS, damage = BOSS_DAMAGE;
-    }
+    private static int minCost = Integer.MAX_VALUE;
+    private static ArrayList<Class<? extends SkillBase>> skills = new ArrayList<>();
 
-    // TODO: every function should be used
-    private static class Skill {
-        String name;
-        int mana, turns;
-
-        Skill(String name, int mana) {
-            this(name, mana, 1);
-        }
-
-        Skill(String name, int mana, int turns) {
-            this.name = name;
-            this.mana = mana;
-            this.turns = turns;
-        }
-
-        int turnsRemaining() {
-            return turns;
-        }
-
-        void execute(Player p, Boss b) {
-            p.mana -= mana;
-            turns --;
-        }
-
-        void removeEffect(Player p, Boss b) { }
+    static {
+        skills.add(MagicMissile.class);
+        skills.add(Drain.class);
+        skills.add(Shield.class);
+        skills.add(Poison.class);
+        skills.add(Recharge.class);
     }
 
-    private static class MagicMissile extends Skill {
-        MagicMissile() {
-            super(MagicMissile.class.getName(), 53);
-        }
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+        infiniteCastSkills(new ArrayList<>());
+        System.out.println(minCost);
+    }
 
-        @Override
-        void execute(Player p, Boss b) {
-            super.execute(p, b);
-            b.hitPoints -= 4;
+    private static void infiniteCastSkills(List<Class<? extends SkillBase>> decidedSkills) throws IllegalAccessException, InstantiationException {
+        for (Class<? extends SkillBase> c : skills) {
+            // ok cast it
+            decidedSkills.add(c);
+
+            // try boss
+            Player p = bossFight(decidedSkills);
+            if (p.mana >= 0 && decidedSkills.size() <= Constants.DFS_DEPTH) {
+                // valid sequence
+                if (p.hitPoints > 0) {
+                    // win
+                    if (minCost > p.getCastedMana()) printSkillSequence(decidedSkills);
+                    minCost = Math.min(minCost, p.getCastedMana());
+                } else {
+                    // lost, and cast more
+                    infiniteCastSkills(decidedSkills);
+                }
+            }
+
+            // ok remove the newly-added one
+            decidedSkills.remove(decidedSkills.size() - 1);
         }
     }
 
-    private static class Drain extends Skill {
-        Drain() {
-            super(Drain.class.getName(), 73);
+    private static Player bossFight(final List<Class<? extends SkillBase>> decidedSkills) throws IllegalAccessException, InstantiationException {
+        // build skill sequence
+        List<SkillBase> skillSequence = new ArrayList<>();
+        for (Class<? extends SkillBase> roundSkill : decidedSkills) {
+            skillSequence.add(roundSkill.newInstance());
         }
 
-        @Override
-        void execute(Player p, Boss b) {
-            super.execute(p, b);
-            p.hitPoints += 2;
-            b.hitPoints -= 2;
+        // fight
+        Player player = new Player();
+        Boss boss = new Boss();
+        List<SkillBase> affectingSkills = new ArrayList<>();
+        for (final SkillBase roundSkill : skillSequence) {
+            // player's turn
+            executeAffectionSkills(player, boss, affectingSkills);
+            if (boss.hitPoints <= 0) break;
+
+            roundSkill.preExecute(player, boss);
+            if (player.mana < 0) break; // not enough mana for this skill sequence
+            if (roundSkill.turnsRemaining() == 1) roundSkill.execute(player, boss);
+            else affectingSkills.add(roundSkill);
+            if (boss.hitPoints <= 0) break;
+
+            // ----
+            // boss's turn
+            executeAffectionSkills(player, boss, affectingSkills);
+            if (boss.hitPoints <= 0) break;
+
+            int dmg = boss.damage - player.armor;
+            if (dmg <= 0) dmg = 1;
+            player.hitPoints -= dmg;
+            if (player.hitPoints <= 0) break;
         }
+
+        // check whether both of them are alive
+        if (player.hitPoints > 0 && boss.hitPoints > 0) {
+            player.hitPoints = 0;
+        }
+
+        return player;
     }
 
-    private static class Shield extends Skill {
-        private boolean executed = false;
-
-        Shield() {
-            super(Shield.class.getName(), 113, 6);
+    private static void executeAffectionSkills(Player p, Boss b, List<SkillBase> affectingSkill) {
+        Map<String, SkillBase> skillSet = new HashMap<>();
+        for (SkillBase sb : affectingSkill) {
+            skillSet.put(sb.getClass().getSimpleName(), sb);
         }
+        affectingSkill = new ArrayList<>(skillSet.values());
 
-        @Override
-        void execute(Player p, Boss b) {
-            super.execute(p, b);
-            if (!executed) {
-                executed = true;
-                p.armor += 7;
+        for (int i = affectingSkill.size() - 1; i >= 0; i --) {
+            SkillBase current = affectingSkill.get(i);
+            if (current.turnsRemaining() > 0) {
+                // execute it
+                current.execute(p, b);
+            }
+            if (current.turnsRemaining() <= 0) {
+                // remove not affecting skill
+                affectingSkill.get(i).removeEffect(p, b);
+                affectingSkill.remove(i);
             }
         }
-
-        @Override
-        void removeEffect(Player p, Boss b) {
-            p.armor -= 7;
-        }
     }
 
-    private static class Poison extends Skill {
-        Poison() {
-            super(Poison.class.getName(), 173, 6);
+    private static void printSkillSequence(final List<Class<? extends SkillBase>> decidedSkills) throws IllegalAccessException, InstantiationException {
+        StringBuilder sb = new StringBuilder();
+        int countMana = 0;
+        for (final Class<? extends SkillBase> c : decidedSkills) {
+            SkillBase s = c.newInstance();
+            countMana += s.mana;
+            sb.append(c.getName() + "(" + s.mana + "), ");
         }
-
-        @Override
-        void execute(Player p, Boss b) {
-            super.execute(p, b);
-            b.hitPoints -= 3;
-        }
-    }
-
-    private static class Recharge extends Skill {
-        Recharge() {
-            super(Recharge.class.getName(), 229, 5);
-        }
-
-        @Override
-        void execute(Player p, Boss b) {
-            super.execute(p, b);
-            p.mana += 101;
-        }
-    }
-
-    private static int BOSS_HIT_POINTS = 58;
-    private static int BOSS_DAMAGE = 9;
-    private static int PLAYER_HIT_POINTS = 50;
-    private static int PLAYER_MANA = 500;
-
-    private static ArrayList<Class<? extends Skill>> skils = new ArrayList<>();
-    static {
-        skils.add(MagicMissile.class);
-        skils.add(Drain.class);
-        skils.add(Shield.class);
-        skils.add(Poison.class);
-        skils.add(Recharge.class);
-    }
-
-    public static void main(String[] args) {
-
+        System.out.println("" + countMana + ": " + sb.toString());
     }
 }
