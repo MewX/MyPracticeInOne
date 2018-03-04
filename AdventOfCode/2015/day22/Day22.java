@@ -56,6 +56,10 @@ public class Day22 {
         Boss boss = new Boss();
         List<SkillBase> affectingSkills = new ArrayList<>();
         for (final SkillBase roundSkill : skillSequence) {
+            // test 2 ----------------
+            player.hitPoints -= 1;
+            if (player.hitPoints <= 0) break;
+
             // player's turn
             executeAffectionSkills(player, boss, affectingSkills);
             if (boss.hitPoints <= 0) break;
