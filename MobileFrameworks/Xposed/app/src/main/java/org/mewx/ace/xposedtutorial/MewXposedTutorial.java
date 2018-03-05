@@ -26,6 +26,7 @@ import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
+import wendu.dsbridge.DWebView;
 
 /**
  * Created by MewX on 12/12/2017.
@@ -199,6 +200,17 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                 }
             });
 
+
+            XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.WebView", lpparam.classLoader, "loadUrl", String.class, new XC_MethodHook() {
+                @Override
+                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                    super.beforeHookedMethod(param);
+
+                    ((WebView) param.thisObject).addJavascriptInterface(new MyJavaScriptInterface(), "interface");
+
+                }
+            });
+
             XposedHelpers.findAndHookMethod("com.tencent.smtt.sdk.SystemWebViewClient", lpparam.classLoader, "onPageFinished", WebView.class, String.class, new XC_MethodHook() {
 
 
@@ -222,10 +234,11 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
                     XposedBridge.log("From WebView, after loading!!! Trying to traverse the webview.");
 
                     // trying to traverse the webview
-                    final WebView webview = (WebView) param.args[0];
+                    final DWebView webview = (DWebView) param.args[0];
                     new WaitAndFetchViews().execute(webview);
 
                     webview.getSettings().setJavaScriptEnabled(true);
+                    webview.setJavascriptInterface(new MyJavaScriptInterface());
 //                    webview.addJavascriptInterface(new MyJavaScriptInterface(), "interface");
 //                    webview.loadUrl("javascript:window.HtmlViewer.showHTML" +
 //                            "('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>');");
