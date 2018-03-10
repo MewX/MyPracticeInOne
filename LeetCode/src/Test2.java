@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Created by MewX on 3/5/2017.
  */
 public class Test2 {
-    class Star {
+    static class Star {
         public int x, y, z, r;
 
         public Star(int x, int y, int z, int r) {

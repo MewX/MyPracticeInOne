@@ -1,8 +1,44 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
+// TODO: testing
 public class TreeNodeTools {
+
+    public static TreeNode buildBinaryTree(Integer[] nodes) {
+        if(nodes == null || nodes.length == 0) return null;
+
+        LinkedList<TreeNode> list = new LinkedList<>();
+        TreeNode root = nodes[0] == null ? null : new TreeNode(nodes[0]);
+        list.addLast(root);
+
+        int i = 1;
+        while (i < nodes.length && list.size() != 0) {
+            if (list.getFirst() == null) {
+                list.removeFirst();
+                continue;
+            }
+
+            // left node
+            TreeNode newNodeLeft = nodes[i] == null ? null : new TreeNode(nodes[i]);
+            i ++;
+            list.getFirst().left = newNodeLeft;
+            list.addLast(newNodeLeft);
+
+            // right node
+            if (i < nodes.length) {
+                TreeNode newNodeRight = nodes[i] == null ? null : new TreeNode(nodes[i]);
+                i ++;
+                list.getFirst().right = newNodeRight;
+                list.addLast(newNodeRight);
+            }
+
+            list.removeFirst();
+        }
+        return root;
+    }
+
     public static TreeNode makeBinaryTree(Integer[] nodes) {
         if(nodes.length == 0) return null;
 
@@ -10,7 +46,7 @@ public class TreeNodeTools {
         TreeNode root = new TreeNode(nodes[0]);
         current.offer(root);
 
-        int i = 1, node;
+        int i = 1;
         while(i < nodes.length) {
             next = new LinkedList<>();
             while(current.size() > 0) {
@@ -33,6 +69,34 @@ public class TreeNodeTools {
             current = next;
         }
         return root;
+    }
+
+    public static Integer[] fellBinaryTree(TreeNode root) {
+        if (root == null) return new Integer[0];
+
+        ArrayList<Integer> ret = new ArrayList<>();
+        LinkedList<TreeNode> temp = new LinkedList<>();
+        temp.add(root);
+
+        while (temp.size() != 0) {
+            if (temp.getFirst() == null) {
+                ret.add(null);
+                temp.removeFirst();
+                continue;
+            }
+
+            ret.add(temp.getFirst().val);
+            temp.addLast(temp.getFirst().left);
+            temp.addLast(temp.getFirst().right);
+            temp.removeFirst();
+        }
+
+        // remove trailing nulls
+        for (int i = ret.size() - 1; i >= 0; i --) {
+            if (ret.get(i) != null) break;
+            ret.remove(i);
+        }
+        return ret.toArray(new Integer[ret.size()]);
     }
 
     public static TreeNode findBinaryTreeByInt(TreeNode root, Integer val) {
