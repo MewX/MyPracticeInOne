@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,13 +18,14 @@ public class Day23 {
         new Day23(cmds.toArray(new String[cmds.size()])).run();
     }
 
-    Day23(String[] cmds) {
+    private Day23(String[] cmds) {
         this.cmds = cmds;
     }
 
-    void run() {
+    private void run() {
         HashMap<String, BigInteger> regs = new HashMap<>();
-        regs.put("a", BigInteger.ZERO);
+//        regs.put("a", BigInteger.ZERO);// part 1
+        regs.put("a", BigInteger.ONE); // part 2
         regs.put("b", BigInteger.ZERO);
 
         String op1, op2;
