@@ -5,6 +5,7 @@ import (
 	"math"
 	"reflect"
 	"time"
+	"sync"
 )
 
 // Exercise: Stringers
@@ -53,6 +54,52 @@ func run() error {
 		time.Now(),
 		"it didn't work",
 	}
+}
+
+func say(s string) {
+	for i := 0; i < 5; i ++ {
+		time.Sleep(100 * time.Microsecond)
+		fmt.Println(s)
+	}
+}
+
+func sum(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
+	}
+	c <- sum
+	//close(c) // cannot be invoked after closing
+}
+
+func fib(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <-quit:
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+type SafeCounter struct {
+	v map[string] int
+	mux sync.Mutex
+}
+
+func (c *SafeCounter) Inc (key string) {
+	c.mux.Lock()
+	c.v[key] ++
+	c.mux.Unlock()
+}
+
+func (c *SafeCounter) Value(key string) int {
+	c.mux.Lock()
+	defer c.mux.Unlock()
+	return c.v[key]
 }
 
 func main() {
@@ -200,5 +247,43 @@ func main() {
 	if err := run(); err != nil {
 		fmt.Println(err)
 	}
+
+	// go routines
+	go say("world")
+	say("hello")
+
+	// channels
+	arr := []int{1, 2, 3, 4, 5, 6, 7,}
+	c := make(chan int)
+	go sum (arr[:len(arr)/2], c)
+	go sum (arr[len(arr)/2:], c)
+	// the following order is random
+	x := <-c
+	y := <-c
+	fmt.Println(x, y, x + y)
+
+	// buffered channels
+	ch := make(chan int, 2)
+	ch <- 1
+	ch <- 2
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+
+	// select go routines
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)
+		}
+		quit <- 0
+	}()
+	fib(c, quit)
+
+	// mutex: lock and unlock
+	ccc := SafeCounter{v: make(map[string] int)}
+	for i := 0; ccc.Value("somekey") < 1000; i ++ {
+		go ccc.Inc("somekey")
+	}
+	fmt.Println(ccc.Value("somekey"))
 
 }
