@@ -2,9 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * This program should be early terminated as the last one was the final result
+ * This program should be early terminated as the last one was the final result (greedy)
+ *
+ * part 1: 113, 109, 107, 101, 89, 1,  (520 - 11846773891)
+ * part 2: 113, 109, 107, 61,  (390 - 80393059)
  */
 public class Day24 {
+    private static final boolean PART1 = false;
     private static int SUM, SINGLE;
     private static ArrayList<Integer> best = new ArrayList<>();
 
@@ -19,7 +23,8 @@ public class Day24 {
         // update sum
         for (Integer i : l) SUM += i;
         System.out.println("SUM: " + SUM);
-        SINGLE = SUM / 3;
+        if (PART1) SINGLE = SUM / 3;
+        else SINGLE = SUM / 4;
         System.out.println("SINGLE: " + SINGLE);
 
         // calc
@@ -64,6 +69,31 @@ public class Day24 {
         for (int i = remaining.size() - 1; i >= 0 && !ret; i --) {
             int pick = remaining.get(i);
             if (sum + pick > SINGLE) continue;
+            else if (sum + pick == SINGLE && PART1) {
+                return true;
+            }
+
+            // valid
+            remaining.remove(i);
+
+            // next state
+            if (sum + pick == SINGLE && !PART1) {
+                ret = validateAgain(remaining, 0);
+            } else {
+                ret = validate(remaining, sum + pick);
+            }
+
+            // clean everything
+            remaining.add(i, pick);
+        }
+        return ret;
+    }
+
+    private static boolean validateAgain(ArrayList<Integer> remaining, int sum) {
+        boolean ret = false;
+        for (int i = remaining.size() - 1; i >= 0 && !ret; i --) {
+            int pick = remaining.get(i);
+            if (sum + pick > SINGLE) continue;
             else if (sum + pick == SINGLE) {
                 return true;
             }
@@ -72,7 +102,7 @@ public class Day24 {
             remaining.remove(i);
 
             // next state
-            ret = validate(remaining, sum + pick);
+            ret = validateAgain(remaining, sum + pick);
 
             // clean everything
             remaining.add(i, pick);
