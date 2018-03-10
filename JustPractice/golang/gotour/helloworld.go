@@ -111,7 +111,8 @@ func powLocal(x, n, lim float64) float64 {
 	return lim
 }
 
-var globalVar int // default 0
+type myint int
+var globalVar myint // default 0
 
 func main() {
 	fmt.Println("Hello world!")
