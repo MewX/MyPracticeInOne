@@ -3,7 +3,6 @@ package utils;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-// TODO: testing
 public class TreeNodeTools {
 
     public static TreeNode buildBinaryTree(Integer[] nodes) {
@@ -108,5 +107,16 @@ public class TreeNodeTools {
             if(temp != null) return temp;
             else return findBinaryTreeByInt(root.right, val);
         }
+    }
+
+    public static boolean compareTwoTrees(TreeNode root1, TreeNode root2) {
+        if ((root1 == null) ^ (root2 == null)) return false; // only one of them is null
+
+        if (root1 != null) {
+            if (!root1.val.equals(root2.val)) return false;
+            // else
+            return compareTwoTrees(root1.left, root2.left) && compareTwoTrees(root1.right, root2.right);
+        }
+        return true;
     }
 }
