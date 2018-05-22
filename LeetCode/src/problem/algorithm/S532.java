@@ -1,10 +1,6 @@
 package problem.algorithm;
 
-import utils.TreeNode;
-import utils.TreeNodeTools;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -16,7 +12,6 @@ import java.util.HashSet;
  *     TreeNode(int x) { val = x; }
  * }
  */
-@SuppressWarnings("unused")
 public class S532 {
 
     public int findPairs(int[] nums, int k) {
