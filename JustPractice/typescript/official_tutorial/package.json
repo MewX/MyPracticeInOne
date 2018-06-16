@@ -1,0 +1,31 @@
+{
+  "name": "org.mewx.ts.practise",
+  "version": "0.1.0",
+  "description": "Xia's ts practice",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:notdecided/practice-in-all.git",
+    "private": true
+  },
+  "author": "MewX",
+  "license": "ISC",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "build",
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "@types/node": "^10.3.3"
+  }
+}
