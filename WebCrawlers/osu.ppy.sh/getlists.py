@@ -35,7 +35,7 @@ def download(url):
 the main function
 """
 list_page = download(FULL_LIST)
-print(list_page)
+# print(list_page)
 propertyDb = PropertyDb()
 for match in re.finditer(LIST_PATTERN, list_page, re.DOTALL | re.MULTILINE):
     key = match.group(1)

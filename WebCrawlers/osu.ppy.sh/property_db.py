@@ -24,6 +24,7 @@ class PropertyDb:
     def does_record_exist(self, key):
         return self.get_value(key) is not None
 
+
     def save_or_overwrite_data(self, key, value):
         self.conn.execute("INSERT OR REPLACE INTO properties(name, value, time) VALUES (?, ?, current_timestamp);", (key, value,))
         self.conn.commit()
@@ -31,5 +32,11 @@ class PropertyDb:
 
     def get_value(self, key):
         cur = self.conn.cursor()
-        cur.execute("SELECT * FROM properties WHERE name = ?;", (key,))
+        cur.execute("SELECT name, value, time FROM properties WHERE name = ?;", (key,))
         return cur.fetchone()
+
+
+    def get_all(self):
+        cur = self.conn.cursor()
+        cur.execute("SELECT name, value, time FROM properties;")
+        return cur.fetchall()
