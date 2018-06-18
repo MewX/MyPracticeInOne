@@ -28,13 +28,14 @@ def download(url):
             print(e)
             print('-- trying again: {}'.format(url))
             continue
-        return b
+        return b.decode("utf-8")
 
 
 """
 the main function
 """
 list_page = download(FULL_LIST)
+print(list_page)
 propertyDb = PropertyDb()
 for match in re.finditer(LIST_PATTERN, list_page, re.DOTALL | re.MULTILINE):
     key = match.group(1)
@@ -53,4 +54,5 @@ for match in re.finditer(LIST_PATTERN, list_page, re.DOTALL | re.MULTILINE):
         # if not found
         print('-- ERROR not found things on page on key {}: {}'.format(key, current_page))
 
+propertyDb.close()
 print('done')
