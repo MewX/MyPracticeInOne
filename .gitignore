@@ -6,6 +6,7 @@ out/
 *.class
 *.dex
 *.log
+*.db
 
 # My files
 dump/
@@ -38,3 +39,7 @@ schemas/
 .navigation/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
+
+# node js
+node_modules/
+build/
