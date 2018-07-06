@@ -26,6 +26,7 @@ var fs = require('fs');
 for (var idx = 2; idx < process.argv.length; idx ++) {
 	var fileName = process.argv[idx];
 	var targFileName = fileName + ".dec.json";
+    targFileName = targFileName.replace('downloads', 'decoded')
 	console.log("Now processing " + fileName + ", saving to " + targFileName);
 	
 	var obj = JSON.parse(fs.readFileSync(fileName, 'utf8'));
