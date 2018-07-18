@@ -1,0 +1,18 @@
+{
+  "name": "org.mewx.practice.graphql.archen",
+  "version": "1.0.0",
+  "description": "The database used in this project is: https://github.com/MewX/PHP-GraduationProjectManageSystem/blob/master/sql/gp.sql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MewX",
+  "license": "ISC",
+  "dependencies": {
+    "archen": "^1.1.8",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "knex": "^0.15.1",
+    "mysql": "^2.16.0"
+  }
+}
