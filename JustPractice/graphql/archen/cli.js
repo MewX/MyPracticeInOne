@@ -12,7 +12,10 @@ const archen = new Archen({
             timezone: 'Z',
             connectionLimit: 10
         }
-    }
+    },
+    // graphql: {
+    //     getAccessor: context => context.accessor
+    // }
 });
 
 archen.getSchemaInfo().then(() => {
@@ -22,18 +25,18 @@ archen.getSchemaInfo().then(() => {
         archen.getAccessor()
     ];
 
-    // const query = `
-    // {
-    //   task(id:"1001") {
-    //     name
-    //     content
-    //     holder {
-    //       name
-    //     }
-    //     type
-    //   }
-    // }`;
-    const query = `
+    const query1 = `
+    {
+      task(where: {id: 1001}) {
+        name,
+        content,
+        type,
+        holder {
+          name
+        }
+      }
+    }`;
+    const query2 = `
     {
       tasks {
         id,
@@ -46,8 +49,8 @@ archen.getSchemaInfo().then(() => {
       }
     }`;
 
-    graphql(schema, query, rootValue, {accessor}).then(response => {
-        console.log(JSON.stringify(response));
+    graphql(schema, query1, rootValue, {accessor}).then(response => {
+        console.log(JSON.stringify(response, null, 2));
     });
 });
 
