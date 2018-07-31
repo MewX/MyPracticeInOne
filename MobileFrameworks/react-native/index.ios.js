@@ -12,6 +12,7 @@ import {
   View
 } from 'react-native';
 
+// TODO: test ios
 export default class ReactNativeMaterialToDoList extends Component {
   render() {
     return (

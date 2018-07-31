@@ -4,7 +4,7 @@
 
 import * as React from "react";
 import {ListView, StatusBar, Text, TextInput, TouchableNativeFeedback, View} from "react-native";
-import {Toolbar, BottomNavigation, ThemeProvider} from 'react-native-material-ui';
+import {Toolbar, BottomNavigation, ThemeContext, getTheme} from 'react-native-material-ui';
 import * as COLOR from "react-native-material-ui/src/styles/colors";
 
 const uiTheme = {
@@ -19,7 +19,7 @@ const uiTheme = {
     },
 };
 
-class MainActivity extends React.Component {
+export default class MainActivity extends React.Component {
     static ACTIVE_ALL = 'ALL';
     static ACTIVE_PENDING = 'PENDING';
     static ACTIVE_DONE = 'DONE';
@@ -27,6 +27,7 @@ class MainActivity extends React.Component {
     constructor() {
         super();
         this.state = {
+            // FIXME - not working on Android 8.0
             ds: new ListView.DataSource({rowHasChanged: (ori, n) => ori !== n}),
             active: MainActivity.ACTIVE_ALL,
             edit: '',
@@ -46,7 +47,7 @@ class MainActivity extends React.Component {
 
     render() {
         return (
-            <ThemeProvider uiTheme={uiTheme}>
+            <ThemeContext.Provider value={getTheme(uiTheme)}>
                 <View style={{flex: 1}}>
                     {/*Interesting ways to make translucent*/}
                     <StatusBar backgroundColor="rgba(0, 0, 0, 0.2)" translucent/>
@@ -112,7 +113,7 @@ class MainActivity extends React.Component {
                         style={{ container: { minWidth: null } }}/>
                     </BottomNavigation>
                 </View>
-            </ThemeProvider>
+            </ThemeContext.Provider>
         )
     }
 
@@ -162,5 +163,3 @@ class MainActivity extends React.Component {
         this.setState({items: i});
     }
 }
-
-module.exports = MainActivity;
