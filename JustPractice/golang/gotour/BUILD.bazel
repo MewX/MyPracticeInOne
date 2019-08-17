@@ -1,17 +1,17 @@
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
-go_library(
-    name = "go_default_library",
+go_binary(
+    name = "gofunc",
     srcs = [
         "functions.go",
-        "helloworld.go",
     ],
-    importpath = "./",
-    visibility = ["//visibility:private"],
+    visibility = ["//visibility:public"],
 )
 
 go_binary(
     name = "gotour",
-    embed = [":go_default_library"],
+    srcs = [
+        "helloworld.go",
+    ],
     visibility = ["//visibility:public"],
 )
