@@ -1,4 +1,7 @@
+.exercism/
+README.md
 .idea/
 build/
 .keep
 PaxHeader/
+
