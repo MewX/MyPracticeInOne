@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Tutorial</title>
+  
+
+  
+  
+  <meta content="BondCracked" name="author">
+
+  
+  <meta content="Solution to crackme proposed by Xia Yuanzhong: XYZ_KeygenMe20110405" name="description"></head><body style="color: rgb(0, 0, 0); background-color: rgb(204, 217, 200);" alink="#000099" link="#000099" vlink="#990099">
+<span style="font-weight: bold; font-family: monospace;"><br>
+<br>
+</span><span style="font-family: monospace;">Author: BondCracked</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">
+April 2011</span><br style="font-family: monospace;">
+
+<hr style="color: rgb(0, 0, 0); width: 100%; height: 0.5px; font-family: monospace;" noshade="noshade"><a style="font-family: monospace;" href="#Introduction">Introduction</a><br style="font-family: monospace;">
+<a style="font-family: monospace;" href="#Initial_analysis">Initial analysis</a><br style="font-family: monospace;">
+<span style="font-family: monospace;">
+Reversing</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">
+Final code</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">
+End words</span><br style="font-family: monospace;">
+<hr style="width: 100%; height: 1px; font-family: monospace; margin-left: 0px; margin-right: auto;" noshade="noshade">
+
+<ol style="font-family: monospace;">
+
+</ol>
+
+
+<h2 style="font-family: monospace;"><a class="mozTocH2" name="mozTocId827801"></a><big><big><big>Introduction</big></big></big></h2>
+
+<span style="font-family: monospace;">
+When one executes the program he can see some affirmatives made by the
+author:</span><br style="font-family: monospace;">
+
+<ol style="font-family: monospace;">
+
+  <li>there's no easy way to find the strings;</li>
+  <li>the name must have at least one capitalization;<br>
+  </li>
+  <li>the length of name must be less than 20 characters (0x14h);</li>
+  <li>the length of password must be less than 50 characters (0x32h);</li>
+</ol>
+<span style="font-family: monospace;">
+The first of them seems to be very true. The other three are the clues I have used to keygen the program.</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">When we desobey the rules the program shows some messages for us and asks to start it again.</span><br style="font-family: monospace;">
+
+<br style="font-family: monospace;">
+
+<a style="font-family: monospace;" name="The_initial_screen_from_this_crackme"></a><img style="width: 677px; height: 342px; font-family: monospace;" alt="The initial screen from this crackme shows its rules." title="Crackme first screen." src="Fig/Crackemesde.png"><br style="font-family: monospace;">
+
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 1</span>: The crackme
+screen showing its rules and some "hints".</small><br style="font-family: monospace;">
+
+<big style="font-family: monospace;"><big></big></big>
+<h2 style="font-family: monospace;"><a class="mozTocH2" name="mozTocId910546"></a><big><big><big>Initial analysis</big></big></big></h2>
+
+<span style="font-family: monospace;">To write the keygen we need to know some things about the target. Let see if our common tools can give us </span><br style="font-family: monospace;">
+
+<span style="font-family: monospace;">some informations about this keygenme.</span><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">Lets start with PEiD when we don't find any packer.</span><br style="font-family: monospace;">
+
+<a style="font-family: monospace;" name="Theres_no_compression_as_indicated_by"></a><img title="PEiD view" style="width: 422px; height: 239px; font-family: monospace;" alt="There's no compression as indicated by PEiD" src="Fig/PeNoCompact.png"><br style="font-family: monospace;">
+
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 2</span>: The target
+is not packed, as shown by PEiD.</small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">There is not evidence for crypto code here with&nbsp; Kanal's plugin
+for PEiD</span><br style="font-family: monospace;">
+
+<a style="font-family: monospace;" name="Kanals_plugin_doesnt_identify_any"></a><img style="width: 317px; height: 261px; font-family: monospace;" alt="Kanal's plugin doesn't identify any crypto." title="Kanal's plugin view" src="Fig/PeNoKryp.png"><br style="font-family: monospace;">
+
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 3</span>: No crypto
+signatures</small><span style="font-family: monospace;">.</span><br style="font-family: monospace;">
+<br style="font-family: monospace;"><span style="font-family: monospace;">
+With LordPE we can see the imports. They are ok too.</span><br style="font-family: monospace;">
+<a name="Imports_are_ok."></a><img style="width: 618px; height: 282px; font-family: monospace;" alt="Imports are ok." src="Fig/Imports.png"><br style="font-family: monospace;">
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 4</span>: No troubles with the imports. Please, pay attention in printf and putc.</small><br style="font-family: monospace;">
+<h2 style="font-family: monospace;"><a class="mozTocH2" name="mozTocId698413"></a><big><big>Reversing</big></big></h2>
+
+<h3 style="font-family: monospace;"><span style="font-weight: bold;">Bad Solution: Patching the program</span><a class="mozTocH3" name="mozTocId686823"></a></h3>
+
+<span style="font-family: monospace;"><span style="font-weight: bold;"></span>I decided to do this only as an exercise. If you do&nbsp; not want to read this, jump for the <a href="#mozTocId561384">next section</a>.</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">The author says clearly that a patch is not a valid solution, but... I</span><small style="font-family: monospace;"> <big>patched it partially</big>.<br>
+<big>The patch does not validate all names or passwords. The rules for
+these strings stand without any change,
+namely:<br>
+</big></small>
+<ol style="font-family: monospace;">
+  <li><small><big>the max length of the name;</big></small></li>
+  <li><small><big>the max length of password;</big></small></li>
+  <li><small><big>invalid characters are&nbsp; not allowed;</big></small></li>
+  <li><small><big>at least one capitalization in the name.</big></small></li>
+
+</ol>
+<span style="font-family: monospace;">Why to to this? Just to see the final message. Let's see where inside the keygenme we have to change the code:</span><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">First point:</span><br style="font-family: monospace;">
+<a style="font-family: monospace;" name="Length_check"></a><img style="width: 892px; height: 123px; font-family: monospace;" alt="Length check" title="Check the lenght of the user entered password and the calculated one" src="Fig/Length.png"><br style="font-family: monospace;">
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 5</span>: The lenght of user entered password and the calculated by&nbsp; the keygenme must be the same.</small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">Second point:</span><br style="font-family: monospace;">
+<a style="font-family: monospace;" name="Cut_points_inside_the_password"></a><img style="width: 890px; height: 123px; font-family: monospace;" alt="Cut points inside the password" title="Patch point" src="Fig/CutPoints.png"><br style="font-family: monospace;">
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 6</span>: There are 'cut' points inside the password.</small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">Third point:</span><br style="font-family: monospace;">
+<a style="font-family: monospace;" name="Checks_the_zxy_array"></a><img style="width: 886px; height: 123px; font-family: monospace;" alt="Checks the [z,x,y] array" src="Fig/xyzCheck.png"><br style="font-family: monospace;">
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 7</span>: Checks a letter from [z, x, y] array and the position inside the password.</small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">Fourth point:</span><br style="font-family: monospace;">
+<a style="font-family: monospace;" name="Check_for_minuscule"></a><img style="width: 886px; height: 123px; font-family: monospace;" alt="Check for minuscule" src="Fig/MinuscleCheck.png"><br style="font-family: monospace;">
+<small style="font-family: monospace;"><span style="text-decoration: underline;">Figure 8</span>: Checks for minuscle letters in the given name. They must appear inside the password too.</small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">To make it run lets do the following changes:</span><br style="font-family: monospace;">
+<table style="text-align: left; width: 522px; height: 142px; font-family: monospace;" border="1" cellpadding="2" cellspacing="2">
+  <caption style="caption-side: bottom;"><small><a name="Table_1"></a>Table 1: The changes to patch the keygenme.</small><br>
+  </caption><tbody>
+    <tr>
+      <th style="vertical-align: top; height: 26px; width: 250px;">Address<br>
+      </th>
+      <th style="vertical-align: top;">Patch to apply<br>
+      </th>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><a href="#Length_check">004018B3</a><br>
+      </td>
+      <td style="vertical-align: top;">Change JE to JMP<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><a href="#Cut_points_inside_the_password">00401AD8</a><br>
+      </td>
+      <td style="vertical-align: top;">NOP<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><a href="#Checks_the_zxy_array">00401C14</a><br>
+      </td>
+      <td style="vertical-align: top;">NOP<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><a href="#Check_for_minuscule">00401C96</a><br>
+      </td>
+      <td style="vertical-align: top;">NOP<br>
+      </td>
+    </tr>
+  </tbody>
+</table><br style="font-family: monospace;">
+<span style="font-family: monospace;">I have enough of playing. Now lets work better.</span><br style="font-family: monospace;">
+<h3 style="font-family: monospace;"><a class="mozTocH3" name="mozTocId561384"></a>The good solution: code a keygen</h3>
+<span style="font-family: monospace;">First of all, lets open the target with ollydbg and search for the lenght of name and password.</span><span style="font-family: monospace;"></span><br style="font-family: monospace;">
+<span style="font-family: monospace;">If we look the <a href="#Imports_are_ok.">imports</a> we can see the printf and putc functions. This keygenme shows many messages to us and a good <br>
+point to start is run it with ollydbg, wait it asks for a name, enter a invalid password, set breakpoint on execution<br>
+in printf (bpx printf) and check what happens in olly.</span><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<img style="width: 785px; height: 513px; font-family: monospace;" alt="The  printf breakpoint." src="Fig/IllegitimateName.png"><br style="font-family: monospace;"><small><span style="font-family: monospace;">
+<span style="text-decoration: underline;">Figure 9</span>: The printf trick inside the program (</span><span style="font-family: monospace;">Illegimate string! Please ReType!).</span></small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">That's it. If you&nbsp; try to decifre all of the MOV DWORD PTR SS:[ESP], XX you will find the message:<br>
+"Illegimate string! Please ReType!"</span><br style="font-family: monospace;">
+<span style="font-family: monospace;"><br>
+Because the way used when writting the messages, search&nbsp; for strings with ollydbg is not usefull.<br>
+The keygenme writes one letter at time, not a long sentence.</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">The exception to this rule occurs before the keygenm ask for the Name. At that moment it writes long sentences, not<br>
+one letter at time.<br>
+</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+The return address at the stack frame gives us more hints.</span><br style="font-family: monospace;">
+<img style="width: 478px; height: 98px; font-family: monospace;" alt="Printf stack frame." src="Fig/PrintfStackFrame.png"><br>
+<small><span style="font-family: monospace;">
+<span style="text-decoration: underline;">Figure 10</span>: Hints from the stack frame.</span></small><br style="font-family: monospace;">
+<br style="font-family: monospace;">
+<span style="font-family: monospace;">Lets check&nbsp; 00401626. If we look the portion of code with attention we can find two suspect values there: 0x14 and 0x32.<br>
+They are respectively the max. length of name and the max. length of password and they are in these addresses: 0040159E and 00401677.<br>
+Now its time to look the proximity of this code. If we scroll up a little lines we will find another 0x14 at address 004014CB.<br>
+So, after we clear the bpx at printf we can set bpx at 004014CB and run the program again.<br>
+(You can use bpd printf, bpx 004014CB and rst in ollydbg cmdline).</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+When we enter the name the keygenme stops at our last bpx. Then, by debugging step by step we see that the program:</span><br style="font-family: monospace;">
+<ol style="font-family: monospace;">
+  <li>
+tests for empty name (length = 0);<br>
+  </li>
+  <li>
+tests for a name which&nbsp; length is greater than 0x14;<br>
+  </li>
+  <li>
+tests for at least one capital letter in the name.</li>
+</ol>
+<span style="font-family: monospace;">If the one of the conditions 1 or 2 is true, the name is invalid. If the condition 3 is true, the name is valid.<br>
+</span><span style="font-family: monospace;">Those tests are carried out from address 004014B3 up to 00401626.</span><br style="font-family: monospace;">
+<br>
+<span style="font-family: monospace;">Since the name is valid the keygenme asks for the password. Then the program:</span><br style="font-family: monospace;">
+<ol style="font-family: monospace;">
+  <li>tests for empty password;</li>
+  <li>tests for a password which length is greater than 0x32;</li>
+</ol>
+<span style="font-family: monospace;">Those one of those conditions is
+true, the password is invalid. But there are another checks which
+involve the password and the name, namely:</span><span style="font-family: monospace;" class="descricao"><br>
+</span>
+<ol style="font-family: monospace;">
+  <li><span class="descricao">their lengths can't bee the same;</span></li>
+  <li><span class="descricao">the lenght of password has to be greather than the length of the name;</span></li>
+</ol>
+<span style="font-family: monospace;" class="descricao"></span><br style="font-family: monospace;">
+<span style="font-family: monospace;">Once these checkings are done, some calculations occur and can invalidate the password.<br>
+They begin at address 004017B1 and end at address 00401899.</span><br>
+<img style="width: 837px; height: 579px;" alt="Calculate length for password" src="Fig/LenPassEqLenName.png"><br>
+<small><span style="font-family: monospace;">
+<span style="text-decoration: underline;">Figure 11</span>: Calculation of the length of the password.</span></small><br>
+<br>
+Is it hard to understand? Lets use some C code here:<br>
+<img style="width: 606px; height: 439px;" alt="Ccode" src="Fig/CCode.png"><br>
+<small><span style="font-family: monospace;">
+<span style="text-decoration: underline;">Figure 12</span>: The C code which shows the calculation for the length of password.</span></small><br>
+<br>
+The result is the length of the password who matches the valid name we entered.<br style="font-family: monospace;">
+
+
+<h2 style="font-family: monospace;"><a class="mozTocH2" name="mozTocId893597"></a><big><big>End words</big></big></h2>
+
+<span style="font-family: monospace;">This one with its common jumps is an
+example of trick code. The author of this keygenme has gently send the
+source to me and I made myself impressed when I saw how a so short code</span> <span style="font-family: monospace;">could be hard to follow sometimes. Very interesting.</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">Thanks Xia Yuanzhong for this good Keygenme.</span><br style="font-family: monospace;">
+
+<span style="font-family: monospace;">.</span><br style="font-family: monospace;">
+
+<br style="font-family: monospace;">
+
+</body></html>
