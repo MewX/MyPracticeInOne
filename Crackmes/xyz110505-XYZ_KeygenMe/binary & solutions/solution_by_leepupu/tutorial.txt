@@ -1,0 +1,219 @@
+Step 1: First, load crackme in OllyDBG.Then try F8 until wait for input.Remember the call(401100), and Ctrl+F2, reload crackme.
+
+Step 2: F8 to the call remember early, F7 trace in it.Then you found after 4011E2 is WIN32API "ExitProcess", so you can decide the call 401390 at 4011E2 is function main.Trace in.
+
+Step 3: F8 untill wait for input at 4015EE. Back to crackme enter the name "1234567" and crackme pause. Still F8, at401750 is function get password. After it is the main decode code, so pay attention at 401755.Break point at here.
+
+Step 4: Enter the password according with your wishes. Here i enter "abcdef". Then F8 to found which cmp jmp would print Error and loop for another input. It seems 4019AE is that.Check back, it was jmp from 4019AA, so re tyr and this time pause at 4019AA.
+
+????????   .^\E9 57FAFFFF   jmp     0040150E                        ;loop for another input, find way to bypass it(Always do that cause it's the way to find the correct password!)
+
+
+Stpe 5: OK, you are at 4019AA and look at hunt window. A lot of address jmp to here. Maybe it's a switch or nested if. Here cmp the [ebp-12A] whit 4AF, magic number! Look back check where change the value at [ebp-12A].Here i just try and error to found how to pass this cmp(means let [ebp-12A] == 0x4Af). So i right click at stack window, choose "Go to expression" and type "ebp-0x12A",the stack window's top now point to this variable. But remember right click and choose "Lock stack" or when push or pop, stack window's top will point back to top of the stack.
+Hint: you can right click at stack window and select Address\Relative to EBP to show where is the address program access.
+
+Step 5: Then F9 and enter name and password.F8 and check [ebp-12A] carefully.If you can, try analyze by watch.
+!!Notice [ebp-12A] is a Word not DWord, so it is 16 Bits integer.
+004017B5   > \66:C785 D6FEF>mov     word ptr [ebp-12A], 6F
+
+00401802   .  66:C785 D6FEF>mov     word ptr [ebp-12A], 78
+
+00401843   .  66:C785 D6FEF>mov     word ptr [ebp-12A], 77
+
+00401851   > \66:C785 D6FEF>mov     word ptr [ebp-12A], 4B0
+
+
+0040187F   .  0FB785 D6FEFF>movzx   eax, word ptr [ebp-12A]
+00401886   .  40            inc     eax
+00401887   .  66:8985 D6FEF>mov     word ptr [ebp-12A], ax
+
+004018B8   .  0FB785 D6FEFF>movzx   eax, word ptr [ebp-12A]
+004018BF   .  48            dec     eax                              
+004018C0   .  66:8985 D6FEF>mov     word ptr [ebp-12A], ax
+
+00401935   .  66:C785 D6FEF>mov     word ptr [ebp-12A], 4D8
+
+00401973   .  66:C785 D6FEF>mov     word ptr [ebp-12A], 460
+
+0040197E   > \66:C785 D6FEF>mov     word ptr [ebp-12A], 4B0
+
+Your goal is let [ebp-12A] = 4AF, so check which combine 4AF.Notice there is 2 addr can let [ebp-12A]++ or [ebp-12A]--, so just check 4AF+1=4B0, 4AF-1=4AE.Ok, there is!Now try to found way to go throught 00401851 and 4018BF.F8 and found in the hint window. You can find that the crackme check password's prefix. Then you can arrange that:
+
+004017DE   .  8038 58       cmp     byte ptr [eax], 58               ;  
+004017E1   .  0F85 0E010000 jnz     004018F5                         ;  Should not JMP => password[0] = 58 (asc 'X')
+
+
+004017FD   .  8038 58       cmp     byte ptr [eax], 58		     ;
+00401800   .  75 1C         jnz     short 0040181E		     ;  Should JMP => password[1] != 58 (asc 'X')
+
+
+0040183E   .  8038 33       cmp     byte ptr [eax], 33               ;  
+00401841   .  74 0E         je      short 00401851                   ;  Should JMP => password[1] = 33(asc '3')
+
+
+0040187A   .  8038 5F       cmp     byte ptr [eax], 5F
+0040187D   .  74 14         je      short 00401893                   ;  Should JMP => password[1] = 5F(asc '_')
+
+So the prefix of the password should be "X3_".
+
+Step 6: If you pass the prefix check, you will be at 004019C8. Then find the "Go back point(show error and wait fot another input)". Ha! here is:
+00401A89   .  39C2          cmp     edx, eax
+00401A8B   .  75 10         jnz     short 00401A9D                   ;  can't
+
+See back, notice edx is the length of password. Obviously it check the length of password! So, find what eax(the value at ebp-BA) is. See more back:
+
+004019E1   .  890424        mov     dword ptr [esp], eax             ;  Here's eax is length of name
+004019E4   .  E8 25070000   call    0040210E                         ;  Before <Amazing Count> ax become a magic number
+004019E9   .  66:8985 46FFF>mov     word ptr [ebp-BA], ax            ;  Here is the ebp-BA!
+
+Trace into the funtion <Amazing Count> and find it is a recursive function.
+
+In c++, the function like this:
+int count_passlen(int n)
+{
+    if(n<0) return 0;
+    if(n<4)
+        return 1;
+    else
+        return count_passlen(n-1)+count_passlen(n-3);
+}
+
+Step 7: After count the magic number, crackme still check some condition to change the value of magic number
+004019E9   .  66:8985 46FFF>mov     word ptr [ebp-BA], ax
+004019F0   .  8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+004019F6   .  890424        mov     dword ptr [esp], eax
+004019F9   .  E8 A2140100   call    00412EA0
+004019FE   .  83F8 05       cmp     eax, 5
+00401A01   .  76 25         jbe     short 00401A28                   ;  <5
+00401A03   .  8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+00401A09   .  890424        mov     dword ptr [esp], eax
+00401A0C   .  E8 8F140100   call    00412EA0
+00401A11   .  83F8 08       cmp     eax, 8
+00401A14   .  77 12         ja      short 00401A28                   ;  >8
+00401A16   .  0FBF85 46FFFF>movsx   eax, word ptr [ebp-BA]
+00401A1D   .  01C0          add     eax, eax                         ;  magic number *= 2
+00401A1F   .  66:8985 46FFF>mov     word ptr [ebp-BA], ax
+00401A26   .  EB 40         jmp     short 00401A68
+00401A28   >  8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]          ;  <=5 || >8
+00401A2E   .  890424        mov     dword ptr [esp], eax
+00401A31   .  C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401A3B   .  E8 60140100   call    00412EA0
+00401A40   .  83F8 0A       cmp     eax, 0A
+00401A43   .  76 23         jbe     short 00401A68                   ;  magic number<=10
+00401A45   .  8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+00401A4B   .  890424        mov     dword ptr [esp], eax
+00401A4E   .  E8 4D140100   call    00412EA0
+00401A53   .  83F8 0E       cmp     eax, 0E                          ;  magic number>14
+00401A56   .  77 10         ja      short 00401A68
+00401A58   .  0FBF85 46FFFF>movsx   eax, word ptr [ebp-BA]
+00401A5F   .  D1F8          sar     eax, 1                           ;  magic number /= 2
+00401A61   .  66:8985 46FFF>mov     word ptr [ebp-BA], ax
+00401A68   >  8D85 48FFFFFF lea     eax, dword ptr [ebp-B8]
+00401A6E   .  890424        mov     dword ptr [esp], eax
+00401A71   .  C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401A7B   .  E8 20140100   call    00412EA0
+00401A80   .  89C2          mov     edx, eax
+00401A82   .  0FBF85 46FFFF>movsx   eax, word ptr [ebp-BA]
+00401A89   .  39C2          cmp     edx, eax                         ;  if length of password == new magic number?
+00401A8B   .  75 10         jnz     short 00401A9D                   ;  can't JMP means there should be equal
+
+After knowing this, you can design a program to count the length of passeord depend on the length of name should be.
+
+
+Step 8: Now we try new pair of name and password. Name: "1234567" Password "X3_abcdefghi"(cause of the new magic number of "7"(length of name) is "C"). And now we smoothly go into decode code.
+At 
+00401AB7   > \8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]          ;  have chacked len and prefix
+
+After it is decode code, and it's a loop. F8 carefully and notice it check password[3] to password[end] to name[0](asc)+1 to name[end % len of name]+end.
+
+00401AF2   . /0F8D 8F010000 jge     00401C87                         ;  loop start
+00401AF8   . |0FBF95 14FEFF>movsx   edx, word ptr [ebp-1EC]
+00401AFF   . |0FBF85 16FEFF>movsx   eax, word ptr [ebp-1EA]
+00401B06   . |8985 B4FDFFFF mov     dword ptr [ebp-24C], eax
+00401B0C   . |89D0          mov     eax, edx
+00401B0E   . |99            cdq
+00401B0F   . |F7BD B4FDFFFF idiv    dword ptr [ebp-24C]
+00401B15   . |895424 04     mov     dword ptr [esp+4], edx
+00401B19   . |8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+00401B1F   . |890424        mov     dword ptr [esp], eax
+00401B22   . |C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401B2C   . |E8 DFDF0200   call    <Get NXT Char>
+00401B31   . |0FBE10        movsx   edx, byte ptr [eax]
+00401B34   . |0FBF85 14FEFF>movsx   eax, word ptr [ebp-1EC]
+00401B3B   . |8D0402        lea     eax, dword ptr [edx+eax]         ;  name[i]+i
+00401B3E   . |83F8 7E       cmp     eax, 7E                          ;  if name[i]+i too large(>asc'~')
+00401B41   . |0F8F 94000000 jg      00401BDB                         ;  jmp
+00401B47   . |0FBF85 14FEFF>movsx   eax, word ptr [ebp-1EC]
+00401B4E   . |83C0 03       add     eax, 3
+00401B51   . |894424 04     mov     dword ptr [esp+4], eax
+00401B55   . |8D85 48FFFFFF lea     eax, dword ptr [ebp-B8]
+00401B5B   . |890424        mov     dword ptr [esp], eax
+00401B5E   . |E8 ADDF0200   call    <Get NXT Char>
+00401B63   . |0FBE00        movsx   eax, byte ptr [eax]
+00401B66   . |8985 D8FDFFFF mov     dword ptr [ebp-228], eax
+00401B6C   . |0FBF95 14FEFF>movsx   edx, word ptr [ebp-1EC]
+00401B73   . |0FBF85 16FEFF>movsx   eax, word ptr [ebp-1EA]
+00401B7A   . |8985 B4FDFFFF mov     dword ptr [ebp-24C], eax
+00401B80   . |89D0          mov     eax, edx
+00401B82   . |99            cdq
+00401B83   . |F7BD B4FDFFFF idiv    dword ptr [ebp-24C]
+00401B89   . |895424 04     mov     dword ptr [esp+4], edx
+00401B8D   . |8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+00401B93   . |890424        mov     dword ptr [esp], eax
+00401B96   . |E8 75DF0200   call    <Get NXT Char>
+00401B9B   . |89C2          mov     edx, eax
+00401B9D   . |8B85 14FEFFFF mov     eax, dword ptr [ebp-1EC]
+00401BA3   . |0202          add     al, byte ptr [edx]
+00401BA5   . |0FBEC0        movsx   eax, al
+00401BA8   . |3985 D8FDFFFF cmp     dword ptr [ebp-228], eax         ;  important
+00401BAE   . |75 05         jnz     short 00401BB5
+00401BB0   . |E9 BF000000   jmp     00401C74			     ;  seems continue here
+00401BB5   > |8D85 68FFFFFF lea     eax, dword ptr [ebp-98]
+00401BBB   . |890424        mov     dword ptr [esp], eax
+00401BBE   . |C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401BC8   . |E8 AF050000   call    <Cheat or error!!!!!>
+00401BCD   . |66:C785 16FEF>mov     word ptr [ebp-1EA], 0FF9C
+00401BD6   . |E9 AC000000   jmp     00401C87
+00401BDB   > |0FBF85 14FEFF>movsx   eax, word ptr [ebp-1EC]          ;  here is the code if name[i]+i too large
+00401BE2   . |83C0 03       add     eax, 3
+00401BE5   . |894424 04     mov     dword ptr [esp+4], eax
+00401BE9   . |8D85 48FFFFFF lea     eax, dword ptr [ebp-B8]
+00401BEF   . |890424        mov     dword ptr [esp], eax
+00401BF2   . |C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401BFC   . |E8 0FDF0200   call    <Get NXT Char>
+00401C01   . |0FBE00        movsx   eax, byte ptr [eax]
+00401C04   . |8985 D4FDFFFF mov     dword ptr [ebp-22C], eax
+00401C0A   . |0FBF95 14FEFF>movsx   edx, word ptr [ebp-1EC]
+00401C11   . |0FBF85 16FEFF>movsx   eax, word ptr [ebp-1EA]
+00401C18   . |8985 B4FDFFFF mov     dword ptr [ebp-24C], eax
+00401C1E   . |89D0          mov     eax, edx
+00401C20   . |99            cdq
+00401C21   . |F7BD B4FDFFFF idiv    dword ptr [ebp-24C]
+00401C27   . |895424 04     mov     dword ptr [esp+4], edx
+00401C2B   . |8D85 58FFFFFF lea     eax, dword ptr [ebp-A8]
+00401C31   . |890424        mov     dword ptr [esp], eax
+00401C34   . |E8 D7DE0200   call    <Get NXT Char>
+00401C39   . |8B95 14FEFFFF mov     edx, dword ptr [ebp-1EC]
+00401C3F   . |0FB600        movzx   eax, byte ptr [eax]
+00401C42   . |28D0          sub     al, dl                          ;too large so count exceeded number from tail.
+00401C44   . |0FBEC0        movsx   eax, al
+00401C47   . |3985 D4FDFFFF cmp     dword ptr [ebp-22C], eax
+00401C4D   . |75 02         jnz     short 00401C51
+00401C4F   . |EB 23         jmp     short 00401C74
+00401C51   > |8D85 68FFFFFF lea     eax, dword ptr [ebp-98]
+00401C57   . |890424        mov     dword ptr [esp], eax
+00401C5A   . |C785 E4FDFFFF>mov     dword ptr [ebp-21C], 1
+00401C64   . |E8 13050000   call    <Cheat or error!!!!!>
+00401C69   . |66:C785 16FEF>mov     word ptr [ebp-1EA], 0FF9C
+00401C72   . |EB 13         jmp     short 00401C87
+00401C74   > |8B85 14FEFFFF mov     eax, dword ptr [ebp-1EC]
+00401C7A   . |40            inc     eax
+00401C7B   . |66:8985 14FEF>mov     word ptr [ebp-1EC], ax
+00401C82   .^|E9 58FEFFFF   jmp     00401ADF                         ;  loop
+00401C87   > \0FBF95 16FEFF>movsx   edx, word ptr [ebp-1EA]
+
+Now you know how the crackme decode your password, and i trush you can make the Keygen now ^_^.
+-------------------------------------------------------------------------------------------------------------
+I just a Newbie, and it's my first submission. If i did wrong please criticize me. 
+Hope you like this ^_^
+
