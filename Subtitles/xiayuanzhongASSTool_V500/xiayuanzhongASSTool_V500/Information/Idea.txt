@@ -1,0 +1,28 @@
+========================================================================
+    控制台应用程序：xiayuanzhongASSTool_V500 设计思路说明
+========================================================================
+
+一、主要特点
+    先说明一下问什么会跳过V400直接诞生V500这个版本呢？
+	原因是V400是全面采用先ANSI输出，再转码到Unicode的方式，
+	这种方式有致命弱点：如果读入的歌词中有Unicode字符，那就无法识别，整个字幕就失败了。
+	所以这个程序就是由wchar_t和wstring作为基础建立的，全过程都是读入、输出Unicode，
+	即使有的文件不是直接读写Unicode字符，也是完全从二进制的方式读写的，
+	所以Unicode的字符也是全部支持的，就像VS2010一样，是一个革命性的版本，
+	即使用的是C++标准库，做出来的特效也是革命性的。
+
+二、程序组成(全是类模板，采用继承)
+    1.核心类：xiayuanzhongASSComputeCore			(Doing...)
+	2.辅助工具类：xiayuanzhongASSComputeHelper		(Finished)
+	3.Filter生成类：VSFilter;VSFilterMod;			(Finished)
+	4.Project定义类：xiayuanzhongASSProjectInfo		(Finished)
+	5.以上所有类的组织类：UnionAllClasses			(Haven't)
+
+三、注意事项
+	1.文字的储存：char *存储Hex的值，用sizeof获取长度，【读取前先判断是否为Unicode的】
+	2.程序分两部分，第一部分是生成可以直接编辑的卡轴，第二部分是生成成品ASS
+	3.所有头部参数全部都在FontFile里面，注意读取的是Unicode
+	4.需要手动测量字间距（看来不得不这样）。
+	5.去版权，加版权。
+	7.输出时，发现'\n'记得分解！！！！！！！！！！！！0D 00 0A 00
+	8.

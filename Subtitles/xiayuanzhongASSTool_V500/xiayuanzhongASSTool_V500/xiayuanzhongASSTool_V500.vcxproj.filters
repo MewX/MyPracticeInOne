@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="OriginalHeader">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="MainCPP">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Projects">
+      <UniqueIdentifier>{e556609a-8a91-465c-b340-7dff7156b0a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InnerClass">
+      <UniqueIdentifier>{a6292666-1783-4fec-a03f-d31423f3c2a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InnerClass\ComputeHelper">
+      <UniqueIdentifier>{dbd1a9cf-d755-437e-879e-4e8a5fa9d944}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InnerClass\FilterFunctions">
+      <UniqueIdentifier>{df2b2646-d8b3-49f1-9faa-31d8a53b2235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InnerClass\Core">
+      <UniqueIdentifier>{e37130a0-972d-4ecf-97a8-65fc19b01406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InnerClass\ProjectDefine">
+      <UniqueIdentifier>{703746ed-777c-4528-aa9d-ed6881a2806c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnionAllClasses">
+      <UniqueIdentifier>{8017f087-516a-4675-b075-bf8d52e88dda}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>OriginalHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>OriginalHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ASSComputeCore.h">
+      <Filter>InnerClass\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterFunctions\VSFilter.h">
+      <Filter>InnerClass\FilterFunctions</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputeHelper\ASSComputeHelper.h">
+      <Filter>InnerClass\ComputeHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDefine\ASSProjectInfo.h">
+      <Filter>InnerClass\ProjectDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="UnionAllClasses.h">
+      <Filter>UnionAllClasses</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>MainCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="xiayuanzhongASSTool_V500.cpp">
+      <Filter>MainCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectDefine\ASSProjectInfo.cpp">
+      <Filter>InnerClass\ProjectDefine</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeHelper\ASSComputeHelper.cpp">
+      <Filter>InnerClass\ComputeHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="FilterFunctions\VSFilter.cpp">
+      <Filter>InnerClass\FilterFunctions</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ASSComputeCore.cpp">
+      <Filter>InnerClass\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Information\Idea.txt">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Information\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Information\UsageInfo.txt">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>

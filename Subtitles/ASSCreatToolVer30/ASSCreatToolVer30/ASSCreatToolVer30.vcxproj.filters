@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{f4ba2859-d9a8-4951-bf39-a4ee152b0cbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\Details">
+      <UniqueIdentifier>{ea3cb233-ed5e-4d56-98ff-e69606d81e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4d1252ae-18b6-4224-b666-0843ce038364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Filters">
+      <UniqueIdentifier>{0c3ad42e-3924-42fa-ba18-caa392e25c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Structures">
+      <UniqueIdentifier>{161987e4-1192-4e92-a75f-cd5c07921798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{896e66ac-4251-4ccc-9fe8-f0627cee3f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test\Details">
+      <UniqueIdentifier>{928a5e8f-a081-45bc-884e-58553b165c4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UsefulFunction">
+      <UniqueIdentifier>{2f1a7155-fc89-4aee-a363-1d78ee490eb1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation\AllAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\001.LittleBustersEX.h">
+      <Filter>Animation\Details</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\002.[MAD]Hokiboshi.h">
+      <Filter>Animation\Details</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterDLL\VSFilter.h">
+      <Filter>Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterDLL\VSFilterMod.h">
+      <Filter>Filters</Filter>
+    </ClInclude>
+    <ClInclude Include="Structures\[C]DATA.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Structures\[C]ScriptInfo.h">
+      <Filter>Structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\TestList.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="UsefulFunction\[F]OTH.h">
+      <Filter>UsefulFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="UsefulFunction\[F]RAND.h">
+      <Filter>UsefulFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[C]ASScodeCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]CharToInt(CharTime).h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]Compute(int x).h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]Getdata.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]IntToString(IntTime).h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]MyEncoder.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]Ohead.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]Order.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\[F]Start.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CommenHead.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="UsefulFunction\[F]KCreator.h">
+      <Filter>UsefulFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation\003.TOMOYOafter.h">
+      <Filter>Animation\Details</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\ComputeTest.h">
+      <Filter>Test\Details</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\EncoderTest.h">
+      <Filter>Test\Details</Filter>
+    </ClInclude>
+    <ClInclude Include="Test\GetdataTest.h">
+      <Filter>Test\Details</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ASSCreatToolVer30.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="EnglishWordComputer.h">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NewCodeAddingNoticing.txt">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="SthTemp.txt">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="OringinalComputeFunc.txt">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>

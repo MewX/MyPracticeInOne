@@ -1,0 +1,23 @@
+
+static short amount[AllSentenceAmount][2];//存储每句话分割的字数（格式：[句子编号][语言编号]）
+static short max_line;//句子总数
+static char jdtime[AllSentenceAmount][WordsInLineAmount][6][11];//存储字符型时间[CN];format[sentence][word][menu][time]
+static char cdtime[AllSentenceAmount][WordsInLineAmount][6][11];//存储字符型时间[JP]
+static short jdpos[AllSentenceAmount][WordsInLineAmount][2];//存储位置[JP];format[sentence][word][pos]
+static short cdpos[AllSentenceAmount][WordsInLineAmount][2];//存储位置[CN]
+static short lenth[AllSentenceAmount][2];//存储每句话的像素长度
+static char etime_last[AllSentenceAmount][2][11];//存储每句话最后一个字的结束时间
+static char stime_first[AllSentenceAmount][2][11];////存储每句话第一个字的开始时间
+
+
+static short LineAmount;//句子总数
+static short AmountJP[AllSentenceAmount];//存储每句JP话分割的字数
+static short AmountCN[AllSentenceAmount];//存储每句CN话分割的字数
+static long TimeJP[AllSentenceAmount][WordsInLineAmount][6];//存储整型时间[JP];format[sentence][word][menu]
+static long TimeCN[AllSentenceAmount][WordsInLineAmount][6];//存储整型时间[CN];format[sentence][word][menu]
+static short LineLenthJP[AllSentenceAmount];//存储每句JP话的像素长度
+static short LineLenthCN[AllSentenceAmount];//存储每句CN话的像素长度
+static short WordLenthJP[AllSentenceAmount][WordsInLineAmount];//存储每个JP字的像素长度
+static short WordLenthCN[AllSentenceAmount][WordsInLineAmount];//存储每个CN字的像素长度
+static short PosJP[AllSentenceAmount][WordsInLineAmount][2];//存储位置[JP];format[sentence][word][pos]
+static short PosCN[AllSentenceAmount][WordsInLineAmount][2];//存储位置[CN];format[sentence][word][pos]

@@ -1,0 +1,45 @@
+
+	strcpy_s(????.GETopenfileCN,"--");              //注：如果输入"-"，则表示忽略
+	strcpy_s(????.GETopenfileJP,"--");//输出My卡轴
+	strcpy_s(????.GETopenfileJPrm,"--");            //注：如果输入"-"，则表示忽略
+	strcpy_s(????.GETopenfileROCK,"--");            //注：如果输入"-"，则表示忽略
+	strcpy_s(????.GETsavefile,"????.ass");//输出成品文件
+	strcpy_s(????.GETkaraokefile,"--");//读入
+	strcpy_s(????.GETtempfile,"????Temp.txt");//输出临时文件
+	strcpy_s(????.Title,"????Test");                        //标题
+	????.PlayResX=720;                         //x的长度,宽度
+	????.PlayResY=480;                         //y的长度,高度
+	????.SynchPoint=0;
+	????.FontAmount=1;                       //包含的字体数量
+	strcpy_s(????.FontInfo[0].Name,"EnglishWord");                      //字体变量名
+	strcpy_s(????.FontInfo[0].Fontname,WordName);                  //字体的原名
+	????.FontInfo[0].Fontsize=WordSize;                     //字体的大小8-72
+	strcpy_s(????.FontInfo[0].PrimaryColour,"FF0066");              //第一色
+	strcpy_s(????.FontInfo[0].SecondaryColour,"996666");            //第二色
+	strcpy_s(????.FontInfo[0].OutlineColour,"996666");              //边框色
+	strcpy_s(????.FontInfo[0].BackColour,"000000");                 //投影色
+	????.FontInfo[0].Bold=0;                         //粗体? 0关闭,-1开启
+	????.FontInfo[0].Italic=0;                       //斜体? 0关闭,-1开启
+	????.FontInfo[0].Underline=0;                    //下划线? 0关闭,-1开启
+	????.FontInfo[0].StrikeOut=0;                    //删除线? 0关闭,-1开启
+	????.FontInfo[0].ScaleX=100;                       //X方向大小(%)
+	????.FontInfo[0].ScaleY=100;                       //Y方向大小(%)
+	????.FontInfo[0].Spacing=10;                      //间距
+	????.FontInfo[0].Angle=0;                        //倾斜角
+	????.FontInfo[0].BorderStyle=1;                  //边框样式:取值1,正常;取值3,有一覆盖区域
+	????.FontInfo[0].Outline=1;                      //边框宽度:取值范围1-4,数字越大边框越宽
+	????.FontInfo[0].Shadow=2;                       //阴影距离:取值范围0-4,数字越大阴影越厚
+	????.FontInfo[0].Alignment=1;                    //对齐方式1-11
+	????.FontInfo[0].MarginL=30;
+	????.FontInfo[0].MarginR=30;
+	????.FontInfo[0].MarginV=30;    //边距,默认30
+	????.FontInfo[0].Encoding=1;                     //字符编码,默认:1
+
+
+
+	字体长度~~~~~~~~~~~~~~~
+	EdgeDistance~~~~~~~~~~
+
+	层次安排。
+
+	循环~~~~~~~~~~~~~
