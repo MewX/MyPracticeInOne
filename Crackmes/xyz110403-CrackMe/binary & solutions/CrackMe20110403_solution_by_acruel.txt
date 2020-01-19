@@ -1,0 +1,59 @@
+Crackme: xiayuanzhong's CrackMe(HardestShell)20110403
+Solved by: acruel, 2015-November-17
+Tools used: IDA 6.8
+
+
+The unpacked version of the crackme is rather straingtforward.
+
+The crackme first prompts for username/password and checks the length of each. The length must be less than or equals to 998.
+
+It then makes an additional check on the length of the password. The password lenght must be the username length plus four.
+
+It then enters the loop that compares each character of the username with that of the password in reverse order. Below is the disassembly.
+
+.text:00401506 loc_401506:                             ; CODE XREF: _main+16Aj
+.text:00401506                 mov     [ebp+i_var_3E], 0
+.text:0040150C
+.text:0040150C loc_40150C:                             ; CODE XREF: _main+1F6j
+.text:0040150C                 movzx   eax, [ebp+i_var_3E]
+.text:00401510                 cmp     ax, [ebp+name_length_var_3A]
+.text:00401514                 jge     short loc_401588
+.text:00401516                 movsx   eax, [ebp+i_var_3E]
+.text:0040151A                 mov     [esp+4], eax    ; int
+.text:0040151E                 lea     eax, [ebp+username_var_28]
+.text:00401521                 mov     [esp], eax      ; std::string *
+.text:00401524                 mov     [ebp+var_70], 1
+.text:0040152B                 call    __ZNSsixEj      ; std::string::operator[](uint)
+.text:00401530                 mov     [ebp+username[i]_var_80], eax
+.text:00401533                 movsx   edx, [ebp+name_length_var_3A]
+.text:00401537                 movsx   eax, [ebp+i_var_3E]
+.text:0040153B                 sub     edx, eax
+.text:0040153D                 mov     eax, edx
+.text:0040153F                 dec     eax             ; name_length - i - 1
+.text:00401540                 mov     [esp+4], eax    ; int
+.text:00401544                 lea     eax, [ebp+password_var_38]
+.text:00401547                 mov     [esp], eax      ; std::string *
+.text:0040154A                 call    __ZNSsixEj      ; std::string::operator[](uint)
+.text:0040154F                 mov     edx, eax
+.text:00401551                 mov     ecx, [ebp+username[i]_var_80]
+.text:00401554                 movzx   eax, byte ptr [ecx]
+.text:00401557                 cmp     al, [edx]       ; username[i] == password[name_length - i - 1]
+.text:00401559                 jz      short loc_40157D
+.text:0040155B                 mov     dword ptr [esp], 0FFFFFFFFh ; __int16
+.text:00401562                 call    __Z9getMyChars  ; getMyChar(short)
+.text:00401567                 movsx   eax, al
+.text:0040156A                 mov     [esp], eax      ; char
+.text:0040156D                 call    __Z12turnToMyCharc ; turnToMyChar(char)
+.text:00401572                 mov     [ebp+var_3C], ax
+.text:00401576                 call    __Z5Errorv      ; Error(void)
+.text:0040157B                 jmp     short loc_401588
+
+
+Finally, the crackme checks the last four characters of the password. It simply compares each one of them with one of 'z', '_', 'x', 'y'.
+
+The following is a keygen written in Python.
+
+#!/usr/bin/python
+
+import sys
+print sys.argv[1][::-1] + "_xyz"
