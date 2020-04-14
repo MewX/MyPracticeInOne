@@ -2,17 +2,21 @@ package triangle
 
 import "math"
 
-// Notice KindFromSides() returns this type. Pick a suitable data type.
+// Kind of triangles.
 type Kind byte
 
 const (
+	// NaT - Not a triangle.
 	NaT = 'N'
+	// Equ - Equilateral triangle.
 	Equ = 'E'
+	// Iso - Isosceles triangle.
 	Iso = 'I'
+	// Sca - Scalene triangle.
 	Sca = 'S'
 )
 
-// Get triangle kind.
+// KindFromSides returns the triangle kind based on 3 side lengths from input.
 func KindFromSides(a, b, c float64) Kind {
 	// Check if input is a valid triangle.
 	if math.IsNaN(a) || math.IsNaN(b) || math.IsNaN(c) {
