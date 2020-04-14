@@ -1,17 +1,23 @@
 package hamming
 
-import "errors"
+import (
+	"errors"
+)
 
+// Distance of the two strings.
 func Distance(a, b string) (int, error) {
-	if len(a) != len(b) {
-		return -1, errors.New("Lengths do not match.")
+	var ra = []rune(a)
+	var rb = []rune(b)
+
+	if len(ra) != len(rb) {
+		return 0, errors.New("lengths do not match")
 	}
 
 	var c int
-	for i := 0; i < len(a); i ++ {
-		if a[i] != b[i] {
-			c += 1
+	for i := 0; i < len(ra); i++ {
+		if ra[i] != rb[i] {
+			c++
 		}
 	}
-  return c, nil
+	return c, nil
 }

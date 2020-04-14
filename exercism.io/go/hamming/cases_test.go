@@ -22,6 +22,12 @@ var testCases = []struct {
 		0,
 		false,
 	},
+	{ // single UTF-8 string
+		"A",
+		"世",
+		1,
+		false,
+	},
 	{ // single letter different strands
 		"G",
 		"T",
