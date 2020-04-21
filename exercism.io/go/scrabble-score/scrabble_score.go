@@ -36,9 +36,7 @@ var ScoreTable = map[rune]int{
 func Score(s string) int {
 	sum := 0
 	for _, c := range strings.ToUpper(s) {
-		if score, ok := ScoreTable[c]; ok {
-			sum += score
-		}
+		sum += ScoreTable[c]
 	}
 	return sum
 }
