@@ -11,10 +11,11 @@ function getStyleUse(bundleFilename) {
     {
       loader: 'sass-loader',
       options: {
+        sourceMap: true,
         includePaths: ['./node_modules'],
         implementation: require('dart-sass'),
         fiber: require('fibers'),
-  }
+      }
     },
   ];
 }
@@ -55,7 +56,7 @@ module.exports = [
       loaders: [{
         test: /login.js$/,
         loader: 'babel-loader',
-        query: {presets: ['env']}
+        query: { presets: ['env'] }
       }]
     },
   },
@@ -68,7 +69,7 @@ module.exports = [
       loaders: [{
         test: /home.js$/,
         loader: 'babel-loader',
-        query: {presets: ['env']}
+        query: { presets: ['env'] }
       }]
     },
   }
