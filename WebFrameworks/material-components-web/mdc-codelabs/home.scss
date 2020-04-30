@@ -8,6 +8,7 @@
 
 .home {
   display: flex; // Flexbox is used to easily arrange the persistent drawer and content side-by-side
+  background-color: $mdc-theme-background;
 }
 
 .shrine-logo-drawer {
@@ -15,13 +16,14 @@
   width: 48px;
   padding: 40px 0 0;
   margin: 0 auto;
-  fill: currentColor;
+  fill: $mdc-theme-on-primary;
 }
 
 .shrine-title {
   @include mdc-typography(headline6);
   text-align: center;
   margin: 5px auto;
+  color: $mdc-theme-on-primary;
 }
 
 .product-list {
