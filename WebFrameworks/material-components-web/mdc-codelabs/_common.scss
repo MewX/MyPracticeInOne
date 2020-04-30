@@ -1,9 +1,12 @@
-html, body {
+@import "./variables";
+
+html,
+body {
   height: 100%;
 }
 
 body {
-  font-family: 'Roboto';
+  font-family: "Roboto";
   margin: 0;
   padding-top: 0.1px; // Prevent header h1 margin from pushing body down
 }
