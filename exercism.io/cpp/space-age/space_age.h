@@ -5,7 +5,8 @@ namespace space_age {
 
 class space_age {
   public:
-    space_age(long long s) : SECONDS(s), YEARS(s/31557600.0) {};
+    explicit space_age(long long seconds)
+        : earth_seconds(seconds), earth_years(seconds/31557600.0) {};
 
     long long seconds() const;
     double on_mercury() const;
@@ -18,8 +19,8 @@ class space_age {
     double on_neptune() const;
 
   private:
-    const long long SECONDS;
-    const double YEARS;
+    long long earth_seconds;
+    double earth_years;
 };  // class space_age
 
 }  // namespace space_age
