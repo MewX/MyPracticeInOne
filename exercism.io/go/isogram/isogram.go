@@ -1,23 +1,23 @@
 package isogram
 
 import (
-	"strings"
 	"unicode"
 )
 
 // IsIsogram checks whether the input string is an isogram.
 func IsIsogram(str string) bool {
-	mem := make(map[rune]int)
-	for _, r := range strings.ToLower(str) {
-		if unicode.IsLetter(r) {
-			mem[r] = mem[r] + 1
+	mem := make(map[rune]bool)
+	for _, originalR := range str {
+		r := unicode.ToLower(originalR)
+		if !unicode.IsLetter(r) {
+			continue
 		}
-	}
 
-	for _, v := range mem {
-		if v > 1 {
+		if mem[r] {
 			return false
 		}
+		mem[r] = true
 	}
+
 	return true
 }
