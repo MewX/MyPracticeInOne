@@ -1,0 +1,5 @@
+config autossh
+        option ssh      '-i /etc/dropbear/dropbear_rsa_host_key -N -R 12345:localhost:22 mewx@yummytake.com -- -y'
+        option gatetime '0'
+        option monitorport      '20000'
+        option poll     '30'
