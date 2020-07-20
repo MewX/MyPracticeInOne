@@ -9,11 +9,7 @@ func SquareOfSum(n int) int {
 
 // SumOfSquares returns the sum of the squares of the first N natural numbers.
 func SumOfSquares(n int) int {
-	s := 0
-	for i := 1; i <= n; i++ {
-		s += i * i
-	}
-	return s
+	return n * (n + 1) * (2*n + 1) / 6
 }
 
 // Difference returns the difference between the square of the sum and the sum
