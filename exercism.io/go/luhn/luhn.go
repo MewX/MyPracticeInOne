@@ -2,8 +2,8 @@ package luhn
 
 // Valid tells if the input string follows the Luhn formula.
 func Valid(str string) bool {
-	sum, count := 0, 0
-	secondNumberFlipper := false
+	var sum, count int
+	var secondNumberFlipper bool
 	for i := len(str) - 1; i >= 0; i-- {
 		// Can be space.
 		if str[i] == ' ' {
