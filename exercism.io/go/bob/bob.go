@@ -23,8 +23,7 @@ func Hey(remark string) string {
 }
 
 // hasLowerCase tests if a string is yelling.
-func isYelling(s *string) bool {
-	hasUpperCase := false
+func isYelling(s *string) (hasUpperCase bool) {
 	for i := 0; i < len(*s); i++ {
 		// One lowercase can indicate not yelling.
 		if 'a' <= (*s)[i] && (*s)[i] <= 'z' {

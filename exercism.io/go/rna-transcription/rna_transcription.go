@@ -1,19 +1,16 @@
 package strand
 
-import "bytes"
-
-var ruleMap = map[byte]byte{
-	'G': 'C',
-	'C': 'G',
-	'T': 'A',
-	'A': 'U',
+var ruleMap = map[rune]string{
+	'G': "C",
+	'C': "G",
+	'T': "A",
+	'A': "U",
 }
 
 // ToRNA - Generate transcripted RNA.
-func ToRNA(dna string) string {
-	buf := bytes.NewBufferString("")
-	for i := 0; i < len(dna); i++ {
-		buf.WriteByte(ruleMap[dna[i]])
+func ToRNA(dna string) (ret string) {
+	for _, i := range dna {
+		ret += ruleMap[i]
 	}
-	return buf.String()
+	return
 }
