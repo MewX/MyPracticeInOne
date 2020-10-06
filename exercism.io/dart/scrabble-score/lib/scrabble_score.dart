@@ -39,9 +39,8 @@ const Map<String, int> ScoreTable = const {
 /// Calcuate the score of input string.
 int score(String str) {
   int sum = 0;
-  str = str.toLowerCase();
   for (int i = 0; i < str.length; i++) {
-    sum += ScoreTable[str[i]];
+    sum += ScoreTable[str[i].toLowerCase()];
   }
   return sum;
 }
