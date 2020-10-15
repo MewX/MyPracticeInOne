@@ -2,44 +2,36 @@ package clock
 
 import "fmt"
 
-// Clock repersents the hour and minute of a moment.
+// Clock repersents a time in minutes.
 type Clock struct {
-	hour   int
-	minute int
+	minutes int
 }
 
-// New returns the time represented in string.
+// New returns the time represented in string, and makes sure the time is within
+// [0,24) hours.
 func New(h int, m int) Clock {
 	// Normalize time.
-	minute := m % 60
-	hour := h
-	if minute < 0 {
-		minute += 60
-		hour--
+	const minutesInADay = 24 * 60
+	minutes := (h*60 + m) % minutesInADay
+	if minutes < 0 {
+		minutes += minutesInADay
 	}
-
-	hour = ((m / 60) + hour) % 24
-	if hour < 0 {
-		hour += 24
-	}
-
 	return Clock{
-		hour:   hour,
-		minute: minute,
+		minutes: minutes,
 	}
 }
 
 // String returns the string representation of the Time.
-func (t Clock) String() string {
-	return fmt.Sprintf("%02d:%02d", t.hour, t.minute)
+func (c Clock) String() string {
+	return fmt.Sprintf("%02d:%02d", c.minutes/60, c.minutes%60)
 }
 
 // Subtract reduces the time with input minutes.
-func (t Clock) Subtract(m int) Clock {
-	return New(t.hour, t.minute-m)
+func (c Clock) Subtract(m int) Clock {
+	return New(0, c.minutes-m)
 }
 
 // Add increases the time with input minutes.
-func (t Clock) Add(m int) Clock {
-	return New(t.hour, t.minute+m)
+func (c Clock) Add(m int) Clock {
+	return New(0, c.minutes+m)
 }
