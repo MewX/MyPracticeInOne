@@ -2,15 +2,15 @@ package clock
 
 import "fmt"
 
-// Time repersents the hour and minute of a moment.
-type Time struct {
+// Clock repersents the hour and minute of a moment.
+type Clock struct {
 	hour   int
 	minute int
 }
 
 // New returns the time represented in string.
-func New(h int, m int) Time {
-	t := Time{
+func New(h int, m int) Clock {
+	t := Clock{
 		hour:   h,
 		minute: m,
 	}
@@ -18,17 +18,17 @@ func New(h int, m int) Time {
 }
 
 // String returns the string representation of the Time.
-func (t Time) String() string {
+func (t Clock) String() string {
 	return fmt.Sprintf("%02d:%02d", t.hour, t.minute)
 }
 
 // Subtract reduces the time with input minutes.
-func (t Time) Subtract(m int) Time {
+func (t Clock) Subtract(m int) Clock {
 	return t.Add(-m)
 }
 
 // Add increases the time with input minutes.
-func (t Time) Add(m int) Time {
+func (t Clock) Add(m int) Clock {
 	totalMinutes := m + t.minute
 	t.minute = totalMinutes % 60
 	if t.minute < 0 {
