@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strconv"
 )
 
 func main() {
@@ -21,9 +20,9 @@ func main() {
 		}
 
 		for _, c := range line {
-			key = move(key, c)
+			key = move2(key, c)
 		}
-		ret += strconv.Itoa(key)
+		ret += fmt.Sprintf("%X", key)
 	}
 	fmt.Println()
 	fmt.Println(ret)
@@ -53,6 +52,49 @@ func move(key int, op byte) int {
 			return key
 		}
 		return key + 3
+	}
+	return -1
+}
+
+var tops = map[int]bool{5: true, 2: true, 1: true, 4: true, 9: true}
+var bottoms = map[int]bool{5: true, 10: true, 13: true, 12: true, 9: true}
+var lefts = map[int]bool{5: true, 2: true, 1: true, 10: true, 13: true}
+var rights = map[int]bool{9: true, 4: true, 1: true, 13: true, 12: true}
+
+// move2 is based on another keypad.
+func move2(key int, op byte) int {
+	fmt.Printf("(%X then %c)", key, op)
+	switch op {
+	case 'L':
+		if _, ok := lefts[key]; ok {
+			return key
+		}
+		return key - 1
+	case 'R':
+		if _, ok := rights[key]; ok {
+			return key
+		}
+		return key + 1
+	case 'U':
+		if _, ok := tops[key]; ok {
+			return key
+		} else if key >= 13 {
+			return key - 2
+		} else if key >= 5 {
+			return key - 4
+		} else if key >= 2 {
+			return key - 2
+		}
+	case 'D':
+		if _, ok := bottoms[key]; ok {
+			return key
+		} else if key <= 1 {
+			return key + 2
+		} else if key <= 9 {
+			return key + 4
+		} else if key <= 12 {
+			return key + 2
+		}
 	}
 	return -1
 }
