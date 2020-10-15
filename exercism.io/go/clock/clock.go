@@ -10,11 +10,23 @@ type Clock struct {
 
 // New returns the time represented in string.
 func New(h int, m int) Clock {
-	t := Clock{
-		hour:   h,
-		minute: m,
+	// Normalize time.
+	minute := m % 60
+	hour := h
+	if minute < 0 {
+		minute += 60
+		hour--
 	}
-	return t.Add(0)
+
+	hour = ((m / 60) + hour) % 24
+	if hour < 0 {
+		hour += 24
+	}
+
+	return Clock{
+		hour:   hour,
+		minute: minute,
+	}
 }
 
 // String returns the string representation of the Time.
@@ -24,20 +36,10 @@ func (t Clock) String() string {
 
 // Subtract reduces the time with input minutes.
 func (t Clock) Subtract(m int) Clock {
-	return t.Add(-m)
+	return New(t.hour, t.minute-m)
 }
 
 // Add increases the time with input minutes.
 func (t Clock) Add(m int) Clock {
-	totalMinutes := m + t.minute
-	t.minute = totalMinutes % 60
-	if t.minute < 0 {
-		t.minute += 60
-		t.hour--
-	}
-	t.hour = ((totalMinutes / 60) + t.hour) % 24
-	if t.hour < 0 {
-		t.hour += 24
-	}
-	return t
+	return New(t.hour, t.minute+m)
 }
