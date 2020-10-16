@@ -32,15 +32,44 @@ func main() {
 
 		checksum := calculateChecksum(token)
 		cmp := extractChecksum(token)
+		n, _ := strconv.Atoi(extractSectorNum(token))
+
+		// Question 1.
 		if checksum == cmp {
-			fmt.Println(token + " is valid")
-			n, _ := strconv.Atoi(extractSectorNum(token))
+			// fmt.Println(token + " is valid")
 			count += n
 		} else {
-			fmt.Println(token + " is NOT valid - actual " + checksum)
+			// fmt.Println(token + " is NOT valid - actual " + checksum)
+		}
+
+		// Question 2.
+		dec := decryptName(token)
+		// fmt.Println(dec + " in token - " + token)
+		if strings.Index(dec, "north") >= 0 {
+			fmt.Println(dec + " in token - " + token)
 		}
 	}
-	fmt.Println(count)
+	fmt.Printf("answer 1: %d\n", count)
+}
+
+func decryptName(s string) string {
+	n, _ := strconv.Atoi(extractSectorNum(s))
+	n %= 26
+
+	var sb strings.Builder
+	for _, c := range s[:strings.IndexAny(s, "0123456789")-1] {
+		if !unicode.IsLetter(c) {
+			sb.WriteRune(c)
+			continue
+		}
+
+		r := int(c) + n
+		if r > 'z' {
+			r -= 26
+		}
+		sb.WriteRune(rune(r))
+	}
+	return sb.String()
 }
 
 func calculateChecksum(s string) string {
@@ -81,5 +110,5 @@ func extractChecksum(s string) string {
 }
 
 func extractSectorNum(s string) string {
-	return s[strings.IndexAny(s, "0123456789") : strings.Index(s, "[")]
+	return s[strings.IndexAny(s, "0123456789"):strings.Index(s, "[")]
 }
