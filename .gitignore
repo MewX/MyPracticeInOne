@@ -3,6 +3,7 @@ META-INF/
 *.iml
 out/
 .idea/
+.vscode/
 *.class
 *.dex
 *.log
