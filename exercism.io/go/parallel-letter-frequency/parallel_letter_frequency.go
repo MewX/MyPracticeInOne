@@ -1,7 +1,5 @@
 package letter
 
-import "sync"
-
 // FreqMap records the frequency of each rune in a given text.
 type FreqMap map[rune]int
 
@@ -17,30 +15,24 @@ func Frequency(s string) FreqMap {
 
 // freqencyWorker calculates rune frequency in a single string, and update the
 // shared frequency map.
-func freqencyWorker(s string, wg *sync.WaitGroup, m *FreqMap, mu *sync.Mutex) {
-	defer wg.Done()
-	fm := Frequency(s)
-	for k, v := range fm {
-		mu.Lock()
-		ori, ok := (*m)[k]
-		if !ok {
-			ori = 0
-		}
-		(*m)[k] = ori + v
-		mu.Unlock()
-	}
+func freqencyWorker(s string, c chan FreqMap) {
+	c <- Frequency(s)
 }
 
 // ConcurrentFrequency calculates the rune frequency from all strings
 // concurrently.
 func ConcurrentFrequency(strs []string) FreqMap {
-	m := FreqMap{}
-	var wg sync.WaitGroup
-	var mu sync.Mutex
+	c := make(chan FreqMap, len(strs))
 	for _, str := range strs {
-		wg.Add(1)
-		go freqencyWorker(str, &wg, &m, &mu)
+		go freqencyWorker(str, c)
 	}
-	wg.Wait()
+
+	// Merge all maps.
+	m := FreqMap{}
+	for range strs {
+		for k, v := range <-c {
+			m[k] += v
+		}
+	}
 	return m
 }
