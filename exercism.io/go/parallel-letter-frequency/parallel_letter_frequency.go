@@ -17,35 +17,30 @@ func Frequency(s string) FreqMap {
 
 // freqencyWorker calculates rune frequency in a single string, and update the
 // shared frequency map.
-func freqencyWorker(s string, wg *sync.WaitGroup, m *sync.Map) {
+func freqencyWorker(s string, wg *sync.WaitGroup, m *FreqMap, mu *sync.Mutex) {
 	defer wg.Done()
 	fm := Frequency(s)
 	for k, v := range fm {
-		ori, ok := m.Load(k)
+		mu.Lock()
+		ori, ok := (*m)[k]
 		if !ok {
 			ori = 0
 		}
-		m.Store(k, v+ori.(int))
+		(*m)[k] = ori + v
+		mu.Unlock()
 	}
 }
 
 // ConcurrentFrequency calculates the rune frequency from all strings
 // concurrently.
 func ConcurrentFrequency(strs []string) FreqMap {
-	// Thread-safe map
-	var m sync.Map
+	m := FreqMap{}
 	var wg sync.WaitGroup
+	var mu sync.Mutex
 	for _, str := range strs {
 		wg.Add(1)
-		go freqencyWorker(str, &wg, &m)
+		go freqencyWorker(str, &wg, &m, &mu)
 	}
 	wg.Wait()
-
-	// Save to FreqMap.
-	fm := FreqMap{}
-	m.Range(func(k, v interface{}) bool {
-		fm[k.(rune)] = v.(int)
-		return true
-	})
-	return fm
+	return m
 }
