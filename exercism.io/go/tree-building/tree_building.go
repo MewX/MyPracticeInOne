@@ -17,15 +17,10 @@ type Node struct {
 	Children []*Node
 }
 
-// AppendChild appends another node to the Children list.
-func (n *Node) AppendChild(node *Node) {
-	n.Children = append(n.Children, node)
-}
-
 // Build constructs the tree.
 func Build(records []Record) (*Node, error) {
 	nodeList := make(map[int]*Node)
-	sort.SliceStable(records, func(i, j int) bool {
+	sort.Slice(records, func(i, j int) bool {
 		return records[i].ID < records[j].ID
 	})
 
@@ -33,11 +28,10 @@ func Build(records []Record) (*Node, error) {
 		if r.ID != i || r.ID < r.Parent || r.ID == r.Parent && r.ID != 0 {
 			return nil, errors.New("invalid node ID or parent ID")
 		}
-		nodeList[r.ID] = &Node{
-			ID: r.ID,
-		}
+		nodeList[r.ID] = &Node{r.ID, nil}
 		if i != 0 {
-			nodeList[r.Parent].AppendChild(nodeList[r.ID])
+			p := nodeList[r.Parent]
+			p.Children = append(p.Children, nodeList[r.ID])
 		}
 	}
 	return nodeList[0], nil
