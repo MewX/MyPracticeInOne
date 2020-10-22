@@ -2,6 +2,7 @@ package robotname
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -16,8 +17,7 @@ type Robot struct {
 
 func randomName() string {
 	return string('A'+r.Int31n(26)) + string('A'+r.Int31n(26)) +
-		string('0'+r.Int31n(10)) + string('0'+r.Int31n(10)) +
-		string('0'+r.Int31n(10))
+		fmt.Sprintf("%03d", r.Int31n(1000))
 }
 
 // Name creates a new robot name.
@@ -27,15 +27,16 @@ func (r *Robot) Name() (string, error) {
 	}
 
 	// Generate a new name.
-	for len(existingRobots) < 26*26*10*10*10 {
-		name := randomName()
-		if _, ok := existingRobots[name]; !ok {
-			existingRobots[name] = true
-			r.name = name
-			return name, nil
-		}
+	if len(existingRobots) == 26*26*10*10*10 {
+		return "", errors.New("exhausted robot names")
 	}
-	return "", errors.New("exhausted robot names")
+
+	r.name = randomName()
+	for existingRobots[r.name] {
+		r.name = randomName()
+	}
+	existingRobots[r.name] = true
+	return r.name, nil
 }
 
 // Reset clears the robot name.
