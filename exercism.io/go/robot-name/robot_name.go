@@ -16,13 +16,12 @@ type Robot struct {
 }
 
 func randomName() string {
-	return string('A'+r.Int31n(26)) + string('A'+r.Int31n(26)) +
-		fmt.Sprintf("%03d", r.Int31n(1000))
+	return fmt.Sprintf("%c%c%03d", 'A'+r.Intn(26), 'A'+r.Intn(26), r.Intn(1000))
 }
 
 // Name creates a new robot name.
 func (r *Robot) Name() (string, error) {
-	if len(r.name) == 5 {
+	if r.name != "" {
 		return r.name, nil
 	}
 
