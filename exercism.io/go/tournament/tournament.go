@@ -19,27 +19,25 @@ type team struct {
 	points      int
 }
 
-func (t team) addMatch(result string, inverse bool) team {
-	t.matchPlayed++
-	if inverse {
-		if result == "win" {
-			result = "loss"
-		} else if result == "loss" {
-			result = "win"
-		}
-	}
-
+func addMatch(a team, b team, result string) (team, team) {
+	a.matchPlayed++
+	b.matchPlayed++
 	switch result {
 	case "win":
-		t.win++
-		t.points += 3
+		a.win++
+		b.loss++
+		a.points += 3
 	case "draw":
-		t.draw++
-		t.points++
+		a.draw++
+		b.draw++
+		a.points++
+		b.points++
 	case "loss":
-		t.loss++
+		a.loss++
+		b.win++
+		b.points += 3
 	}
-	return t
+	return a, b
 }
 
 func writeMatchResults(w io.Writer) {
@@ -80,8 +78,8 @@ func Tally(reader io.Reader, writer io.Writer) error {
 			return errors.New("input format wrong")
 		}
 
-		teamMap[secs[0]] = teamMap[secs[0]].addMatch(secs[2], false)
-		teamMap[secs[1]] = teamMap[secs[1]].addMatch(secs[2], true)
+		teamMap[secs[0]], teamMap[secs[1]] =
+			addMatch(teamMap[secs[0]], teamMap[secs[1]], secs[2])
 	}
 
 	writeMatchResults(writer)
