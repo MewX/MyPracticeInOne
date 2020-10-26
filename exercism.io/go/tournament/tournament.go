@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-var teamMap map[string]team
-
 type team struct {
 	matchPlayed int
 	win         int
@@ -19,7 +17,8 @@ type team struct {
 	points      int
 }
 
-func addMatch(a team, b team, result string) (team, team) {
+func addMatch(a team, b team, result string) (team, team, error) {
+	var e error = nil
 	a.matchPlayed++
 	b.matchPlayed++
 	switch result {
@@ -36,11 +35,13 @@ func addMatch(a team, b team, result string) (team, team) {
 		a.loss++
 		b.win++
 		b.points += 3
+	default:
+		e = errors.New("unknown match result")
 	}
-	return a, b
+	return a, b, e
 }
 
-func writeMatchResults(w io.Writer) {
+func writeMatchResults(teamMap map[string]team, w io.Writer) {
 	names := make([]string, 0, len(teamMap))
 	for key := range teamMap {
 		names = append(names, key)
@@ -62,26 +63,27 @@ func writeMatchResults(w io.Writer) {
 
 // Tally calculates the competition results.
 func Tally(reader io.Reader, writer io.Writer) error {
-	teamMap = map[string]team{}
-	r := bufio.NewReader(reader)
-	for true {
-		bys, _, err := r.ReadLine()
-		if err != nil {
-			break
-		} else if len(bys) == 0 || bys[0] == '#' {
+	teamMap := map[string]team{}
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if line == "" || strings.HasPrefix(line, "#") {
 			continue
 		}
 
-		secs := strings.Split(string(bys), ";")
-		if len(secs) != 3 ||
-			secs[2] != "draw" && secs[2] != "loss" && secs[2] != "win" {
+		secs := strings.Split(line, ";")
+		if len(secs) != 3 {
 			return errors.New("input format wrong")
 		}
 
-		teamMap[secs[0]], teamMap[secs[1]] =
+		var err error
+		teamMap[secs[0]], teamMap[secs[1]], err =
 			addMatch(teamMap[secs[0]], teamMap[secs[1]], secs[2])
+		if err != nil {
+			return err
+		}
 	}
 
-	writeMatchResults(writer)
+	writeMatchResults(teamMap, writer)
 	return nil
 }
