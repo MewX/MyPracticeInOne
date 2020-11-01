@@ -62,11 +62,21 @@ func TestSong(t *testing.T) {
 	}
 }
 
-func TestVerse(t *testing.T) {
+func TestVerseValid(t *testing.T) {
 	for _, test := range testCases {
-		actual := Verse(test.input)
-		if actual != test.expected {
+		actual, err := Verse(test.input)
+		if actual != test.expected || err != nil {
 			t.Errorf("Twelve Days test [%d], expected [%s], actual [%s]", test.input, test.expected, actual)
+		}
+	}
+}
+
+func TestVerseError(t *testing.T) {
+	invalidSamples := []int{-1, 0, 13, 14}
+	for _, day := range invalidSamples {
+		actual, err := Verse(day)
+		if err.(error) == nil {
+			t.Fatalf("Twelve Days test [%d], expected [invalid error], actual [%s].", day, actual)
 		}
 	}
 }
