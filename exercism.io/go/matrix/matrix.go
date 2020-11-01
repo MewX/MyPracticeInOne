@@ -14,24 +14,18 @@ func (m Matrix) Rows() [][]int {
 	rows := make([][]int, len(m))
 	for ir, r := range m {
 		rows[ir] = make([]int, len(r))
-		for ic, c := range r {
-			rows[ir][ic] = c
-		}
+		copy(rows[ir], r)
 	}
 	return rows
 }
 
 // Cols returns independent copy of all the columns in the metrix.
 func (m Matrix) Cols() [][]int {
-	if len(m) == 0 {
-		return [][]int{}
-	}
-
 	cols := [][]int{}
 	for c := 0; len(m) > 0 && c < len(m[0]); c++ {
-		col := make([]int, len(m))
+		col := []int{}
 		for r := 0; r < len(m); r++ {
-			col[r] = m[r][c]
+			col = append(col, m[r][c])
 		}
 		cols = append(cols, col)
 	}
@@ -51,8 +45,7 @@ func (m Matrix) Set(r, c, val int) bool {
 func New(input string) (Matrix, error) {
 	matrix := Matrix{}
 	for i, inputRow := range strings.Split(input, "\n") {
-		valueStrs := strings.FieldsFunc(
-			inputRow, func(c rune) bool { return c == ' ' })
+		valueStrs := strings.Fields(inputRow)
 		if i != 0 && len(matrix[0]) != len(valueStrs) {
 			return nil, fmt.Errorf(
 				"input row \"%s\" size (%d) doesn't match first row size (%d)",
