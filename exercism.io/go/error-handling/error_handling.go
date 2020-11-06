@@ -1,10 +1,14 @@
 package erratum
 
+import (
+	"fmt"
+)
+
 // Use opens the resource and calls Frob(input).
-func Use(o ResourceOpener, input string) (e error) {
+func Use(o ResourceOpener, input string) (err error) {
 	var rc Resource
-	for rc, e = o(); e != nil; rc, e = o() {
-		if _, yes := e.(TransientError); yes {
+	for rc, err = o(); err != nil; rc, err = o() {
+		if _, yes := err.(TransientError); yes {
 			continue
 		}
 		// Other error.
@@ -13,14 +17,18 @@ func Use(o ResourceOpener, input string) (e error) {
 	defer rc.Close()
 
 	defer func() {
-		rerr := recover()
-		if froberr, yes := rerr.(FrobError); yes {
-			rc.Defrob(froberr.defrobTag)
-		}
-		if rerr != nil {
-			e = rerr.(error)
+		switch rerr := recover().(type) {
+		case nil:
+			// Do nothing
+		case FrobError:
+			rc.Defrob(rerr.defrobTag)
+			err = rerr
+		case error:
+			err = rerr
+		default:
+			err = fmt.Errorf("panic from unknown error: %v", rerr)
 		}
 	}()
 	rc.Frob(input)
-	return
+	return err
 }
