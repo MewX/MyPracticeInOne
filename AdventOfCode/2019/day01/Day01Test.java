@@ -12,4 +12,11 @@ class Day01Test {
         assertEquals(Day01.calcFuel(100756), 33583);
     }
 
+    @Test
+    public void testCalcFuelRecursive() {
+        assertEquals(Day01.calcFuelRecursive(14), 2);
+        assertEquals(Day01.calcFuelRecursive(1969), 966);
+        assertEquals(Day01.calcFuelRecursive(100756), 50346);
+    }
+
 }
