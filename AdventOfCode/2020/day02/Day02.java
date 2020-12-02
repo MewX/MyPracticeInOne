@@ -42,12 +42,18 @@ public class Day02 {
       if (r.least <= c && c <= r.most) {
         count ++;
       }
-      // if (r.password.contains(repeatChar(r.least, r.c)) &&
-      //     !r.password.contains(repeatChar(r.most + 1, r.c))) {
-      //   count ++;
-      // }
     }
     System.out.println("part 1: " + count);
+
+    count = 0;
+    for (Record r : records) {
+      int temp = r.password.charAt(r.least - 1) == r.c ? 1 : 0;
+      temp += r.password.charAt(r.most - 1) == r.c ? 1 : 0;
+      if (temp == 1) {
+        count ++;
+      }
+    }
+    System.out.println("part 2: " + count);
   }
 
   private static int count(String str, char c) {
@@ -58,15 +64,6 @@ public class Day02 {
       }
     }
     return cnt;
-  }
-
-  private static String repeatChar(int num, char c) {
-    StringBuilder sb = new StringBuilder();
-    while (num-- > 0) {
-      sb.append(c);
-    }
-    System.out.println("matching: " + sb.toString());
-    return sb.toString();
   }
 
 }
