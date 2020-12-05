@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,14 +17,23 @@ public class Day05 {
         }
 
         int max1 = 0;
+        List<Integer> seats = new ArrayList<>();
         for (String p : bp) {
             int row = parseRow(p.substring(0, 7));
             int col = parseCol(p.substring(7));
             int seat = row * 8 + col;
+            seats.add(seat);
             max1 = Math.max(max1, seat);
             System.out.format("seat %s id is %d (row %d, col %d)\n", p, seat, row, col);
         }
         System.out.println("part 1: " + max1);
+
+        seats.sort(Comparator.comparingInt(a -> a));
+        for (int i = 1; i < seats.size(); i++) {
+            if (seats.get(i) - seats.get(i - 1) == 2) {
+                System.out.println("part 2: " + (seats.get(i) - 1));
+            }
+        }
     }
 
     static int parseRow(String row) {
