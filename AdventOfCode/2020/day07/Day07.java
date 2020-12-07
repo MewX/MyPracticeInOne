@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -63,6 +62,10 @@ public class Day07 {
             }
         }
         System.out.println("part 1: " + count);
+
+        // Part 2.
+        count = count(bagMap.get(target));
+        System.out.println("part 2: " + count);
     }
 
     static boolean dfs(Bag bag, String target) {
@@ -80,5 +83,13 @@ public class Day07 {
             }
         }
         return false;
+    }
+
+    static int count(Bag bag) {
+        int c = 0;
+        for (Bag b : bag.contains.keySet()) {
+            c += bag.contains.get(b) + bag.contains.get(b) * count(b);
+        }
+        return c;
     }
 }
