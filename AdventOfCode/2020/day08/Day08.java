@@ -29,20 +29,17 @@ public class Day08 {
         Set<Integer> runSet = new HashSet<>();
         int acc = 0;
         for (int i = 0; i < ins.size(); i++) {
-            if (runSet.contains(i)) {
+            if (!runSet.add(i)) {
                 break;
             }
-            runSet.add(i);
 
             Ins current = ins.get(i);
             switch (current.ins) {
                 case "nop":
                     break;
-
                 case "acc":
                     acc += current.num;
                     break;
-
                 case "jmp":
                     i += current.num - 1;
                     break;
@@ -55,28 +52,26 @@ public class Day08 {
         acc = 0;
         for (int i = 0; i < ins.size(); i++) {
             Ins current = ins.get(i);
+
+            // Try flipping the instruction.
+            String saveIns = current.ins;
             if (current.ins.equals("nop")) {
                 current.ins = "jmp";
-                int temp = doesBreak(ins);
-                if (temp != Integer.MIN_VALUE) {
-                    acc = temp;
-                    break;
-                }
-                current.ins = "nop";
             } else if (current.ins.equals("jmp")) {
                 current.ins = "nop";
-                int temp = doesBreak(ins);
-                if (temp != Integer.MIN_VALUE) {
-                    acc = temp;
-                    break;
-                }
-                current.ins = "jmp";
+            }
+            int tempAcc = accAfterRunningThrough(ins);
+            current.ins = saveIns;
+
+            if (tempAcc != Integer.MIN_VALUE) {
+                acc = tempAcc;
+                break;
             }
         }
         System.out.println("part 2: " + acc);
     }
 
-    static int doesBreak(List<Ins> ins) {
+    static int accAfterRunningThrough(List<Ins> ins) {
         Set<Integer> runSet = new HashSet<>();
         int acc = 0;
         for (int i = 0; i < ins.size(); i++) {
