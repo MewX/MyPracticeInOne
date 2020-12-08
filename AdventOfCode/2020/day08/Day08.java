@@ -1,18 +1,18 @@
 import java.util.*;
 
 public class Day08 {
-    static class Ins {
+    static class Instruction {
         String ins;
         int num;
 
-        Ins(String ins, int num) {
+        Instruction(String ins, int num) {
             this.ins = ins;
             this.num = num;
         }
     }
 
     public static void main(String[] args) {
-        List<Ins> ins = new ArrayList<>();
+        List<Instruction> program = new ArrayList<>();
 
         Scanner s = new Scanner(System.in);
         while (s.hasNextLine()) {
@@ -23,35 +23,17 @@ public class Day08 {
 
             String[] secs = line.split(" ");
             assert secs.length == 2;
-            ins.add(new Ins(secs[0].trim(), Integer.parseInt(secs[1].trim())));
+            program.add(new Instruction(secs[0].trim(), Integer.parseInt(secs[1].trim())));
         }
+        s.close();
 
+        // Part 1.
         Set<Integer> runSet = new HashSet<>();
-        int acc = 0;
-        for (int i = 0; i < ins.size(); i++) {
-            if (!runSet.add(i)) {
-                break;
-            }
+        System.out.println("part 1: " + accAfterRunningThrough(program, true));
 
-            Ins current = ins.get(i);
-            switch (current.ins) {
-                case "nop":
-                    break;
-                case "acc":
-                    acc += current.num;
-                    break;
-                case "jmp":
-                    i += current.num - 1;
-                    break;
-            }
-        }
-        System.out.println("part 1: " + acc);
-
-        // Part 2.
-        runSet.clear();
-        acc = 0;
-        for (int i = 0; i < ins.size(); i++) {
-            Ins current = ins.get(i);
+        // Part 2 (no need to reset acc).
+        for (int i = 0; i < program.size(); i++) {
+            Instruction current = program.get(i);
 
             // Try flipping the instruction.
             String saveIns = current.ins;
@@ -60,27 +42,25 @@ public class Day08 {
             } else if (current.ins.equals("jmp")) {
                 current.ins = "nop";
             }
-            int tempAcc = accAfterRunningThrough(ins);
+            Integer acc = accAfterRunningThrough(program, false);
             current.ins = saveIns;
-
-            if (tempAcc != Integer.MIN_VALUE) {
-                acc = tempAcc;
+            if (acc != null) {
+                System.out.println("part 2: " + acc);
                 break;
             }
         }
-        System.out.println("part 2: " + acc);
     }
 
-    static int accAfterRunningThrough(List<Ins> ins) {
+    static Integer accAfterRunningThrough(List<Instruction> program, boolean returnBroken) {
         Set<Integer> runSet = new HashSet<>();
         int acc = 0;
-        for (int i = 0; i < ins.size(); i++) {
+        for (int i = 0; i < program.size(); i++) {
             if (runSet.contains(i)) {
-                return Integer.MIN_VALUE;
+                return returnBroken ? acc : null;
             }
             runSet.add(i);
 
-            Ins current = ins.get(i);
+            Instruction current = program.get(i);
             if (current.ins.equals("jmp")) {
                 i += current.num - 1;
             } else if (current.ins.equals("acc")) {
