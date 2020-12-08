@@ -49,5 +49,49 @@ public class Day08 {
             }
         }
         System.out.println("part 1: " + acc);
+
+        // Part 2.
+        runSet.clear();
+        acc = 0;
+        for (int i = 0; i < ins.size(); i++) {
+            Ins current = ins.get(i);
+            if (current.ins.equals("nop")) {
+                current.ins = "jmp";
+                int temp = doesBreak(ins);
+                if (temp != Integer.MIN_VALUE) {
+                    acc = temp;
+                    break;
+                }
+                current.ins = "nop";
+            } else if (current.ins.equals("jmp")) {
+                current.ins = "nop";
+                int temp = doesBreak(ins);
+                if (temp != Integer.MIN_VALUE) {
+                    acc = temp;
+                    break;
+                }
+                current.ins = "jmp";
+            }
+        }
+        System.out.println("part 2: " + acc);
+    }
+
+    static int doesBreak(List<Ins> ins) {
+        Set<Integer> runSet = new HashSet<>();
+        int acc = 0;
+        for (int i = 0; i < ins.size(); i++) {
+            if (runSet.contains(i)) {
+                return Integer.MIN_VALUE;
+            }
+            runSet.add(i);
+
+            Ins current = ins.get(i);
+            if (current.ins.equals("jmp")) {
+                i += current.num - 1;
+            } else if (current.ins.equals("acc")) {
+                acc += current.num;
+            }
+        }
+        return acc;
     }
 }
