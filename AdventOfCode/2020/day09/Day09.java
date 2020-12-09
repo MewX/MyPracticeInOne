@@ -35,22 +35,20 @@ public class Day09 {
 
         // Part 2.
         for (int i = 0; i < list.size(); i++) {
+            long min = Long.MAX_VALUE, max = Long.MIN_VALUE;
             long sum = 0;
             int j = i;
             while (sum < weak && j < list.size()) {
+                if (list.get(j) > max) {
+                    max = list.get(j);
+                }
+                if (list.get(j) < min) {
+                    min = list.get(j);
+                }
                 sum += list.get(j++);
             }
 
             if (sum == weak) {
-                long min = Long.MAX_VALUE, max = Long.MIN_VALUE;
-                for (int k = i; k < j; k++) {
-                    if (list.get(k) > max) {
-                        max = list.get(k);
-                    }
-                    if (list.get(k) < min) {
-                        min = list.get(k);
-                    }
-                }
                 System.out.println("part 2: " + (min + max));
                 break;
             }
