@@ -13,6 +13,8 @@ public class Day09 {
         }
         s.close();
 
+        // Part 1.
+        long weak = 0;
         for (int i = 25; i < list.size(); i++) {
             boolean hasSum = false;
             for (int j = i - 25; j < i; j++) {
@@ -25,7 +27,31 @@ public class Day09 {
             }
 
             if (!hasSum) {
+                weak = list.get(i);
                 System.out.println("part 1: " + list.get(i));
+                break;
+            }
+        }
+
+        // Part 2.
+        for (int i = 0; i < list.size(); i++) {
+            long sum = 0;
+            int j = i;
+            while (sum < weak && j < list.size()) {
+                sum += list.get(j++);
+            }
+
+            if (sum == weak) {
+                long min = Long.MAX_VALUE, max = Long.MIN_VALUE;
+                for (int k = i; k < j; k++) {
+                    if (list.get(k) > max) {
+                        max = list.get(k);
+                    }
+                    if (list.get(k) < min) {
+                        min = list.get(k);
+                    }
+                }
+                System.out.println("part 2: " + (min + max));
                 break;
             }
         }
