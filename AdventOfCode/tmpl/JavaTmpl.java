@@ -7,6 +7,7 @@ public class JavaTmpl {
             String line = s.nextLine().trim();
 
         }
+        s.close();
 
         System.out.println("part 1: ");
     }
