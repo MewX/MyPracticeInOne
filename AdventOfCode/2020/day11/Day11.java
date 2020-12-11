@@ -38,8 +38,27 @@ public class Day11 {
         s.close();
 
         // Part 1.
+//        while (true) {
+//            List<List<STAT>> temp = change(plane);
+//            if (same(temp, plane)) {
+//                // Count and return.
+//                int count = 0;
+//                for (List<STAT> row : plane) {
+//                    for (STAT seat : row) {
+//                        if (seat == STAT.OCCUPIED) {
+//                            count ++;
+//                        }
+//                    }
+//                }
+//                System.out.println("part 1: " + count);
+//                break;
+//            }
+//            plane = temp;
+//        }
+
+        // Part 2.
         while (true) {
-            List<List<STAT>> temp = change(plane);
+            List<List<STAT>> temp = change2(plane);
             if (same(temp, plane)) {
                 // Count and return.
                 int count = 0;
@@ -50,16 +69,14 @@ public class Day11 {
                         }
                     }
                 }
-                System.out.println("part 1: " + count);
+                System.out.println("part 2: " + count);
                 break;
             }
             plane = temp;
         }
-
-
     }
 
-    static List<List<STAT>> change(List<List<STAT>> plane) throws InterruptedException {
+    static List<List<STAT>> change(List<List<STAT>> plane) {
         List<List<STAT>> temp = new ArrayList<>();
         for (int i = 0; i < plane.size(); i++) {
             List<STAT> row = plane.get(i);
@@ -129,9 +146,7 @@ public class Day11 {
         }
 
         // Print.
-        System.out.println("after change:");
-        print(plane);
-//        Thread.sleep(100);
+//        print(plane);
         return temp;
     }
 
@@ -164,5 +179,70 @@ public class Day11 {
             System.out.println();
         }
         System.out.println();
+    }
+
+    static List<List<STAT>> change2(List<List<STAT>> plane) throws InterruptedException {
+        List<List<STAT>> temp = new ArrayList<>();
+        for (int i = 0; i < plane.size(); i++) {
+            List<STAT> row = plane.get(i);
+            List<STAT> tempRow = new ArrayList<>();
+            for (int j = 0; j < row.size(); j++) {
+                // Count occupied.
+                int count = 0;
+                // Row 1.
+                count += firstNonFloor(-1, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+                count += firstNonFloor(-1, 0, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+                count += firstNonFloor(-1, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+
+                // Row 2.
+                count += firstNonFloor(0, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+                count += firstNonFloor(0, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+
+                // Row 3.
+                count += firstNonFloor(1, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+                count += firstNonFloor(1, 0, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+                count += firstNonFloor(1, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+
+                switch (row.get(j)) {
+                    case EMPTY:
+                        if (count == 0) {
+                            tempRow.add(STAT.OCCUPIED);
+                        } else {
+                            tempRow.add(STAT.EMPTY);
+                        }
+                        break;
+                    case OCCUPIED:
+                        if (count >= 5) {
+                            tempRow.add(STAT.EMPTY);
+                        } else {
+                            tempRow.add(STAT.OCCUPIED);
+                        }
+                        break;
+                    default:
+                        tempRow.add(row.get(j));
+                        break;
+                }
+            }
+            temp.add(tempRow);
+        }
+
+        // Print.
+        System.out.println("after change:");
+        print(plane);
+        Thread.sleep(100);
+        return temp;
+    }
+
+    static STAT firstNonFloor(int xoff, int yoff, int x, int y, List<List<STAT>> plane) {
+        x += xoff;
+        y += yoff;
+        while (0 <= x && x < plane.size() && 0 <= y && y < plane.get(x).size()) {
+            if (plane.get(x).get(y) != STAT.FLOOR) {
+                return plane.get(x).get(y);
+            }
+            x += xoff;
+            y += yoff;
+        }
+        return STAT.FLOOR;
     }
 }
