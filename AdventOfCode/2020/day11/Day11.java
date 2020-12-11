@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +9,7 @@ public class Day11 {
         OCCUPIED,
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    static List<List<STAT>> parseInput() {
         Scanner s = new Scanner(System.in);
         List<List<STAT>> plane = new ArrayList<>();
         while (s.hasNextLine()) {
@@ -36,29 +35,29 @@ public class Day11 {
             }
         }
         s.close();
+        return plane;
+    }
+
+    public static void main(String[] args) {
+        List<List<STAT>> plane = parseInput();
 
         // Part 1.
-//        while (true) {
-//            List<List<STAT>> temp = change(plane);
-//            if (same(temp, plane)) {
-//                // Count and return.
-//                int count = 0;
-//                for (List<STAT> row : plane) {
-//                    for (STAT seat : row) {
-//                        if (seat == STAT.OCCUPIED) {
-//                            count ++;
-//                        }
-//                    }
-//                }
-//                System.out.println("part 1: " + count);
-//                break;
-//            }
-//            plane = temp;
-//        }
+        count(1, plane);
 
         // Part 2.
+        count(2, plane);
+    }
+
+    static void count(int partID, List<List<STAT>> plane) {
         while (true) {
-            List<List<STAT>> temp = change2(plane);
+            List<List<STAT>> temp = null;
+            if (partID == 1) {
+                temp = change(plane, false, 4);
+            } else if (partID == 2) {
+                temp = change(plane, true, 5);
+            }
+
+            assert temp != null;
             if (same(temp, plane)) {
                 // Count and return.
                 int count = 0;
@@ -76,52 +75,14 @@ public class Day11 {
         }
     }
 
-    static List<List<STAT>> change(List<List<STAT>> plane) {
+    static List<List<STAT>> change(List<List<STAT>> plane, boolean countInf, int threshold) {
         List<List<STAT>> temp = new ArrayList<>();
         for (int i = 0; i < plane.size(); i++) {
             List<STAT> row = plane.get(i);
             List<STAT> tempRow = new ArrayList<>();
             for (int j = 0; j < row.size(); j++) {
                 // Count occupied.
-                int count = 0;
-                // Row 1.
-                if (i != 0) {
-                    if (j != 0) {
-                        if (plane.get(i - 1).get(j - 1) == STAT.OCCUPIED) {
-                            count ++;
-                        }
-                    }
-                    if (plane.get(i - 1).get(j) == STAT.OCCUPIED) {
-                        count ++;
-                    }
-                    if (j != row.size() - 1) {
-                        if (plane.get(i - 1).get(j + 1) == STAT.OCCUPIED) {
-                            count ++;
-                        }
-                    }
-                }
-
-                // Row 2.
-                if (j != 0  && row.get(j - 1) == STAT.OCCUPIED) {
-                    count++;
-                }
-                if (j != row.size() - 1 && row.get(j + 1) == STAT.OCCUPIED) {
-                    count ++;
-                }
-
-                // Row 3.
-                if (i != plane.size() - 1) {
-                    if (j != 0 && plane.get(i + 1).get(j - 1) == STAT.OCCUPIED) {
-                        count ++;
-                    }
-                    if (plane.get(i + 1).get(j) == STAT.OCCUPIED) {
-                        count ++;
-                    }
-                    if (j != row.size() - 1 && plane.get(i + 1).get(j + 1) == STAT.OCCUPIED) {
-                        count ++;
-                    }
-                }
-
+                int count = countNearbyOccupied(i, j, plane, countInf);
                 switch (row.get(j)) {
                     case EMPTY:
                         if (count == 0) {
@@ -131,7 +92,7 @@ public class Day11 {
                         }
                         break;
                     case OCCUPIED:
-                        if (count >= 4) {
+                        if (count >= threshold) {
                             tempRow.add(STAT.EMPTY);
                         } else {
                             tempRow.add(STAT.OCCUPIED);
@@ -144,9 +105,6 @@ public class Day11 {
             }
             temp.add(tempRow);
         }
-
-        // Print.
-//        print(plane);
         return temp;
     }
 
@@ -181,59 +139,27 @@ public class Day11 {
         System.out.println();
     }
 
-    static List<List<STAT>> change2(List<List<STAT>> plane) throws InterruptedException {
-        List<List<STAT>> temp = new ArrayList<>();
-        for (int i = 0; i < plane.size(); i++) {
-            List<STAT> row = plane.get(i);
-            List<STAT> tempRow = new ArrayList<>();
-            for (int j = 0; j < row.size(); j++) {
-                // Count occupied.
-                int count = 0;
-                // Row 1.
-                count += firstNonFloor(-1, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
-                count += firstNonFloor(-1, 0, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
-                count += firstNonFloor(-1, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+    static int countNearbyOccupied(int i, int j, List<List<STAT>> plane, boolean inf) {
+        // Count occupied.
+        int count = 0;
 
-                // Row 2.
-                count += firstNonFloor(0, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
-                count += firstNonFloor(0, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+        // Upper rows.
+        count += firstNonFloor(-1, -1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        count += firstNonFloor(-1, 0, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        count += firstNonFloor(-1, 1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
 
-                // Row 3.
-                count += firstNonFloor(1, -1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
-                count += firstNonFloor(1, 0, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
-                count += firstNonFloor(1, 1, i, j, plane) == STAT.OCCUPIED ? 1 : 0;
+        // Same row.
+        count += firstNonFloor(0, -1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        count += firstNonFloor(0, 1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
 
-                switch (row.get(j)) {
-                    case EMPTY:
-                        if (count == 0) {
-                            tempRow.add(STAT.OCCUPIED);
-                        } else {
-                            tempRow.add(STAT.EMPTY);
-                        }
-                        break;
-                    case OCCUPIED:
-                        if (count >= 5) {
-                            tempRow.add(STAT.EMPTY);
-                        } else {
-                            tempRow.add(STAT.OCCUPIED);
-                        }
-                        break;
-                    default:
-                        tempRow.add(row.get(j));
-                        break;
-                }
-            }
-            temp.add(tempRow);
-        }
-
-        // Print.
-        System.out.println("after change:");
-        print(plane);
-        Thread.sleep(100);
-        return temp;
+        // Lower rows.
+        count += firstNonFloor(1, -1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        count += firstNonFloor(1, 0, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        count += firstNonFloor(1, 1, i, j, plane, inf) == STAT.OCCUPIED ? 1 : 0;
+        return count;
     }
 
-    static STAT firstNonFloor(int xoff, int yoff, int x, int y, List<List<STAT>> plane) {
+    static STAT firstNonFloor(int xoff, int yoff, int x, int y, List<List<STAT>> plane, boolean inf) {
         x += xoff;
         y += yoff;
         while (0 <= x && x < plane.size() && 0 <= y && y < plane.get(x).size()) {
@@ -242,6 +168,10 @@ public class Day11 {
             }
             x += xoff;
             y += yoff;
+
+            if (!inf) {
+                break;
+            }
         }
         return STAT.FLOOR;
     }
