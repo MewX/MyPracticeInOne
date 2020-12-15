@@ -33,34 +33,40 @@ public class Day13 {
             time ++;
         }
 
-        // Part 2: find max and use the max as a base.
-        int max = 0, maxTOffset = 0;
-        for (int i = 0; i < busIds.length; i++) {
-            if (busIds[i] > max) {
-                max = busIds[i];
-                maxTOffset = i;
+        // Part 2: Chinese remainder theorem.
+        // https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86
+        long modProduct = 1;
+        for (int busId : busIds) {
+            if (busId > 0) {
+                modProduct *= busId;
             }
         }
 
-        time = 0;
+        long result = 0;
+        for (int i = 0; i < busIds.length; i ++) {
+            if (busIds[i] < 0) {
+                continue;
+            }
+            long M = modProduct / busIds[i];
+            long t = calcModInv(M, busIds[i]);
+            long a = busIds[i] - i;
+            result += t * a * M;
+        }
+
+        // Make it smallest positive.
+        if (result > 0) {
+            result -= (result / modProduct) * modProduct;
+        }
+        System.out.println("part 2: " + result);
+    }
+
+    static int calcModInv(long M, long m) {
+        int t = 1;
         while (true) {
-            boolean found = true;
-            for (int i = 0; i < busIds.length; i++) {
-                if (busIds[i] <= 0) {
-                    continue;
-                }
-                if ((time + i - maxTOffset) % busIds[i] != 0) {
-                    found = false;
-                    break;
-                }
+            if (t * M % m == 1) {
+                return t;
             }
-
-            if (found) {
-                System.out.println("part 2: " + time);
-                break;
-            }
-            time += max;
+            t ++;
         }
-
     }
 }
