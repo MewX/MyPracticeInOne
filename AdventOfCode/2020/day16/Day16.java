@@ -64,7 +64,9 @@ public class Day16 {
 
         // Part 1.
         int count = 0;
+        List<List<Integer>> validTickets = new ArrayList<>();
         for (List<Integer> row : nearbyTickets) {
+            boolean ticketValid = true;
             for (Integer t : row) {
                 boolean matched = false;
                 for (String key : fields.keySet()) {
@@ -77,9 +79,89 @@ public class Day16 {
                 if (!matched) {
                     System.out.println("not found " + t);
                     count += t;
+                    ticketValid = false;
                 }
+            }
+
+            if (ticketValid) {
+                // Valid tickets.
+                validTickets.add(row);
             }
         }
         System.out.println("part 1: " + count);
+
+        // Part 2.
+        validTickets.add(myTickets);
+        System.out.println("valid tickets: " + validTickets.size());
+
+        List<Set<String>> possibleMapping = new ArrayList<>();
+        for (int i = 0; i < validTickets.get(0).size(); i++) {
+            possibleMapping.add(new HashSet<>(fields.keySet()));
+
+            for (List<Integer> row : validTickets) {
+                Set<String> removed = new HashSet<>();
+                for (String key : possibleMapping.get(i)) {
+                    if (!fields.get(key).contains(row.get(i))) {
+                        removed.add(key);
+                    }
+                }
+                possibleMapping.get(i).removeAll(removed);
+            }
+
+            System.out.format("index %d: ", i);
+            for (String key : possibleMapping.get(i)) {
+                System.out.print(key + ", ");
+            }
+            System.out.println();
+        }
+
+        // Eliminations.
+        String[] order = new String[fields.keySet().size()];
+        out: while (true) {
+            for (int i = 0; i < possibleMapping.size(); i ++) {
+                if (possibleMapping.get(i).size() == 1) {
+                    order[i] = possibleMapping.get(i).iterator().next();
+
+                    // Start eliminations.
+                    for (Set<String> mapping : possibleMapping) {
+                        mapping.remove(order[i]);
+                    }
+                    continue out;
+                }
+            }
+
+            // Check exist condition.
+            boolean canExit = true;
+            for (Set<String> mapping : possibleMapping) {
+                if (mapping.size() != 0) {
+                    canExit = false;
+                    break;
+                }
+            }
+            if (canExit) {
+                break;
+            }
+        }
+
+        long product = 1;
+        for (int i = 0; i < order.length; i++) {
+            if (order[i].startsWith("departure")) {
+                product *= myTickets.get(i);
+                System.out.format("timing '%s' %d at %d\n", order[i], myTickets.get(i), i);
+            }
+        }
+        System.out.println("part 2: " + product);
+    }
+
+    static boolean validBuild(Map<String, Set<Integer>> fieldMap, List<String> order, List<List<Integer>> validTickets) {
+        for (int i = 0; i < order.size(); i++) {
+            Set<Integer> ranges = fieldMap.get(order.get(i));
+            for (List<Integer> row : validTickets) {
+                if (!ranges.contains(row.get(i))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
