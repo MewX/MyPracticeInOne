@@ -64,8 +64,78 @@ public class Day12 {
                     y -= val;
                     break;
             }
-            System.out.format("[%c] x: %d, y: %d\n", orientation, x, y);
+//            System.out.format("[%c] x: %d, y: %d\n", orientation, x, y);
         }
         System.out.println("part 1: " + (Math.abs(x) + Math.abs(y)));
+
+        // Part 2.
+        int wpx = 10, wpy = 1; // Waypoint's x and y.
+        x = y = 0; // Ship's x and y.
+        for (Map.Entry<Character, Integer> input : inputs) {
+            // Update direction.
+            char operation = input.getKey();
+            int val = input.getValue();
+            final int tempx = wpx;
+            switch (operation) {
+                case 'N':
+                    wpy += val;
+                    break;
+                case 'S':
+                    wpy -= val;
+                    break;
+                case 'E':
+                    wpx += val;
+                    break;
+                case 'W':
+                    wpx -= val;
+                    break;
+                case 'F':
+                    x += val * wpx;
+                    y += val * wpy;
+                    break;
+                case 'R':
+                    // Waypoint rotating right.
+                    switch (val % 360) {
+                        case 90:
+                            wpx = wpy;
+                            wpy = -tempx;
+                            break;
+                        case 180:
+                            wpx = -wpx;
+                            wpy = -wpy;
+                            break;
+                        case 270:
+                            wpx = -wpy;
+                            wpy = +tempx;
+                            break;
+                        default:
+                            assert false;
+                            break;
+                    }
+                    break;
+                case 'L':
+                    // Waypoint rotating left.
+                    switch (val % 360) {
+                        case 90:
+                            wpx = -wpy;
+                            wpy = +tempx;
+                            break;
+                        case 180:
+                            wpx = -wpx;
+                            wpy = -wpy;
+                            break;
+                        case 270:
+                            wpx = +wpy;
+                            wpy = -tempx;
+                            break;
+                        default:
+                            assert false;
+                            break;
+                    }
+                    break;
+            }
+//            System.out.format("[%c%d] (x: %d, y: %d), (wpx: %d, wpy: %d)\n", operation, val, x, y, wpx, wpy);
+        }
+        System.out.println("part 2: " + (Math.abs(x) + Math.abs(y)));
     }
 }
