@@ -6,5 +6,5 @@ class S819 {
             .groupingBy { it.toLowerCase() }
             .eachCount()
             .filterNot { it.key.isEmpty() || banned.contains(it.key) }
-            .maxBy { it.value }!!.key
+            .maxByOrNull { it.value }!!.key
 }
