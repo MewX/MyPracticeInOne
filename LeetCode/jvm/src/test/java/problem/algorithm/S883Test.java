@@ -3,8 +3,6 @@ package problem.algorithm;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class S883Test {
 
     @Test
