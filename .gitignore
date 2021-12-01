@@ -1,13 +1,14 @@
 # Intellij
-META-INF/
-*.iml
-out/
+.gradle/
 .idea/
 .vscode/
 *.class
-*.dex
-*.log
 *.db
+*.dex
+*.iml
+*.log
+META-INF/
+out/
 
 # My files
 dump/

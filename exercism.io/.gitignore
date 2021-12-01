@@ -1,10 +1,9 @@
+.cache/
 .exercism/
-README.md
 .idea/
-build/
 .keep
-PaxHeader/
 *.orig
 *.pyc
-.cache/
-
+build/
+PaxHeader/
+README.md

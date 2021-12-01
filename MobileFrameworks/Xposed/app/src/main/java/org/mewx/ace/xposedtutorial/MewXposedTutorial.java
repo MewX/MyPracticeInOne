@@ -68,7 +68,7 @@ public class MewXposedTutorial implements IXposedHookLoadPackage {
         final boolean HIJACK_TRANSORKS = false;
 
         if (HIJACK_TRANSORKS && lpparam.packageName.contains("fobwifi")) {
-            // for hijacking the bks keystore password
+            // Transocks: hijacking the bks keystore password.
             XposedBridge.log("MewX outputs, loaded app: " + lpparam.packageName);
 
 
