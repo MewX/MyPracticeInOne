@@ -11,6 +11,7 @@ public class Day01 {
             }
             sweepReports.add(Integer.valueOf(line));
         }
+        s.close();
 
         // Do the calculation.
         System.out.println("q1: " + countIncreasing(sweepReports));

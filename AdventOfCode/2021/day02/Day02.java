@@ -13,7 +13,7 @@ public class Day02 {
         }
         s.close();
 
-        // Do the calculation.
+        // Part 1.
         int horizontal = 0, depth = 0;
         for (String op : ops) {
             if (op.startsWith("forward")) {
@@ -24,6 +24,26 @@ public class Day02 {
                 depth -= Integer.parseInt(op.substring(3).trim());
             }
         }
+        System.out.println("Part 1");
+        System.out.println("h/d: " + horizontal + "/" + depth);
+        System.out.println("h*d: " + horizontal * depth);
+
+        // Part 2.
+        int aim = 0;
+        horizontal = depth = 0;
+        for (String op : ops) {
+            if (op.startsWith("forward")) {
+                int x = Integer.parseInt(op.substring(8).trim());
+                horizontal += x;
+                depth += aim * x;
+            } else if (op.startsWith("down")) {
+                aim += Integer.parseInt(op.substring(5).trim());
+            } else if (op.startsWith("up")) {
+                aim -= Integer.parseInt(op.substring(3).trim());
+            }
+        }
+        System.out.println("Part 2");
+        System.out.println("aim: " + aim);
         System.out.println("h/d: " + horizontal + "/" + depth);
         System.out.println("h*d: " + horizontal * depth);
     }
