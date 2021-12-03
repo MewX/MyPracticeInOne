@@ -14,33 +14,31 @@ public class Day03 {
     }
     s.close();
 
-    // part 1.
-    String gamma = "", epsilon = "";
+    // Part 1.
+    StringBuilder gamma = new StringBuilder(), epsilon = new StringBuilder();
     for (int i = 0; i < input.get(0).length(); i++) {
-      int c1 = 0;
-      for (String str : input) {
-        if (str.charAt(i) == '1') {
-          c1++;
-        }
-      }
+      final int c1 = count1(input, i);
+      final int c0 = input.size() - c1;
+      gamma.append(c1 >= c0 ? '1' : '0');
+      epsilon.append(c1 <= c0 ? '1' : '0');
+    }
+    System.out.println("part 1: " +
+        (Integer.parseInt(gamma.toString(), 2) * Integer.parseInt(epsilon.toString(), 2)));
 
-      int c0 = input.size() - c1;
-      if (c1 > c0) {
-        gamma += '1';
-        epsilon += '0';
-      } else if (c1 < c0) {
-        gamma += '0';
-        epsilon += '1';
-      } else {
-        System.out.println("error c1=c0");
+    // Part 2.
+    final int oxygen = part2(new ArrayList<>(input), 0, '1');
+    final int co2 = part2(new ArrayList<>(input), 0, '0');
+    System.out.println("part 2: " + (oxygen * co2));
+  }
+
+  private static int count1(List<String> input, int index) {
+    int c1 = 0;
+    for (String str : input) {
+      if (str.charAt(index) == '1') {
+        c1++;
       }
     }
-    System.out.println("part 1: " + (Integer.parseInt(gamma, 2) * Integer.parseInt(epsilon, 2)));
-
-    // part 2.
-    System.out.println(
-        "part 2: " + (part2(new ArrayList<>(input), 0, '1') * part2(new ArrayList<>(input), 0,
-            '0')));
+    return c1;
   }
 
   private static void dump(List<String> input) {
@@ -50,14 +48,13 @@ public class Day03 {
     }
   }
 
-  // private static String oxygen = "", co2 = "";
   private static int part2(List<String> input, int index, char target) {
     if (input.size() == 1) {
       // Good!
       return Integer.parseInt(input.get(0), 2);
     }
 
-    // errors.
+    // Errors.
     if (input.size() == 0) {
       System.out.println("error, input 0; index is " + index);
       System.exit(-1);
@@ -68,14 +65,8 @@ public class Day03 {
       System.exit(-2);
     }
 
-    int c1 = 0;
-    for (String str : input) {
-      if (str.charAt(index) == '1') {
-        c1++;
-      }
-    }
-    int c0 = input.size() - c1;
-
+    final int c1 = count1(input, index);
+    final int c0 = input.size() - c1;
     char toKeep;
     if (target == '1') {
       // Oxygen.
@@ -84,14 +75,13 @@ public class Day03 {
       // CO2.
       toKeep = c0 <= c1 ? '0' : '1';
     }
+    assert target == '1' || target == '2';
 
     for (int i = input.size() - 1; i >= 0; i--) {
       if (input.get(i).charAt(index) != toKeep) {
         input.remove(i);
       }
     }
-    System.out.println("index: " + index);
-    dump(input);
     return part2(input, index + 1, target);
   }
 }
