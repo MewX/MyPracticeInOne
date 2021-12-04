@@ -37,17 +37,39 @@ public class Day04 {
 
         // Part 1.
         // Marking as min integer.
-        out: for (Integer num : chosen) {
-            for (List<List<Integer>> m : matrixs) {
+//        out: for (Integer num : chosen) {
+//            for (List<List<Integer>> m : matrixs) {
+//                markCell(m, num);
+//                if (checkMatrixDone(m)) {
+//                    dumpMatrix(m);
+//                    System.out.println("sum: " + sumAllValidNumbers(m));
+//                    System.out.println("N: " + num);
+//                    System.out.println("part 1: " + (sumAllValidNumbers(m) * num));
+//                    break out;
+//                }
+//            }
+//        }
+
+        // Part 2.
+        List<List<Integer>> last = new ArrayList<>();
+        int lastNum = 0;
+        for (Integer num : chosen) {
+            if (matrixs.size() == 0) {
+                // Last matrix.
+                dumpMatrix(last);
+                System.out.println("sum: " + sumAllValidNumbers(last));
+                System.out.println("N: " + lastNum);
+                System.out.println("part 2: " + (sumAllValidNumbers(last) * lastNum));
+                break;
+            }
+
+            for (int i = matrixs.size() - 1; i >= 0; i--) {
+                List<List<Integer>> m = matrixs.get(i);
                 markCell(m, num);
                 if (checkMatrixDone(m)) {
-                    dumpMatrix(m);
-                    System.out.println("sum: " + sumAllValidNumbers(m));
-                    System.out.println("N: " + num);
-                    System.out.println("part 1: " + (sumAllValidNumbers(m) * num));
-                    break out;
+                    last = matrixs.remove(i);
+                    lastNum = num;
                 }
-
             }
         }
     }
@@ -118,7 +140,7 @@ public class Day04 {
             allCols = allCols || done;
         }
 
-        // The rest.
+        // The diagonals.
 //        boolean leftRight = true, rightLeft = true;
 //        for (int row = 0; row < 5; row++) {
 //            if (m.get(row).get(row) != Integer.MIN_VALUE) {
