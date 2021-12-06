@@ -16,35 +16,21 @@ public class Day06 {
         s.close();
 
         // Part 1.
-        int DAYS = 80;
-        List<Integer> timers = new ArrayList<>(initialTimers);
-        for (int day = 0; day < DAYS; day++) {
-            final int originalCount = timers.size();
-            for (int i = 0; i < originalCount; i++) {
-                int lantern = timers.get(i);
-                lantern--;
-                if (lantern < 0) {
-                    timers.set(i, 6);
-                    timers.add(8);
-                } else {
-                    timers.set(i, lantern);
-                }
-            }
-//            System.out.print("Day " + day + ": ");
-//            dump(timers);
-        }
-        System.out.println("part 1: " + timers.size());
-
-        // Part 2.
-        DAYS = 256;
         Map<Integer, Long> timerToLantern = new HashMap<>(); // Timer to the number of lanterns.
         for (Integer i : initialTimers) {
             timerToLantern.put(i, timerToLantern.getOrDefault(i, 0L) + 1);
         }
-        for (int day = 0; day < DAYS; day++) {
+        System.out.println("part 1: " + generate(new HashMap<>(timerToLantern), 80));
+
+        // Part 2.
+        System.out.println("part 2: " + generate(new HashMap<>(timerToLantern), 256));
+    }
+
+    private static long generate(Map<Integer, Long> map, final int days) {
+        for (int day = 0; day < days; day++) {
             Map<Integer, Long> temp = new HashMap<>();
-            for (Integer timerKey : timerToLantern.keySet()) {
-                Long count = timerToLantern.get(timerKey);
+            for (Integer timerKey : map.keySet()) {
+                Long count = map.get(timerKey);
                 timerKey--;
                 if (timerKey < 0) {
                     temp.put(6, temp.getOrDefault(6, 0L) + count);
@@ -53,18 +39,11 @@ public class Day06 {
                     temp.put(timerKey, temp.getOrDefault(timerKey, 0L) + count);
                 }
             }
-            timerToLantern = temp;
+            map = temp;
 //            System.out.print("Day " + day + ": ");
 //            dumpMap(timerToLantern);
         }
-        System.out.println("part 2: " + timerToLantern.values().stream().reduce(0L, Long::sum));
-    }
-
-    private static void dump(List<Integer> list) {
-        for (Integer i : list) {
-            System.out.print("" + i + ",");
-        }
-        System.out.println();
+        return map.values().stream().reduce(0L, Long::sum);
     }
 
     private static void dumpMap(Map<Integer, Long> timerToLantern) {
