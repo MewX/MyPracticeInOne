@@ -20,6 +20,11 @@ public class Day10 {
     pointTable.put(']', 57);
     pointTable.put('}', 1197);
     pointTable.put('>', 25137);
+    final Map<Character, Integer> completeTable = new HashMap<>();
+    completeTable.put(')', 1);
+    completeTable.put(']', 2);
+    completeTable.put('}', 3);
+    completeTable.put('>', 4);
     final Map<Character, Character> pairs = new HashMap<>();
     pairs.put('(', ')');
     pairs.put('[', ']');
@@ -31,7 +36,8 @@ public class Day10 {
     pairs.put('>', '<');
 
     int score = 0;
-    for (String line : input) {
+    List<Long> scores2 = new ArrayList<>();
+    l: for (String line : input) {
       Stack<Character> stack = new Stack<>();
       for (int i = 0; i < line.length(); i++) {
         char c = line.charAt(i);
@@ -45,13 +51,29 @@ public class Day10 {
             if (out != pairs.get(c)) {
               // Wrong.
               score += pointTable.get(c);
+              continue l;
             }
             break;
           default:
             stack.push(c);
         }
       }
+
+      // Complete the remaining lines.
+      long s2 = 0L;
+      boolean add = !stack.isEmpty();
+      while (!stack.isEmpty()) {
+        Character c = stack.pop();
+        s2 *= 5;
+        s2 += completeTable.get(pairs.get(c));
+      }
+      if (add) {
+        scores2.add(s2);
+      }
     }
+    scores2.sort(Comparator.comparingLong(a -> a));
     System.out.println("part 1: " + score);
+    System.out.println("part 2 size: " + scores2.size());
+    System.out.println("part 2: " + scores2.get(scores2.size() / 2));
   }
 }
