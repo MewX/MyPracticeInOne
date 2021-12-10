@@ -30,12 +30,8 @@ public class Day10 {
     pairs.put('[', ']');
     pairs.put('{', '}');
     pairs.put('<', '>');
-    pairs.put(')', '(');
-    pairs.put(']', '[');
-    pairs.put('}', '{');
-    pairs.put('>', '<');
 
-    int score = 0;
+    int score1 = 0;
     List<Long> scores2 = new ArrayList<>();
     l: for (String line : input) {
       Stack<Character> stack = new Stack<>();
@@ -48,9 +44,9 @@ public class Day10 {
           case '>':
             // Need to pop out.
             Character out = stack.pop();
-            if (out != pairs.get(c)) {
+            if (c != pairs.get(out)) {
               // Wrong.
-              score += pointTable.get(c);
+              score1 += pointTable.get(c);
               continue l;
             }
             break;
@@ -60,20 +56,19 @@ public class Day10 {
       }
 
       // Complete the remaining lines.
-      long s2 = 0L;
+      long roundScore2 = 0L;
       boolean add = !stack.isEmpty();
       while (!stack.isEmpty()) {
         Character c = stack.pop();
-        s2 *= 5;
-        s2 += completeTable.get(pairs.get(c));
+        roundScore2 *= 5;
+        roundScore2 += completeTable.get(pairs.get(c));
       }
       if (add) {
-        scores2.add(s2);
+        scores2.add(roundScore2);
       }
     }
     scores2.sort(Comparator.comparingLong(a -> a));
-    System.out.println("part 1: " + score);
-    System.out.println("part 2 size: " + scores2.size());
-    System.out.println("part 2: " + scores2.get(scores2.size() / 2));
+    System.out.println("part 1: " + score1);
+    System.out.format("part 2: %d (size %d)\n", scores2.get(scores2.size() / 2), scores2.size());
   }
 }
