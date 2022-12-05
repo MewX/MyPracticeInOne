@@ -50,28 +50,36 @@ public class SupplyStacks {
     s.close();
 
     // Q1.
+    // for (Operation o : operations) {
+    //   for (int i = 0; i < o.count; i++) {
+    //     if (stacks.get(o.from).length() == 0) {
+    //       continue;
+    //     }
+    //     // pop and push.
+    //     push(stacks.get(o.to), pop(stacks.get(o.from), 1));
+    //   }
+    // }
+    // System.out.println("part 1: ");
+    // outputTops(stacks);
+
+    // Q2.
     for (Operation o : operations) {
-      for (int i = 0; i < o.count; i++) {
-        if (stacks.get(o.from).length() == 0) {
-          continue;
-        }
-        // pop and push.
-        push(stacks.get(o.to), pop(stacks.get(o.from)));
-      }
+      // pop and push.
+      push(stacks.get(o.to), pop(stacks.get(o.from), o.count));
     }
-    System.out.println("part 1: ");
+    System.out.println("part 2: ");
     outputTops(stacks);
   }
 
-  private static void push(StringBuilder sb, char c) {
-    sb.append(c);
+  private static void push(StringBuilder sb, String s) {
+    sb.append(s);
   }
 
-  private static char pop(StringBuilder sb) {
+  private static String pop(StringBuilder sb, int count) {
     assert sb.length() != 0;
-    char c = sb.charAt(sb.length() - 1);
-    sb.deleteCharAt(sb.length() - 1);
-    return c;
+    String s = sb.substring(Math.max(0, sb.length() - count), sb.length());
+    sb.delete(Math.max(0, sb.length() - count), sb.length());
+    return s;
   }
 
   private static void outputTops(List<StringBuilder> stacks) {
