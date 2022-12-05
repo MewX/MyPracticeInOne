@@ -9,7 +9,8 @@ public class SupplyStacks {
 
   private static class Operation {
 
-    int count, from, to; // 1-based numbers.
+    int count;
+    int from, to; // 0-based numbers.
 
     Operation(int count, int from, int to) {
       this.count = count;
@@ -19,8 +20,7 @@ public class SupplyStacks {
   }
 
   public static void main(String[] args) {
-    List<StringBuilder> stacks = new ArrayList<>(10);
-    stacks.add(new StringBuilder()); // Not using 0.
+    List<StringBuilder> stacks = new ArrayList<>();
     stacks.add(new StringBuilder("BGSC"));
     stacks.add(new StringBuilder("TMWHJNVG"));
     stacks.add(new StringBuilder("MQS"));
@@ -42,8 +42,8 @@ public class SupplyStacks {
 
       Matcher m = p.matcher(line);
       if (m.matches()) {
-        operations.add(new Operation(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)),
-            Integer.parseInt(m.group(3))));
+        operations.add(new Operation(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)) - 1,
+            Integer.parseInt(m.group(3)) - 1));
       }
     }
     s.close();
@@ -85,13 +85,8 @@ public class SupplyStacks {
   }
 
   private static void outputTops(List<StringBuilder> stacks) {
-    for (int i = 1; i < stacks.size(); i ++) {
-      StringBuilder s = stacks.get(i);
-      if (s.length() == 0) {
-        System.out.print(" ");
-      }
-      System.out.print(s.charAt(s.length() - 1));
-    }
-    System.out.println();
+    System.out.println(
+        stacks.stream().map(sb -> sb.length() == 0 ? " " : sb.charAt(sb.length() - 1))
+            .map(Object::toString).collect(Collectors.joining()));
   }
 }
