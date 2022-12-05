@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class SupplyStacks {
 
-  static class Operation {
+  private static class Operation {
 
-    int count, from, to; // 1-based number.
+    int count, from, to; // 1-based numbers.
 
     Operation(int count, int from, int to) {
       this.count = count;
@@ -20,7 +20,7 @@ public class SupplyStacks {
 
   public static void main(String[] args) {
     List<StringBuilder> stacks = new ArrayList<>(10);
-    stacks.add(null); // not using 0;
+    stacks.add(new StringBuilder()); // Not using 0.
     stacks.add(new StringBuilder("BGSC"));
     stacks.add(new StringBuilder("TMWHJNVG"));
     stacks.add(new StringBuilder("MQS"));
@@ -40,7 +40,6 @@ public class SupplyStacks {
         continue;
       }
 
-      // move 4 from 6 to 3
       Matcher m = p.matcher(line);
       if (m.matches()) {
         operations.add(new Operation(Integer.parseInt(m.group(1)), Integer.parseInt(m.group(2)),
@@ -50,25 +49,26 @@ public class SupplyStacks {
     s.close();
 
     // Q1.
-    // for (Operation o : operations) {
-    //   for (int i = 0; i < o.count; i++) {
-    //     if (stacks.get(o.from).length() == 0) {
-    //       continue;
-    //     }
-    //     // pop and push.
-    //     push(stacks.get(o.to), pop(stacks.get(o.from), 1));
-    //   }
-    // }
-    // System.out.println("part 1: ");
-    // outputTops(stacks);
+    List<StringBuilder> s1 = deepCopy(stacks);
+    for (Operation o : operations) {
+      for (int i = 0; i < o.count; i++) {
+        push(s1.get(o.to), pop(s1.get(o.from), 1));
+      }
+    }
+    System.out.print("part 1: ");
+    outputTops(s1);
 
     // Q2.
+    List<StringBuilder> s2 = deepCopy(stacks);
     for (Operation o : operations) {
-      // pop and push.
-      push(stacks.get(o.to), pop(stacks.get(o.from), o.count));
+      push(s2.get(o.to), pop(s2.get(o.from), o.count));
     }
-    System.out.println("part 2: ");
-    outputTops(stacks);
+    System.out.print("part 2: ");
+    outputTops(s2);
+  }
+
+  private static List<StringBuilder> deepCopy(List<StringBuilder> stacks) {
+    return stacks.stream().map(StringBuilder::new).collect(Collectors.toList());
   }
 
   private static void push(StringBuilder sb, String s) {
@@ -76,7 +76,9 @@ public class SupplyStacks {
   }
 
   private static String pop(StringBuilder sb, int count) {
-    assert sb.length() != 0;
+    if (sb.length() == 0) {
+      return "";
+    }
     String s = sb.substring(Math.max(0, sb.length() - count), sb.length());
     sb.delete(Math.max(0, sb.length() - count), sb.length());
     return s;
