@@ -1,6 +1,9 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
-public class MonkeyMap {
+public class MonkeyMap2 {
     private enum Direction {
         UP, RIGHT, DOWN, LEFT
     }
@@ -56,7 +59,7 @@ public class MonkeyMap {
             }
         }
 
-        // Part 1.
+        // Part 2.
         int y = 0;
         int x = mapInput.get(y).indexOf("" + TILE);
         Direction direction = Direction.RIGHT;
@@ -97,10 +100,62 @@ public class MonkeyMap {
         }
 
         int result = 4 * (x + 1) + 1000 * (y + 1) + FACING_SCORE.get(direction);
-        System.out.println("part 1: " + result);
+        System.out.println("part 2: " + result);
+    }
+
+    private static Direction getNextDirection(int x, int y, Direction direction, List<StringBuilder> mapInput) {
+        // Only supports sample (4x4) and real input (50x50).
+        if (mapInput.get(0).length() == 16) {
+            // Sample.
+            // . . 1
+            // 2 3 4
+            // . . 5 6
+            if (y < 4) {
+                // 1
+                switch (direction) {
+                    case LEFT:
+                        if (x == 2 * 4) {
+                            // Goes to 3.
+                            return Direction.DOWN;
+                        }
+                    case RIGHT:
+                        if (x == 3 * 4 - 1) {
+                            // Goes to 6.
+                            return Direction.LEFT;
+                        }
+                    default: return direction;
+                }
+            } else if (y < 2 * 4) {
+                // 2, 3, 4
+                // TODO: finish this and below.
+            } else {
+                // 5, 6
+            }
+
+        } else {
+            // Real.
+            // . 1 2
+            // . 3
+            // 4 5
+            // 6
+            assert mapInput.get(0).length() == 150;
+
+            if (mapInput.get(y).length() < 50) {
+                // 4, 6
+            } else if (mapInput.get(y).length() < 100) {
+                // 1, 3, 5
+            } else {
+                // 2
+            }
+        }
+
+        // Shouldn't get here.
+        assert false;
+        return Direction.UP;
     }
 
     /**
+     * TODO: update the implementation of this.
      * @return x or y depending on the direction.
      */
     private static int findNext(Direction direction, int x, int y, List<StringBuilder> mapInput) {
