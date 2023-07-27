@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    h1= title
+    p Welcome to #{title}
+
+    p
+        a(href='/') Index (This page)
+    p
+        a(href='/hello') Hello page (/hello)
+    p
+        a(href='/users') Users page (/users) an example error page
