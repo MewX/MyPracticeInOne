@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -11,6 +10,8 @@ public class Day01 {
 
     private static final List<String> WORD_TABLE = Arrays.asList("one", "two", "three", "four",
         "five", "six", "seven", "eight", "nine");
+    private static final List<String> REVERSED_WORD_TABLE = WORD_TABLE.stream()
+        .map(w -> new StringBuilder(w).reverse().toString()).collect(Collectors.toList());
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -22,9 +23,9 @@ public class Day01 {
             }
             input.add(line);
         }
-       scanner.close();
+        scanner.close();
 
-        Pattern p = Pattern.compile("\\d");
+        // Pattern p = Pattern.compile("\\d");
 
         int result = 0;
         // for (String str : input) {
@@ -38,31 +39,31 @@ public class Day01 {
         //
         // System.out.println("part 1: " + result);
 
-        // OK, writing this code will get me fired by Google.
         result = 0;
+        Pattern p1 = Pattern.compile("\\d|" + String.join("|", WORD_TABLE));
+        Pattern p2 = Pattern.compile("\\d|" + String.join("|", REVERSED_WORD_TABLE));
         for (String str : input) {
-            for (int i = 1; i <= 9; i++) {
-                str = str.replace("" + i, WORD_TABLE.get(i - 1));
-            }
-            System.out.println("After: " + str);
+            List<Integer> digits = new ArrayList<>();
+            Matcher m = p1.matcher(str);
+            m.find();
+            digits.add(parseInt(m.group()));
 
-            String s = str;
-            List<Integer> firstWordIndex = WORD_TABLE.stream()
-                .map(w -> s.contains(w) ? s.indexOf(w) : 1000).collect(Collectors.toList());
-            int firstNumber = 1 + WORD_TABLE.indexOf(WORD_TABLE.stream()
-                .min(Comparator.comparingInt(a -> firstWordIndex.get(WORD_TABLE.indexOf(a)))).get());
-            System.out.println("First " + firstWordIndex + " -> " + firstNumber);
+            m = p2.matcher(new StringBuilder().append(str).reverse());
+            m.find();
+            digits.add(parseInt(m.group()));
 
-            List<Integer> lastWordIndex = WORD_TABLE.stream()
-                .map(w -> s.contains(w) ? s.lastIndexOf(w) : -1).collect(Collectors.toList());
-            int lastNumber = 1 + WORD_TABLE.indexOf(WORD_TABLE.stream()
-                .max(Comparator.comparingInt(a -> lastWordIndex.get(WORD_TABLE.indexOf(a)))).get());
-            System.out.println("Last " + lastWordIndex + " -> " + lastNumber);
-
-            int num = firstNumber * 10 + lastNumber;
-            System.out.println("Added " + num);
-            result += num;
+            result += digits.get(0) * 10 + digits.get(digits.size() - 1);
         }
         System.out.println("part 2: " + result);
+    }
+
+    private static int parseInt(String str) {
+        if (WORD_TABLE.contains(str)) {
+            return 1 + WORD_TABLE.indexOf(str);
+        } else if (REVERSED_WORD_TABLE.contains(str)) {
+            return 1 + REVERSED_WORD_TABLE.indexOf(str);
+        } else {
+            return Integer.parseInt(str);
+        }
     }
 }
