@@ -1,0 +1,3 @@
+[submodule "MewX-chinesization-tools"]
+	path = ChineseLocalization
+	url = git@github.com:MewX/MewX-chinesization-tools.git
