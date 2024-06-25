@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>2.10_Re-order Paragraph_排序_ Reading _ PTEstudy-在线PTE练习网站</title>
+    <meta name="baidu-site-verification" content="nGfpMLvv9y" />
+    <meta name="keywords" content="ptestudy.com-PTE在线学习交流网站">
+	<meta name="description" content="PTE阅读题型Re-order Paragraph简称RO重新排列段落：共两至三题。要求学生将一段打乱的话重新排列，根据排列段落的逻辑顺序来评分，建议时间3-4分钟一题">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/web/reset.css"/>
+    <link rel="stylesheet" href="/css/web/function.css"/>
+    <link rel="stylesheet" href="/css/web/style.css"/>
+    <link rel="stylesheet" href="/js/layui/css/layui.css" media="all">
+	<style>
+		a[title='站长统计']{color:#f0f0f0;}
+		audio::-internal-media-controls-download-button {display:none;}
+		audio::-webkit-media-controls {overflow: hidden !important}
+		audio::-webkit-media-controls-enclosure {width: calc(100% + 32px);margin-left:auto;}
+	</style>
+    
+    
+</head>
+<body>
+	<!-- 顶部导航 -->
+	
+<div class="pe-top">
+    <div class="f-cb" style="width:99%;margin-left: auto;margin-right: auto;">
+        <div class="f-fl pe-logo">
+        	<a href="/">
+            	<img src="/images/web/logo.png" alt="" class="" style="margin-top:7px;"/>
+            </a>
+        </div>
+        <div class="f-fl pe-nav-en pe-nav ">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                	<a href="/pratice/detail/?cate=22">PTE Speaking</a>
+                	<b></b>
+                	<ul>
+                        <li><a href="/pratice/detail/?cate=22">Read aloud</a></li>
+                        <li><a href="/pratice/detail/?cate=23">Repeat Sentence</a></li>
+                        <li><a href="/pratice/detail/?cate=24">Describe Image</a></li>
+                        <li><a href="/pratice/detail/?cate=25">Retell Lecture</a></li>
+                        <li><a href="/pratice/detail/?cate=26">Answer Short Question</a></li>
+                    </ul>
+               	</li>
+                <li>
+                	<a href="/pratice/detail/?cate=28">PTE Writing</a>
+                	<b></b>
+                	<ul>
+                        <li><a href="/pratice/detail/?cate=28">Summarize Written Text</a></li>
+                        <li><a href="/pratice/detail/?cate=29">Write Essay</a></li>
+                    </ul>
+               	</li>
+                <li>
+                	<a href="/pratice/detail/?cate=31">PTE Reading</a>
+                	<b></b>
+                	<ul>
+                        <li><a href="/pratice/detail/?cate=31">Re-order Paragraphs</a></li>
+                        <li><a href="/pratice/detail/?cate=32">Reading Fill In The Blanks</a></li>
+                    </ul>
+               	</li>
+                <li>
+                	<a href="/pratice/detail/?cate=34">PTE Listening</a>
+                	<b></b>
+                	<ul>
+                        <li><a href="/pratice/detail/?cate=34">Summarize Spoken Text</a></li>
+                        <li><a href="/pratice/detail/?cate=35">Write From Dictation</a></li>
+                        <li><a href="/pratice/detail/?cate=36">Listening Fill In The Blanks</a></li>
+                        <li><a href="/pratice/detail/?cate=37">Highlight Incorrect Words</a></li>
+                    </ul>
+               	</li>
+                <li><a href="/article/38-">PTE Video</a></li>
+                <li><a href="/post">PTE Forum</a></li>
+                 <li><a href="/honor">Honor List</a></li>
+            </ul>
+        </div>
+         
+         <div class="f-fr pe-login-register f-cb" id="login-div">
+         		<a href="javascript:wxLogin()" class="pe-login">Login</a>
+            	
+	            <i>|</i>
+	            <a href="javascript:changeLang()" id="changeLangBtn" data-lang="zh_CN" class="pe-register">中文</a>
+	           
+        </div>
+        
+       
+    </div>
+</div>
+
+	
+	<!-- 页面主体 -->
+	<div class="pe-main">
+    	<div class="w-1000 f-cb">
+<style>
+#reorderdiv {
+	width:100%;
+	padding: 20px;
+	text-align: left;
+	line-height: 32px;
+	margin-bottom:10px;
+	font-size: 18px;
+    color: #333;
+}
+
+#reorderdiv ul {
+	width: 45%;
+	float:left;
+	min-height:283px;
+	border: 1px solid #dcdcdc;
+	margin:0px 10px;
+	padding:5px;
+}
+
+#questionBox li {
+	background-color:#f6f6f6;
+	margin: 3px 3px;
+	cursor:move;
+	box-shadow: 2px 2px 5px #888888;
+}
+
+#answerBox li {
+	background-color: #f6f6f6;
+	margin: 3px 3px;
+	cursor:move;
+	box-shadow: 2px 2px 5px #888888;
+}
+
+#answerText {
+	width: 96%;
+	display:none;
+	padding:10px;
+}
+
+#answerText p{
+	margin:0px 10px;
+	padding:5px;
+}
+
+</style>
+<div class="pe-fybox">
+    <div class="pe-fybox">
+       <div class="pe-mbx">Home&nbsp;&nbsp;&gt;&nbsp;&nbsp;Reading&nbsp;&nbsp;&gt;&nbsp;&nbsp;<span>Re-Order</span></div>
+       <div class="pratice-box">
+	       <div class="pe-yw">Re-Order</div>
+	       <div class="pe-js">
+	       <div id="reorderdiv">
+	           <ul id="questionBox">
+	            <li data-sen="Since Independence the policy of the government of India towards private foreign investment and collaboration has moved from cautious encouragement through a brief spell of near 'open door' in the fifties, a long phase of rigorous selectivity from 1968 to 1991 onto current post-1991 policy of open encouragement of direct investment specially in priority areas even with 51 percent participation in equity.Independent India started with a legacy of well-established foreign capital and all the fear and prejudice associated with it">1.Since Independence the policy of the government of India towards private foreign investment and collaboration has moved from cautious encouragement through a brief spell of near 'open door' in the fifties, a long phase of rigorous selectivity from 1968 to 1991 onto current post-1991 policy of open encouragement of direct investment specially in priority areas even with 51 percent participation in equity.Independent India started with a legacy of well-established foreign capital and all the fear and prejudice associated with it</li>
+	            <li data-sen="
+Based on the exposure of a series of misdeeds perpetrated on some third countries by some of the multinational like International Telephone and Telegraph corp. (ITT), United Fruit, Union Miniere and Lockheed, criticism welled up against the MNCs in the Indian parliament and outside.On the other hand, there was also a realisation that all foreign enterprises operating in India should not be tarred with the same brush and that there were some amongst them who were performing a useful role in the economy by their import-substitution or export-oriented operation, or by making valuable contribution to the technological skill and capability of our country.">2.
+Based on the exposure of a series of misdeeds perpetrated on some third countries by some of the multinational like International Telephone and Telegraph corp. (ITT), United Fruit, Union Miniere and Lockheed, criticism welled up against the MNCs in the Indian parliament and outside.On the other hand, there was also a realisation that all foreign enterprises operating in India should not be tarred with the same brush and that there were some amongst them who were performing a useful role in the economy by their import-substitution or export-oriented operation, or by making valuable contribution to the technological skill and capability of our country.</li>
+	            <li data-sen="
+ During the seventies and eighties, official view has been inevitably influenced by the controversy the world over on the role of multinational corporations in relation to third world countries">3.
+ During the seventies and eighties, official view has been inevitably influenced by the controversy the world over on the role of multinational corporations in relation to third world countries</li>
+	            <li data-sen="
+While the overwhelming thrust has all along been towards the goal of a self-sufficient economy and of freeing national economic and industrial policy from the dictates and manipulates of foreign capital, the compulsions of an economy of scarcity and chronic foreign exchange deficiency also had an effect in shaping official policy towards foreign investment and foreign collaboration.
+">4.
+While the overwhelming thrust has all along been towards the goal of a self-sufficient economy and of freeing national economic and industrial policy from the dictates and manipulates of foreign capital, the compulsions of an economy of scarcity and chronic foreign exchange deficiency also had an effect in shaping official policy towards foreign investment and foreign collaboration.
+</li>
+			   </ul>
+			   <ul id="answerBox">
+				
+			   </ul>
+			   <input type="hidden" id="answertext" value="Since Independence the policy of the government of India towards private foreign investment and collaboration has moved from cautious encouragement through a brief spell of near 'open door' in the fifties, a long phase of rigorous selectivity from 1968 to 1991 onto current post-1991 policy of open encouragement of direct investment specially in priority areas even with 51 percent participation in equity.
+ Independent India started with a legacy of well-established foreign capital and all the fear and prejudice associated with it.
+While the overwhelming thrust has all along been towards the goal of a self-sufficient economy and of freeing national economic and industrial policy from the dictates and manipulates of foreign capital, the compulsions of an economy of scarcity and chronic foreign exchange deficiency also had an effect in shaping official policy towards foreign investment and foreign collaboration.
+During the seventies and eighties, official view has been inevitably influenced by the controversy the world over on the role of multinational corporations in relation to third world countries.
+Based on the exposure of a series of misdeeds perpetrated on some third countries by some of the multinational like International Telephone and Telegraph corp. (ITT), United Fruit, Union Miniere and Lockheed, criticism welled up against the MNCs in the Indian parliament and outside.
+On the other hand, there was also a realisation that all foreign enterprises operating in India should not be tarred with the same brush and that there were some amongst them who were performing a useful role in the economy by their import-substitution or export-oriented operation, or by making valuable contribution to the technological skill and capability of our country." />
+			   <div style="clear:both"></div>
+	       </div>
+		   <div  id="answerText">
+		    	<p>Answer:1432</p>
+		   </div>
+	       <div class="foot" style="text-align:center">
+	       	    <a rel="nofollow" href="javascript:checkAnswer()" style="display:none" class="btn bg-white">检查</a>
+	            <a rel="nofollow" href="javascript:showAnswer()" class="btn bg-blue">Show answer</a>
+	            <span>Jump To：
+	            <select name="pindex" id="pindex">
+					<option value="0"></option>
+					<option value="1" >1</option>
+					<option value="2" >2</option>
+					<option value="3" >3</option>
+					<option value="4" >4</option>
+					<option value="5" >5</option>
+					<option value="6" >6</option>
+					<option value="7" >7</option>
+					<option value="8" >8</option>
+					<option value="9" >9</option>
+					<option value="10" >10</option>
+					<option value="11" >11</option>
+					<option value="12" >12</option>
+					<option value="13" >13</option>
+					<option value="14" >14</option>
+					<option value="15" >15</option>
+					<option value="16" >16</option>
+					<option value="17" >17</option>
+					<option value="18" >18</option>
+					<option value="19" >19</option>
+					<option value="20" >20</option>
+					<option value="21" >21</option>
+					<option value="22" >22</option>
+					<option value="23" >23</option>
+					<option value="24" >24</option>
+					<option value="25" >25</option>
+					<option value="26" >26</option>
+					<option value="27" >27</option>
+					<option value="28" >28</option>
+					<option value="29" >29</option>
+					<option value="30" >30</option>
+					<option value="31" >31</option>
+					<option value="32" >32</option>
+					<option value="33" >33</option>
+					<option value="34" >34</option>
+					<option value="35" >35</option>
+					<option value="36" >36</option>
+					<option value="37" >37</option>
+					<option value="38" >38</option>
+					<option value="39" >39</option>
+					<option value="40" >40</option>
+					<option value="41" >41</option>
+					<option value="42" >42</option>
+					<option value="43" >43</option>
+					<option value="44" >44</option>
+					<option value="45" >45</option>
+					<option value="46" >46</option>
+					<option value="47" >47</option>
+					<option value="48" >48</option>
+					<option value="49" >49</option>
+					<option value="50" >50</option>
+					<option value="51" >51</option>
+					<option value="52" >52</option>
+					<option value="53" >53</option>
+					<option value="54" >54</option>
+					<option value="55" >55</option>
+					<option value="56" >56</option>
+					<option value="57" >57</option>
+					<option value="58" >58</option>
+					<option value="59" >59</option>
+					<option value="60" >60</option>
+					<option value="61" >61</option>
+					<option value="62" >62</option>
+					<option value="63" >63</option>
+					<option value="64" >64</option>
+					<option value="65" >65</option>
+					<option value="66" >66</option>
+					<option value="67" >67</option>
+					<option value="68" >68</option>
+					<option value="69" >69</option>
+					<option value="70" >70</option>
+					<option value="71" >71</option>
+					<option value="72" >72</option>
+					<option value="73"selected >73</option>
+					<option value="74" >74</option>
+					<option value="75" >75</option>
+					<option value="76" >76</option>
+					<option value="77" >77</option>
+					<option value="78" >78</option>
+					<option value="79" >79</option>
+					<option value="80" >80</option>
+					<option value="81" >81</option>
+					<option value="82" >82</option>
+					<option value="83" >83</option>
+					<option value="84" >84</option>
+					<option value="85" >85</option>
+					<option value="86" >86</option>
+					<option value="87" >87</option>
+					<option value="88" >88</option>
+					<option value="89" >89</option>
+					<option value="90" >90</option>
+					<option value="91" >91</option>
+					<option value="92" >92</option>
+					<option value="93" >93</option>
+					<option value="94" >94</option>
+					<option value="95" >95</option>
+					<option value="96" >96</option>
+					<option value="97" >97</option>
+					<option value="98" >98</option>
+					<option value="99" >99</option>
+		        </select>
+		        </span>
+		        <a rel="nofollow" href="javascript:nextQuestion(0);" class="btn bg-yellow">Next</a>
+		        <a style="display:none;" href="/pratice/detail/464?cate=31">next one</a>
+	       </div>
+	       <!--  <div class="pe-da pe-xsqw" id="answerText" style="width: 490px;display:none;margin-top:25px;">
+		    	<p>Since Independence the policy of the government of India towards private foreign investment and collaboration has moved from cautious encouragement through a brief spell of near 'open door' in the fifties, a long phase of rigorous selectivity from 1968 to 1991 onto current post-1991 policy of open encouragement of direct investment specially in priority areas even with 51 percent participation in equity.
+ Independent India started with a legacy of well-established foreign capital and all the fear and prejudice associated with it.
+While the overwhelming thrust has all along been towards the goal of a self-sufficient economy and of freeing national economic and industrial policy from the dictates and manipulates of foreign capital, the compulsions of an economy of scarcity and chronic foreign exchange deficiency also had an effect in shaping official policy towards foreign investment and foreign collaboration.
+During the seventies and eighties, official view has been inevitably influenced by the controversy the world over on the role of multinational corporations in relation to third world countries.
+Based on the exposure of a series of misdeeds perpetrated on some third countries by some of the multinational like International Telephone and Telegraph corp. (ITT), United Fruit, Union Miniere and Lockheed, criticism welled up against the MNCs in the Indian parliament and outside.
+On the other hand, there was also a realisation that all foreign enterprises operating in India should not be tarred with the same brush and that there were some amongst them who were performing a useful role in the economy by their import-substitution or export-oriented operation, or by making valuable contribution to the technological skill and capability of our country.</p>
+		   </div>-->
+	       </div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+	
+	
+	
+	<!--共用二维码和返回顶部-->
+	<div class="ewm" style="display:none"><img src="/images/web/daaopteqr.jpg" alt="" style="width:115px;height: 115px;display: inline-block"/><p>更多信息<br/>请关注本站公众号</p></div>
+	<div class="go-top" onclick="scroll(0,0)"></div>
+	<!--/ 共用二维码和返回顶部-->
+	
+	<!--底部版权-->
+	<div class="pe-footer">
+	    <p style="text-align: center;">Copyright © 2017 - 陕ICP备 17001566 号-2 , All Rights Reserved Powered By 绿澳网络 </p>
+	</div>
+	
+	<!--微信登录容器-->
+	<div id="login_container" style="display:none"></div>
+	<script src="/js/web/jquery.1.11.1.min.js"></script>
+	<script src="/js/web/jquery.SuperSlide.2.1.1.js"></script>
+	<script src="/js/web/function.js"></script>
+	<script src="/js/layui/lay/dest/layui.all.js"></script>
+	<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	<script src="/js/web/js.cookie.js"></script>
+	<script>
+	
+	function changeLang(){
+		var editionStr = $("#changeLangBtn").text();
+		if(editionStr=='中文'){
+			Cookies.set('_locale', 'zh_CN');
+			//$("#changeLangBtn").text('English');
+		} else {
+			Cookies.set('_locale', 'en_US');
+			//$("#changeLangBtn").text('中文');
+		}
+		window.location.reload();
+	}
+	var wxLoginRedirectUrl = "https://ptestudy.com/user/login?ref=/";
+	function wxLogin(){
+		
+		var obj = new WxLogin({
+            id:"login_container", 
+            appid: "wxff733dd31708f959", 
+            scope: "snsapi_login", 
+            redirect_uri: wxLoginRedirectUrl,
+            state: "fdafo342oinvwzceu",
+            style: "",
+            href: ""
+          });
+		layer.open({
+			  type: 1,
+			  content: $('#login_container'), //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+			  cancel: function(index, layero){ 
+				  //if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+				 //   layer.close(index)
+				 // }
+				  layer.close(index);
+				  $("#login_container").css("display", "none");
+				  return false; 
+				}    
+			});
+	}
+	
+	var msg = "";
+	console.log(msg);
+	if(msg!=null && msg!=""){
+		layer.msg(msg, function(){
+			if(msg == "您需要登录才能进行该操作！"){
+				wxLogin();
+				return;
+			}
+			window.location = "";
+		});
+	}
+	</script>
+	<!--页面JS脚本-->
+<script src="/js/web/common.js"></script>
+<script src="/js/web/usermedia.js"></script>
+<script src="/js/web/Sortable.js"></script>
+<script>
+
+var questionbox = document.getElementById("questionBox");
+Sortable.create(questionbox, {group: "default"});
+var answerbox = document.getElementById("answerBox");
+Sortable.create(answerbox, {group: "default"});
+
+function showAnswer(){
+	console.log('查看排序答案...');
+	if($('#answerText').css('display')=='block'){
+		$('#answerText').css('display', 'none');
+	} else {
+		$('#questionText').css('display', 'none');
+		$('#answerText').css('display', 'block');
+	}
+};
+
+var answerText = $("#answertext").val();
+function checkAnswer(){
+	console.log('检查答案...');
+	var an = "";
+	$("#answerBox li").each(function(i){
+		an = an+$(this).attr("data-sen");
+	});
+	console.log(an.replace(/\s/g, ""));
+	if(an.replace(/\s/g, "")==answerText.replace(/\s/g, "")){
+		alert('正确');
+	} else {
+		alert('错误');
+	}
+};
+
+
+$("#pindex").change(function(){
+	console.log("pindex change。。。");
+	if($("#pindex").val()!="0"){
+		nextQuestion(1);
+	}
+});
+
+
+//Jump To下一道题目
+function nextQuestion(isSelectIndex){
+	var nqid = "464";
+	var nextUrl = "/pratice/detail/464?cate=31";
+	if($("#pindex").val()!="0"){
+		nextUrl = "/pratice/detail/?cate=31&pindex="+$("#pindex").val();
+		if(isSelectIndex==0){
+			nextUrl = "/pratice/detail/?cate=31&pindex="+(parseInt($("#pindex").val())+1);
+			if(nqid==""){
+				alert("已经是最后一题了咯！");	
+				return;
+			}
+		}
+	} else {
+		if(nqid==""){
+			alert("已经是最后一题了咯！");	
+			return;
+		}
+	}
+	window.location = nextUrl;
+};
+
+$(function(){
+	var h = $("#questionBox").height();
+	console.log(h);
+	$("#answerBox").height(h);
+	$("#questionBox").height(h);
+});
+</script>
+
+	<script src="https://s13.cnzz.com/z_stat.php?id=1262972418&web_id=1262972418" language="JavaScript"></script>
+</body>
+</html>
+
+
