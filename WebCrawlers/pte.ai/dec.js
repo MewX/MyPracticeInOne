@@ -33,5 +33,5 @@ for (var idx = 2; idx < process.argv.length; idx ++) {
 	for (i = 0; i < obj.result.length; i ++) {
 		obj.result[i] = JSON.stringify(dec_guess(obj.result[i]))
 	}
-	fs.writeFile(targFileName, JSON.stringify(obj), 'utf8');
+	fs.writeFileSync(targFileName, JSON.stringify(obj), 'utf8');
 }
