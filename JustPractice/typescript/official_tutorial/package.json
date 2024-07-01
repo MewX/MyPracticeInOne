@@ -1,10 +1,13 @@
 {
   "name": "org.mewx.ts.practise",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Xia's ts practice",
-  "main": "hello.js",
+  "main": "src/hello.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run tsc",
+    "start": "npm run tsc && node build/hello.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -26,6 +29,9 @@
     "node_modules"
   ],
   "devDependencies": {
-    "@types/node": "^10.3.3"
+    "@types/node": "^18.19.0"
+  },
+  "dependencies": {
+    "typescript": "^5.5.2"
   }
 }
